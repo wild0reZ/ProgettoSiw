@@ -24,3 +24,5 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 * **[Link](https://uniroma3-my.sharepoint.com/:p:/g/personal/pmerialdo_os_uniroma3_it/EWquRO72NQhIkXoXdv0Z2PkBE4swwAwqqLUYSjVex2T-lQ?rtime=k-o01Y_e1kg)** per il testo del progetto.
 * **[Link](https://docs.google.com/document/d/1zWzz7bv0yzQxsciJGQ69k-eHZYzNhOUFQj2ZqBs2tws/edit)** per i casi d'uso.
 * **[Link](https://trello.com/progettosiw)** per la bacheca di pianificazione del progetto.
+* **[Link](https://getbootstrap.com/docs/4.3/getting-started/introduction/)** Documentazione ufficiale Bootstrap 4.
+
