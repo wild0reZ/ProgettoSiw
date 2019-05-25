@@ -24,7 +24,9 @@
 <link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
 </head>
 <body>
-	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+
+	<!-- Inizio Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
 		<a class="navbar-brand" href="#"> <i
 			class="fas fa-camera-retro fa-fw" style="color: #4169E1"></i>SiLPH
 			Inc.
@@ -54,7 +56,8 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fas fa-user-tie fa-fw" style="color: #4169E1; font-size: 20px"></i></a>
+					aria-expanded="false"><i class="fas fa-user-tie fa-fw"
+						style="color: #4169E1; font-size: 20px"></i></a>
 
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdown" style="width: 300px">
@@ -67,7 +70,8 @@
 							<div class="form-group">
 								<label for="exampleDropdownFormPassword1">Password</label> <input
 									type="password" class="form-control"
-									id="exampleDropdownFormPassword1" placeholder="Password" size="30">
+									id="exampleDropdownFormPassword1" placeholder="Password"
+									size="30">
 							</div>
 							<button type="submit" class="btn btn-primary">Sign in</button>
 						</form>
@@ -75,6 +79,8 @@
 			</ul>
 		</div>
 	</nav>
+	<!-- Fine Navigation Bar -->
+
 	<!-- JS Per alcune animazioni di Bootstrap (ad esempio il menù Dropdown) -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
