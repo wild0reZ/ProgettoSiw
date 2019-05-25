@@ -18,6 +18,10 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 ## A che punto siamo?
 - [x] Primo incontro con scrittura dei casi d'uso.
 - [x] Creazione del modello di dominio. (**Da refinire**)
+- [ ] Rifinimento della Navbar della homepage.
+- [ ] Creazione del corpo della homepage.
+- [ ] Seguire siw per quando aggiungeremo il backend (xDDDDdjfuighajslkdnk).
+- [ ] Iniziare fase di Progettazione (vedi il punto direttamente sopra).
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.
