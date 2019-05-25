@@ -22,6 +22,11 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 - [ ] Creazione del corpo della homepage.
 - [ ] Seguire siw per quando aggiungeremo il backend (xDDDDdjfuighajslkdnk).
 - [ ] Iniziare fase di Progettazione (vedi il punto direttamente sopra).
+- [ ] Iniziare a comporre 'AlbumPage'
+- [ ] Iniziare a comporre 'FotografiPage'
+- [ ] Iniziare a comporre 'FotografoPage'
+- [ ] Iniziare a comporre 'ModuliPage'
+- [ ] Iniziare a comporre 'ModuloPage'
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.
