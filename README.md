@@ -26,7 +26,7 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 - [ ] Iniziare a comporre 'FotografiPage'
 - [ ] Iniziare a comporre 'FotografoPage'
 - [ ] Iniziare a comporre 'ModuliPage'
-- [ ] Iniziare a comporre 'ModuloPage'
+- [ ] Iniziare a comporre 'ModuloPage' (forse non sarebbe meglio gestirli tutti nella homepage da menù contestuale?)
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.
