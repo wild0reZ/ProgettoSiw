@@ -25,4 +25,7 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 * **[Link](https://docs.google.com/document/d/1zWzz7bv0yzQxsciJGQ69k-eHZYzNhOUFQj2ZqBs2tws/edit)** per i casi d'uso.
 * **[Link](https://trello.com/progettosiw)** per la bacheca di pianificazione del progetto.
 * **[Link](https://getbootstrap.com/docs/4.3/getting-started/introduction/)** Documentazione ufficiale Bootstrap 4.
+* **[Link](https://fontawesome.com/)** Portale di FontAwesome per i tag delle icone e un comodo motore di ricerca per cercarle.
+
+
 
