@@ -136,3 +136,4 @@ target/
 .nfs*
 
 # End of https://www.gitignore.io/api/git,java,linux,eclipse,java-web,code-java
+/build/
