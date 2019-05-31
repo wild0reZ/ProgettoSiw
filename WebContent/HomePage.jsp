@@ -101,11 +101,12 @@
 	<div id="foto-section">
 		<div class="container">
 			<div class="row">
-			<!-- Impossibile settare l'ombra direttamente sulla foto, il box colonna
+				<!-- Impossibile settare l'ombra direttamente sulla foto, il box colonna
 			bugga non poco la cosa! (ho lasciato la class per farlo vedere)  -->
 				<div class="col-md-4 shadow-lg">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example1.jpg" />
+					<a href="#" class="pop"> <img class="mx-auto img-fluid"
+						src="SampleData/Pics/example1.jpg" data-toggle="modal"
+						data-target="#imagemodal" />
 					</a>
 				</div>
 				<div class="col-md-4">
@@ -179,7 +180,44 @@
 		</div>
 
 	</div>
+	<script>
+		$(function() {
+			$('.pop').on(
+					'click',
+					function() {
+						$('.imagepreview').attr('src',
+								$(this).find('img').attr('src'));
+						$('#imagemodal').modal('show');
+					});
+		});
+	</script>
 
+	<!-- Modal -->
+	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog"
+		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered modal-lg"
+			role="document">
+			<div class="modal-content">
+				<div class="row">
+					<div class="col-md-8 pr-0" id="showImg">
+						<img src="" class="imagepreview" style="width: 100%;">
+					</div>
+					<div class="col-md-4 pl-0">
+						<div class="modal-header">
+							<h5 class="modal-title" id="exampleModalLongTitle">Titolo
+								Foto</h5>
+						</div>
+						<div class="modal-body">Breve descrizione della foto.
+							Invoglia il Cliente a comprare la foto.</div>
+						<div class="modal-footer">
+							<p class="text-left">20€</p>
+							<button type="button" class="btn btn-primary">Seleziona</button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 	<!-- JS Per alcune animazioni di Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
