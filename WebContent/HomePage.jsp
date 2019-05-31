@@ -21,14 +21,14 @@
 	crossorigin="anonymous">
 
 <!-- CSS locale per override -->
-<link rel="stylesheet" href="CSS/homepage.css">
+<link rel="stylesheet" href="CSS/HomePage.css">
 
 <!-- Favicon del tab -->
 <link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
 
 <!-- Google fonts -->
 <link
-	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches&display=swap"
+	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches|Oswald|Ubuntu&display=swap"
 	rel="stylesheet">
 </head>
 <body>

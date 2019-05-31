@@ -27,6 +27,7 @@ body {
 }
 
 .jumbotron {
+	font-family: 'Ubuntu', sans-serif;
 	color: white;
 	text-align: center;
 	border-radius: 0;
@@ -52,6 +53,10 @@ body {
 
 .navbar-brand {
 	font-family: 'Staatliches', cursive;
+}
+
+.navbar-nav {
+	font-family: 'Oswald', sans-serif;
 }
 
 /*
