@@ -1,0 +1,87 @@
+@charset "UTF-8";
+
+/* necessario per non essere nascosto sotto la navBar */
+body {
+	padding-top: 56px;
+}
+
+#user-icon {
+	color: #4169E1;
+	font-size: 20px;
+}
+
+#navbar-icon {
+	color: #4169E1;
+}
+
+#login-dropdown {
+	width: 300px;
+}
+
+.col-md-4 img {
+	object-fit: cover;
+	width: 350px;
+	height: 350px;
+	margin-bottom: 30px;
+	margin-top: 30px;
+}
+
+.jumbotron {
+	color: white;
+	text-align: center;
+	border-radius: 0;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	background-size: cover;
+}
+
+#foto-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-photo-background.jpg");
+}
+
+#album-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-album-background.jpg");
+}
+
+#fotografi-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-fotografi-background.jpg");
+}
+
+.navbar-brand {
+	font-family: 'Staatliches', cursive;
+}
+
+/*
+Sezioni di ogni foto, un po indeciso se lasciarle come id o come classe, probabilmente
+da settare come classe 
+#foto-section {
+	background:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-photo-grid-background.jpg")
+		no-repeat center center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+*/
+
+/*
+#album-section {
+	background-repeat: no-repeat;
+	backgroud-size: cover;
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-album-grid-background.jpg");
+}
+*/
+
+/*
+#fotografi-section {
+	background-repeat: no-repeat;
+	backgroud-size: cover;
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-fotografi-grid-background.jpg");
+}
+*/
