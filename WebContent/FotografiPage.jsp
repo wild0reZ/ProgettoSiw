@@ -26,6 +26,7 @@
 
 <link rel="stylesheet" href="CSS/hover.css">
 <link rel="stylesheet" href="CSS/silphbar.css">
+<link rel="stylesheet" href="CSS/fotocell.css">
 </head>
 
 <link
@@ -95,7 +96,7 @@
 
 		<div class="row justify-content-center">
 
-			<div class="col-auto mb-1">
+			<div class="col-auto mb-1 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img fitSize"
@@ -107,7 +108,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img" src="SampleData/Pics/mk.jpg"></a>
@@ -118,7 +119,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"
@@ -130,7 +131,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"
@@ -142,7 +143,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"

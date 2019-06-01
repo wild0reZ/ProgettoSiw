@@ -25,6 +25,7 @@
 <link rel="stylesheet" href="CSS/silphbar.css">
 <link rel="stylesheet" href="CSS/hover.css">
 <link rel="stylesheet" href="CSS/fotocell.css">
+<link rel="stylesheet" href="CSS/albumcell.css">
 
 <!-- Favicon del tab -->
 <link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
@@ -235,28 +236,69 @@
 	</div>
 	<!-- Fine sezione Foto -->
 
+	<!-- Inizio sezione Album -->
+	<div id="album-jumbotron" class="jumbotron text-center">
+		<div class="container-fluid">
+			<h1 class="jumbotron-heading">Album</h1>
+			<p class="lead">
+				<i>le nostre raccolte più attuali.</i>
+			</p>
+		</div>
+	</div>
 	<div id="album-section">
-		<div id="album-jumbotron" class="jumbotron text-center">
-			<div class="container-fluid">
-				<h1 class="jumbotron-heading">Album</h1>
-				<p class="lead">
-					<i>le nostre raccolte più attuali.</i>
-				</p>
+		<div class="container">
+			<div class="row mb-2">
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto text-right text-truncate">Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
+								est, malesuada quis placerat sed, congue at odio. Suspendisse
+								rhoncus tortor et aliquet eleifend.</p>
+
+							</span>
+						</div>
+						<a href="#"> <img
+							class="card-img-right flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example1.jpg"></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<a href="#"> <img
+							class="card-img-left flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example2.jpg"></a>
+
+						<div class="card-body d-flex flex-column align-items-start">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto">Breve descrizione dell'album.
+								Parla degli argomenti presentati al suo interno.</p>
+						</div>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
+	<!-- Fine sezione Album -->
 
-	<div id="fotografi-section">
-		<div id="fotografi-jumbotron" class="jumbotron text-center">
-			<div class="container-fluid">
-				<h1 class="jumbotron-heading">Fotografi</h1>
-				<p class="lead">
-					<i>i nostri artisti più giovani.</i>
-				</p>
-			</div>
+	<!-- Inizio sezione Album -->
+	<div id="fotografi-jumbotron" class="jumbotron text-center">
+		<div class="container-fluid">
+			<h1 class="jumbotron-heading">Fotografi</h1>
+			<p class="lead">
+				<i>i nostri artisti più giovani.</i>
+			</p>
 		</div>
-
 	</div>
+	<div id="fotografi-section"></div>
+	<!-- Fine sezione Album -->
 
 	<script>
 		$(function() {
