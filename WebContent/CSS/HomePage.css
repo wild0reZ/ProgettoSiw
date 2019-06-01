@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+.jumbotron {
+	font-family: 'Ubuntu', sans-serif;
+	color: white;
+	text-align: center;
+	border-radius: 0;
+	margin-bottom: 30px;
+	margin-top: 0px;
+	background-size: cover;
+}
+
+#foto-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-photo-background.jpg");
+}
+
+#album-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-album-background.jpg");
+}
+
+#fotografi-jumbotron {
+	background-image:
+		url("http://localhost:8080/SILPHsrl/Data/homepage-fotografi-background.jpg");
+}

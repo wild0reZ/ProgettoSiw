@@ -18,14 +18,23 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 ## A che punto siamo?
 - [x] Primo incontro con scrittura dei casi d'uso.
 - [x] Creazione del modello di dominio. (**Da refinire**)
+- [ ] Rifinimento della Navbar della homepage.
+- [ ] Creazione del corpo della homepage.
+- [ ] Seguire siw per quando aggiungeremo il backend (xDDDDdjfuighajslkdnk).
+- [ ] Iniziare fase di Progettazione (vedi il punto direttamente sopra).
+- [ ] Iniziare a comporre 'AlbumPage' 
+- [ ] Iniziare a comporre 'FotografiPage'
+- [ ] Iniziare a comporre 'FotografoPage' 
+- [ ] Iniziare a comporre 'ModuliPage'
+- [ ] Iniziare a comporre 'ModuloPage'
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.
 * **[Link](https://uniroma3-my.sharepoint.com/:p:/g/personal/pmerialdo_os_uniroma3_it/EWquRO72NQhIkXoXdv0Z2PkBE4swwAwqqLUYSjVex2T-lQ?rtime=k-o01Y_e1kg)** per il testo del progetto.
 * **[Link](https://docs.google.com/document/d/1zWzz7bv0yzQxsciJGQ69k-eHZYzNhOUFQj2ZqBs2tws/edit)** per i casi d'uso.
 * **[Link](https://trello.com/progettosiw)** per la bacheca di pianificazione del progetto.
-* **[Link](https://getbootstrap.com/docs/4.3/getting-started/introduction/)** Documentazione ufficiale Bootstrap 4.
-* **[Link](https://fontawesome.com/)** Portale di FontAwesome per i tag delle icone e un comodo motore di ricerca per cercarle.
+* **[Link](https://getbootstrap.com/docs/4.3/getting-started/introduction/)** per la Documentazione ufficiale Bootstrap 4.
+* **[Link](https://fontawesome.com/)** per il Portale di FontAwesome per i tag delle icone e un comodo motore di ricerca per cercarle.
 
 
 
