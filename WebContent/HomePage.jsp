@@ -22,6 +22,8 @@
 
 <!-- CSS locale per override -->
 <link rel="stylesheet" href="CSS/HomePage.css">
+<link rel="stylesheet" href="CSS/silphbar.css">
+<link rel="stylesheet" href="CSS/hover.css">
 
 <!-- Favicon del tab -->
 <link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
@@ -35,8 +37,8 @@
 
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
-		<a class="navbar-brand" href="#"> <i id="navbar-icon"
-			class="fas fa-camera-retro fa-fw"></i>Silph Inc.
+		<a class="navbar-brand" href="#"> <i
+			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
 			data-target="#navbarSupportedContent"
@@ -62,10 +64,10 @@
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i id="user-icon"
-						class="fas fa-user-tie fa-fw"></i></a>
+					aria-expanded="false"><i
+						class="fas fa-user-tie fa-fw dropdown-icon"></i></a>
 
-					<div id="login-dropdown" class="dropdown-menu dropdown-menu-right"
+					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown"
 						aria-labelledby="navbarDropdown">
 						<form class="px-4 py-3">
 							<div class="form-group">
@@ -101,58 +103,134 @@
 	<div id="foto-section">
 		<div class="container">
 			<div class="row">
-				<!-- Impossibile settare l'ombra direttamente sulla foto, il box colonna
-			bugga non poco la cosa! (ho lasciato la class per farlo vedere)  -->
-				<div class="col-md-4 shadow-lg">
-					<a href="#" class="pop"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example1.jpg" data-toggle="modal"
-						data-target="#imagemodal" />
-					</a>
-				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example2.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example1.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example3.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example2.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example4.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example3.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example5.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example4.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example6.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example5.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
-			</div>
-			<div class="row">
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example7.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example6.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class="mx-auto img-fluid"
-						src="SampleData/Pics/example8.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example7.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
 				<div class="col-md-4">
-					<a href="#"> <img class=" mx-auto img-fluid"
-						src="SampleData/Pics/example9.jpg" />
-					</a>
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example8.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
 				</div>
+
+				<div class="col-md-4">
+					<div class="card mx-auto shadow-lg ">
+						<div class="hovereffect">
+							<a href="#" class="pop"> <img class="card-img"
+								src="SampleData/Pics/example9.jpg" data-toggle="modal"
+								data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 class="card-title">Titolo Foto</h4>
+							</div>
+						</div>
+					</div>
+				</div>
+
+
 			</div>
 		</div>
 	</div>

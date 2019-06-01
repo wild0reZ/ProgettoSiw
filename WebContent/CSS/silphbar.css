@@ -1,0 +1,31 @@
+@charset "UTF-8";
+
+/* necessario per non essere nascosto sotto la navBar */
+body {
+	padding-top: 56px;
+}
+
+.silphbar-icon {
+	color: #4169E1;
+}
+
+.silph-login-dropdown {
+	width: 300px;
+}
+
+.dropdown-icon {
+	color: #4169E1;
+	font-size: 20px;
+}
+
+.navbar-brand {
+	font-family: 'Staatliches', cursive;
+}
+
+.navbar-nav {
+	font-family: 'Oswald', sans-serif;
+}
+
+
+
+
