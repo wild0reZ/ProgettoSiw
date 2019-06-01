@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html>
 <head profile="http://www.w3.org/2005/10/profile">
@@ -26,7 +27,7 @@
 <body>
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
 		<a class="navbar-brand" href="#"> <i
-			class="fas fa-camera-retro fa-fw" style="color: #4169E1"></i>SiLPH
+			class="fas fa-camera-retro fa-fw" style="color: #434343"></i>SiLPH
 			Inc.
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -38,7 +39,7 @@
 
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="./viewFotografo.jsp">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
 				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a>
@@ -49,12 +50,12 @@
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="Tag(s)..." aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
 					</form>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i class="fas fa-user-tie fa-fw" style="color: #4169E1; font-size: 20px"></i></a>
+					aria-expanded="false"><i class="fas fa-user-tie fa-fw" style="color: #434343; font-size: 20px"></i></a>
 
 					<div class="dropdown-menu dropdown-menu-right"
 						aria-labelledby="navbarDropdown" style="width: 300px">
