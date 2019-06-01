@@ -24,6 +24,7 @@
 <link rel="stylesheet" href="CSS/HomePage.css">
 <link rel="stylesheet" href="CSS/silphbar.css">
 <link rel="stylesheet" href="CSS/hover.css">
+<link rel="stylesheet" href="CSS/fotocell.css">
 
 <!-- Favicon del tab -->
 <link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
@@ -46,7 +47,6 @@
 			aria-label="Toggle navigation">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
@@ -66,7 +66,6 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><i
 						class="fas fa-user-tie fa-fw dropdown-icon"></i></a>
-
 					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown"
 						aria-labelledby="navbarDropdown">
 						<form class="px-4 py-3">
@@ -104,8 +103,8 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-4">
-					<div class="card mx-auto shadow-lg ">
+				<div class="col-md-4 fotocell">
+					<div class="card mx-auto shadow-lg">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
 								src="SampleData/Pics/example1.jpg" data-toggle="modal"
@@ -118,7 +117,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -132,7 +131,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -146,7 +145,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -160,7 +159,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -174,7 +173,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -188,7 +187,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -202,7 +201,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -216,7 +215,7 @@
 					</div>
 				</div>
 
-				<div class="col-md-4">
+				<div class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg ">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
@@ -258,6 +257,7 @@
 		</div>
 
 	</div>
+
 	<script>
 		$(function() {
 			$('.pop').on(
