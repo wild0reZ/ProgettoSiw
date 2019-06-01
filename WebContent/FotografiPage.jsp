@@ -36,7 +36,7 @@
 <body>
 
 	<!-- Inizio Navigation Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="#"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>

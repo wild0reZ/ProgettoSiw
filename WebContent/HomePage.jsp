@@ -38,7 +38,7 @@
 <body>
 
 	<!-- Inizio Navigation Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="#"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
@@ -59,15 +59,15 @@
 				<li class="nav-item">
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Tag(s)..." aria-label="Search">
+							placeholder="Cerca" aria-label="Search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><i
-						class="fas fa-user-tie fa-fw dropdown-icon"></i></a>
-					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown"
+						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
+					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark"
 						aria-labelledby="navbarDropdown">
 						<form class="px-4 py-3">
 							<div class="form-group">
@@ -248,6 +248,7 @@
 	<div id="album-section">
 		<div class="container">
 			<div class="row mb-2">
+
 				<div class="col-md-6">
 					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
 						<div class="card-body d-flex flex-column align-items-end">
@@ -259,8 +260,6 @@
 								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
 								est, malesuada quis placerat sed, congue at odio. Suspendisse
 								rhoncus tortor et aliquet eleifend.</p>
-
-							</span>
 						</div>
 						<a href="#"> <img
 							class="card-img-right flex-auto d-none d-lg-block"
@@ -283,6 +282,142 @@
 						</div>
 					</div>
 				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto text-right text-truncate">Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
+								est, malesuada quis placerat sed, congue at odio. Suspendisse
+								rhoncus tortor et aliquet eleifend.</p>
+						</div>
+						<a href="#"> <img
+							class="card-img-right flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example3.jpg"></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<a href="#"> <img
+							class="card-img-left flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example4.jpg"></a>
+
+						<div class="card-body d-flex flex-column align-items-start">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto">Breve descrizione dell'album.
+								Parla degli argomenti presentati al suo interno.</p>
+						</div>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto text-right text-truncate">Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
+								est, malesuada quis placerat sed, congue at odio. Suspendisse
+								rhoncus tortor et aliquet eleifend.</p>
+						</div>
+						<a href="#"> <img
+							class="card-img-right flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example5.jpg"></a>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<a href="#"> <img
+							class="card-img-left flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example6.jpg"></a>
+
+						<div class="card-body d-flex flex-column align-items-start">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto">Breve descrizione dell'album.
+								Parla degli argomenti presentati al suo interno.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto text-right text-truncate">Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
+								est, malesuada quis placerat sed, congue at odio. Suspendisse
+								rhoncus tortor et aliquet eleifend.</p>
+						</div>
+						<a href="#"> <img
+							class="card-img-right flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example7.jpg"></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<a href="#"> <img
+							class="card-img-left flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example8.jpg"></a>
+
+						<div class="card-body d-flex flex-column align-items-start">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto">Breve descrizione dell'album.
+								Parla degli argomenti presentati al suo interno.</p>
+						</div>
+					</div>
+				</div>
+
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto text-right text-truncate">Lorem
+								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
+								est, malesuada quis placerat sed, congue at odio. Suspendisse
+								rhoncus tortor et aliquet eleifend.</p>
+						</div>
+						<a href="#"> <img
+							class="card-img-right flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example9.jpg"></a>
+					</div>
+				</div>
+				<div class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<a href="#"> <img
+							class="card-img-left flex-auto d-none d-lg-block"
+							src="SampleData/Pics/example10.jpg"></a>
+
+						<div class="card-body d-flex flex-column align-items-start">
+							<h3 class="mb-0">
+								<a class="text-dark" href="#">Titolo Album</a>
+							</h3>
+							<a href="#" class="mb-1 text-muted">Nome Autore</a>
+							<p class="card-text mb-auto">Breve descrizione dell'album.
+								Parla degli argomenti presentati al suo interno.</p>
+						</div>
+					</div>
+				</div>
+
 			</div>
 		</div>
 	</div>

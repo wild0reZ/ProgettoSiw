@@ -11,6 +11,11 @@ body {
 
 .silph-login-dropdown {
 	width: 300px;
+	margin-top: 8px;
+}
+
+.silph-login-dropdown label{
+	color: #868A8E;
 }
 
 .dropdown-icon {
@@ -25,7 +30,3 @@ body {
 .navbar-nav {
 	font-family: 'Oswald', sans-serif;
 }
-
-
-
-
