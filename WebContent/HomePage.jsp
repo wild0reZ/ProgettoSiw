@@ -67,7 +67,7 @@
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><i
 						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
-					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark"
+					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
 						aria-labelledby="navbarDropdown">
 						<form class="px-4 py-3">
 							<div class="form-group">
