@@ -1,10 +1,10 @@
 @charset "UTF-8";
 
 .fotocell .card {
-	width: 350px;
-	height: 350px;
-	margin-top: 0px;
-	margin-bottom: 30px;
+	width: 21.875rem;
+	height: 21.875rem;
+	margin-top: 0rem;
+	margin-bottom: 1.875rem;
 }
 
 .fotocell .card-img{

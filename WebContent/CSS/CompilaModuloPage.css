@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.thumbcell .card {
+	height: 9.375rem;
+	width: 9.375rem;
+	margin-top: 0rem;
+	margin-bottom: 0.625rem;
+}
+
+.thumbcell .card-img {
+	border-radius: 0;
+	object-fit: cover;
+	width: 100%;
+	height: 100%;
+}
+
+.modulo {
+	margin-top: 1rem;
+	margin-bottom: 3rem;
+	font-family: 'Ubuntu', sans-serif;
+}
+

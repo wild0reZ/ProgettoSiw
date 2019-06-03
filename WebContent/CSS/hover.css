@@ -24,10 +24,15 @@
 	transition: all .4s ease-in-out
 }
 
-.hovereffect h4 {
+.hovereffect .card-title {
 	color: white;
 	font-family: 'Ubuntu', sans-serif;
-	margin-top: 5px;
+	margin-top: 0.3125rem;
+}
+
+.hovereffect .top-right {
+	margin-left: 7.5rem;
+	margin-top: 0.125rem;
 }
 
 .hovereffect:hover .overlay {

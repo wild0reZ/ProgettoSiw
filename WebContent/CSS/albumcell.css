@@ -1,14 +1,14 @@
 @charset "UTF-8";
 
 .albumcell img {
-	height: 200px;
-	width: 200px;
+	height: 12.5rem;
+	width: 12.5rem;
 	object-fit: cover;
 }
 
 .albumcell .text-muted, .albumcell h3, .albumcell p {
 	font-family: 'Ubuntu', sans-serif;
-	max-height: 98px;
+	max-height: 6.125rem;
 	text-overflow: ellipsis;
 	white-space: normal;
 }

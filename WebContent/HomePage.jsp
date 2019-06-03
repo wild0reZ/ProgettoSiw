@@ -59,15 +59,18 @@
 				<li class="nav-item">
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Search">
+							placeholder="Cerca" aria-label="Cerca">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-file-alt moduli-icon"></i></a>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
 					aria-expanded="false"><i
 						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
-					<div class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
+					<div
+						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
 						aria-labelledby="navbarDropdown">
 						<form class="px-4 py-3">
 							<div class="form-group">

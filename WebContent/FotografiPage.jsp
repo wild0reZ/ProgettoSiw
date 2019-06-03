@@ -54,6 +54,8 @@
 				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-file-alt moduli-icon"></i></a>
 				<li class="nav-item">
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
