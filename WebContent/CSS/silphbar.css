@@ -1,0 +1,41 @@
+@charset "UTF-8";
+
+/* necessario per non essere nascosto sotto la navBar */
+body {
+	padding-top: 3.5rem;
+}
+
+.silphbar-icon {
+	color: #4169E1;
+}
+
+.silph-login-dropdown {
+	width: 18.75rem;
+	margin-top: 0.4375rem;
+}
+
+.silph-login-dropdown label{
+	color: #868a8e;
+}
+
+.dropdown-icon {
+	color: #4169E1;
+	font-size: 1.25rem;
+}
+
+.navbar-brand {
+	font-family: 'Staatliches', cursive;
+}
+
+.navbar-nav {
+	font-family: 'Oswald', sans-serif;
+}
+
+.moduli-icon {
+	color: #4169E1;
+	font-size: 1.25rem;
+}
+
+.selected-entry {
+	text-shadow: #4169E1 0 0 0.4375rem;
+}
