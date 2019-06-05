@@ -23,7 +23,7 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 - [ ] Iniziare fase di Progettazione.
 - [ ] Iniziare a comporre 'AlbumPage'. 
 - [ ] Iniziare a comporre 'FotografiPage'.
-- [ ] Iniziare a comporre 'FotografoPage'. 
+- [x] Iniziare a comporre 'FotografoPage'. 
 - [ ] Iniziare a comporre 'ModuliPage'.
 - [x] Iniziare a comporre 'ComponiModuloPage'.
 - [ ] Implementare Spring Boot al più presto.
