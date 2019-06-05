@@ -50,9 +50,10 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
+				<li class="nav-item"><a class="selected-entry nav-link"
+					href="#">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Foto</a></li>
 				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
@@ -95,12 +96,11 @@
 	<div class="container sezioneFotografo">
 		<div class="row">
 			<div class="col-md-3">
-				<div class="rounded-circle profilePic"
+				<div class="rounded-circle profilePic shadow-lg"
 					style="background-image: url(http://localhost:8080/SILPHsrl/SampleData/Pics/fExample1.jpg);"></div>
-				<!--   <img class="rounded-circle profilePic" src="SampleData/Pics/fExample1.jpg"> -->
 			</div>
 			<div class="col-md-9">
-				<h1>Titolo fotografo</h1>
+				<h1>Nome Fotografo</h1>
 				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
 					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
 					enim ad minim veniam, quis nostrud exercitation ullamco laboris
@@ -114,16 +114,80 @@
 
 	<div class="container sezioneAlbum">
 		<div class="row">
-		<!-- Preferirei fare una piccola icona in basso a destra della cartella,
+			<!-- Preferirei fare una piccola icona in basso a destra della cartella,
 		sovrapposta all'icona dell'Album, ma ora devo fare APS -->
+		
 			<div class="col-md-3">
-				<a href="#"><i class="fas fa-folder-open text-center folderIcon"></i></a>
-				<p><a class="text-center" href="">Titolo Album</a></p>
+				<div class="albumFolder">
+					<a href="#"> <img class="folderThumbnail"
+						src="SampleData/Pics/example1.jpg" /> <i
+						class="fas fa-folder folderIcon"></i>
+					</a>
+				</div>
+					<a class="text-center" href="">Titolo Album</a>
+				</p>
 			</div>
+
 			<div class="col-md-3">
-				<a href="#"><i class="fas fa-folder-plus folderIcon"></i></a>
-				<p><a class="text-center" href="">Titolo Album</a></p>
+				<div class="albumFolder">
+					<a href="#"> <img class="folderThumbnail"
+						src="SampleData/Pics/example2.jpg" /> <i
+						class="fas fa-folder folderIcon"></i>
+					</a>
+				</div>
+				<p>
+					<a class="text-center" href="">Titolo Album</a>
+				</p>
 			</div>
+
+			<div class="col-md-3">
+				<div class="albumFolder">
+					<a href="#"> <img class="folderThumbnail"
+						src="SampleData/Pics/example3.jpg" /> <i
+						class="fas fa-folder folderIcon"></i>
+					</a>
+				</div>
+				<p>
+					<a class="text-center" href="">Titolo Album</a>
+				</p>
+			</div>
+
+			<div class="col-md-3">
+				<div class="albumFolder">
+					<a href="#"> <img class="folderThumbnail"
+						src="SampleData/Pics/example4.jpg" /> <i
+						class="fas fa-folder folderIcon"></i>
+					</a>
+				</div>
+				<p>
+					<a class="text-center" href="">Titolo Album</a>
+				</p>
+			</div>
+
+			<div class="col-md-3">
+				<div class="albumFolder">
+					<a href="#"> <img class="folderThumbnail"
+						src="SampleData/Pics/example5.jpg" /> <i
+						class="fas fa-folder folderIcon"></i>
+					</a>
+				</div>
+				<p>
+					<a class="text-center" href="">Titolo Album</a>
+				</p>
+			</div>
+
+			<!-- Icona per aggiungere una foto/album! -->
+			<div class="col-md-3">
+				<div class="albumFolder">
+					<a href="#"> <i class="fas fa-folder-plus folderIcon" style="color: #4169E1 "></i>
+					</a>
+				</div>
+				<p>
+					<a class="text-center" href="">Aggiungi Foto e Album</a>
+				</p>
+			</div>
+			<!-- End -->
+
 		</div>
 	</div>
 
