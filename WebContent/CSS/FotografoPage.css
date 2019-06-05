@@ -1,0 +1,22 @@
+@charset "UTF-8";
+
+.sezioneFotografo {
+	margin-top: 30px;
+	margin-bottom: 30px;
+	height: 250px;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.profilePic {
+	width: 250px;
+	height: 250px;
+	background-size: cover;
+}
+
+.sezioneAlbum {
+	
+}
+
+.folderIcon {
+	font-size: 10rem;
+}
