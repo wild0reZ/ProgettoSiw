@@ -1,0 +1,49 @@
+@charset "UTF-8";
+
+.sezioneFotografo {
+	margin-top: 1.875rem;
+	margin-bottom: 1.875rem;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.profilePic {
+	width: 15.625rem;
+	height: 15.625rem;
+	background-size: cover;
+}
+
+.sezioneAlbum {
+	margin-bottom: 1.875rem;
+}
+
+.sezioneAlbum a {
+	color: black;
+}
+
+.sezioneAlbum p {
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.albumFolder {
+	width: 11.875rem;
+	height: 9.375rem;
+	position: relative;
+	margin-bottom: 1.25rem;
+}
+
+.folderThumbnail {
+	position: absolute;
+	left: 5rem;
+	bottom: -0.9375rem;
+	object-fit: cover;
+	width: 6.25rem;
+	height: 6.25rem;
+	z-index: 100;
+	border-radius: 0.9375rem;
+}
+
+.folderIcon {
+	color: #343A40;
+	position: absolute;
+	font-size: 10rem;
+}

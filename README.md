@@ -17,16 +17,16 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 
 ## A che punto siamo?
 - [x] Primo incontro con scrittura dei casi d'uso.
-- [x] Creazione del modello di dominio. (**Da refinire**)
-- [ ] Rifinimento della Navbar della homepage.
-- [ ] Creazione del corpo della homepage.
-- [ ] Seguire siw per quando aggiungeremo il backend (xDDDDdjfuighajslkdnk).
-- [ ] Iniziare fase di Progettazione (vedi il punto direttamente sopra).
-- [ ] Iniziare a comporre 'AlbumPage' 
-- [ ] Iniziare a comporre 'FotografiPage'
-- [ ] Iniziare a comporre 'FotografoPage' 
-- [ ] Iniziare a comporre 'ModuliPage'
-- [ ] Iniziare a comporre 'ModuloPage'
+- [x] Creazione del modello di dominio. (**Refinito, ma lo faremo sempre perché siamo AGILE**)
+- [x] Rifinimento della Navbar della homepage.
+- [x] Creazione del corpo della homepage.
+- [ ] Iniziare fase di Progettazione.
+- [ ] Iniziare a comporre 'AlbumPage'. 
+- [ ] Iniziare a comporre 'FotografiPage'.
+- [x] Iniziare a comporre 'FotografoPage'. 
+- [ ] Iniziare a comporre 'ModuliPage'.
+- [x] Iniziare a comporre 'ComponiModuloPage'.
+- [ ] Implementare Spring Boot al più presto.
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.

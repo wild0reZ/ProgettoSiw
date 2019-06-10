@@ -1,6 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
-
 <!DOCTYPE html>
 <html>
 
@@ -27,6 +24,7 @@
 
 <link rel="stylesheet" href="CSS/hover.css">
 <link rel="stylesheet" href="CSS/silphbar.css">
+<link rel="stylesheet" href="CSS/fotocell.css">
 </head>
 
 <link
@@ -36,7 +34,7 @@
 <body>
 
 	<!-- Inizio Navigation Bar -->
-	<nav class="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="#"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
@@ -48,17 +46,19 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="./viewFotografo.jsp">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
 				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
 				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-file-alt moduli-icon"></i></a>
 				<li class="nav-item">
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="Tag(s)..." aria-label="Search">
-						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
@@ -96,7 +96,7 @@
 
 		<div class="row justify-content-center">
 
-			<div class="col-auto mb-1">
+			<div class="col-auto mb-1 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img fitSize"
@@ -108,7 +108,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img" src="SampleData/Pics/mk.jpg"></a>
@@ -119,7 +119,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"
@@ -131,7 +131,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"
@@ -143,7 +143,7 @@
 				</div>
 			</div>
 
-			<div class="col-auto mb-3">
+			<div class="col-auto mb-3 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img"
