@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="UTF-8">
+<title>SiLPH Inc.</title>
+</head>
+<body>
+	<div>
+		<h4>Inserisci dati Foto</h4>
+	</div>
+	<form action="#" th:action="@{/foto}" method="POST" th:object="${foto}" enctype="multipart/form-data">
+		<table>
+			<tr>
+				<td>Titolo:</td>
+				<td><input type="text" th:field="*{titolo}" /></td>
+			</tr>
+			<tr>
+				<td>Descrizione:</td>
+				<td><input type="text" th:field="*{descrizione}" /></td>
+			</tr>
+			<tr>
+				<td>Foto:</td>
+				<td><input type="file" name="multipartFoto" /></td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">Invio</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</body>
+</html>
