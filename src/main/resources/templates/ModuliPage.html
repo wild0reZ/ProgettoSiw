@@ -1,10 +1,170 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+<!-- Link per il CSS di Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!--  Link per le icone di FontAwesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+
+<!-- CSS locale per override -->
+<link rel="stylesheet" href="/CSS/ModuliPage.css">
+<link rel="stylesheet" href="/CSS/silphbar.css">
+<link rel="stylesheet" href="/CSS/hover.css">
+<link rel="stylesheet" href="/CSS/modulocell.css">
+
+<title>SiLPH Inc.</title>
+
+<!-- Favicon del tab -->
+<link rel="icon" type="image/ico" href="/Data/retro-photo-favicon.ico">
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches|Oswald|Ubuntu&display=swap"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700"
+	rel="stylesheet">
 </head>
+
 <body>
-Hai bisogno di essere un funzionario per vedere questa pagina!
+	<!-- Inizio Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#"> <i
+			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Cerca" aria-label="Cerca">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-file-alt moduli-icon"></i></a>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><i
+						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
+					<div
+						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
+						aria-labelledby="navbarDropdown">
+						<form th:action="@{/login}" method="post" class="px-4 py-3">
+							<div class="form-group">
+								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
+									type="text" name="username" class="form-control"
+									id="exampleDropdownFormID1" placeholder="ID" size="30">
+							</div>
+							<div class="form-group">
+								<label for="exampleDropdownFormPassword1">Password</label> <input
+									type="password" name="password" class="form-control"
+									id="exampleDropdownFormPassword1" placeholder="Password"
+									size="30">
+							</div>
+							<button type="submit" class="btn btn-primary">Sign in</button>
+						</form>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Fine Navigation Bar -->
+
+	<!-- Inizio sezione moduli -->
+	<div class="container">
+		<div class="row mb-0">
+
+			<div class="col-md-12">
+				<div class="card flex-md-row mb-0 shadow-sm h-md-200 modulocell">
+					<div class="card-body d-flex flex-column align-items-start">
+						<h3 class="mb-0">
+							<a class="text-dark" href="#">Oggetto</a>
+						</h3>
+						<a href="#" class="mb-1 text-muted">Mittente</a>
+						<p class="card-text mb-auto text-left text-truncate">(Messaggio)
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+							fermentum interdum magna sit amet cursus. Integer sit amet dictum
+							dui. Praesent sapien nunc, mollis id condimentum ac, iaculis
+							viverra lectus. Donec malesuada scelerisque sapien at laoreet.
+							Vivamus enim sem, imperdiet quis lacinia nec, feugiat nec sapien.
+							Aenean dignissim nisl nec elit dictum euismod. Quisque et congue
+							turpis, ac accumsan odio. Integer bibendum sed justo ut
+							efficitur. Etiam vel lorem et purus mattis tempus sagittis et
+							velit. Donec nec mauris mollis, malesuada turpis non, facilisis
+							lacus. Nam convallis ligula ultricies aliquam euismod.
+							Pellentesque venenatis pretium orci, ut ullamcorper sapien dictum
+							quis. Ut varius lacinia erat, sed tempor felis ultricies non.
+							Etiam ac viverra metus, sed dapibus lectus. Ut consequat metus
+							vitae elementum sodales. Nulla elementum mollis bibendum. In
+							dapibus bibendum urna nec fermentum. Nullam tempus porttitor
+							euismod. Cras tincidunt ultrices imperdiet. Vestibulum maximus
+							facilisis egestas. Aliquam ac tempor lectus, feugiat mattis
+							felis. Mauris dictum maximus dolor. Nam massa ex, laoreet eu
+							imperdiet eget, volutpat sit amet elit.</p>
+					</div>
+				</div>
+			</div>
+
+
+			<div class="col-md-12">
+				<div class="card flex-md-row mb-0 shadow-sm h-md-200 modulocell">
+					<div class="card-body d-flex flex-column align-items-start">
+						<h3 class="mb-0">
+							<a class="text-dark" href="#">Oggetto</a>
+						</h3>
+						<a href="#" class="mb-1 text-muted">Mittente</a>
+						<p class="card-text mb-auto text-left text-truncate">(Messaggio)
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
+							fermentum interdum magna sit amet cursus. Integer sit amet dictum
+							dui. Praesent sapien nunc, mollis id condimentum ac, iaculis
+							viverra lectus. Donec malesuada scelerisque sapien at laoreet.
+							Vivamus enim sem, imperdiet quis lacinia nec, feugiat nec sapien.
+							Aenean dignissim nisl nec elit dictum euismod. Quisque et congue
+							turpis, ac accumsan odio. Integer bibendum sed justo ut
+							efficitur. Etiam vel lorem et purus mattis tempus sagittis et
+							velit. Donec nec mauris mollis, malesuada turpis non, facilisis
+							lacus. Nam convallis ligula ultricies aliquam euismod.
+							Pellentesque venenatis pretium orci, ut ullamcorper sapien dictum
+							quis. Ut varius lacinia erat, sed tempor felis ultricies non.
+							Etiam ac viverra metus, sed dapibus lectus. Ut consequat metus
+							vitae elementum sodales. Nulla elementum mollis bibendum. In
+							dapibus bibendum urna nec fermentum. Nullam tempus porttitor
+							euismod. Cras tincidunt ultrices imperdiet. Vestibulum maximus
+							facilisis egestas. Aliquam ac tempor lectus, feugiat mattis
+							felis. Mauris dictum maximus dolor. Nam massa ex, laoreet eu
+							imperdiet eget, volutpat sit amet elit.</p>
+					</div>
+				</div>
+			</div>
+
+
+		</div>
+	</div>
 </body>
 </html>
