@@ -10,8 +10,20 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-	http.authorizeRequests().antMatchers("/**", "/favicon.ico").permitAll().antMatchers("/ModuliPage").hasRole("FUNZIONARIO")
-		.anyRequest().authenticated().and().formLogin().loginPage("/login").permitAll().and().logout()
-		.permitAll();
+	http
+	.authorizeRequests()
+	.antMatchers("/**")
+	.permitAll()
+	.antMatchers("/ModuliPage")
+	.hasRole("FUNZIONARIO")
+	.anyRequest()
+	.authenticated()
+	.and()
+	.formLogin()
+	.loginPage("/login") // TODO: va implementata una pagina di reindirizzamento per i login
+	.permitAll()
+	.and()
+	.logout()
+	.permitAll();
     }
 }
