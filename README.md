@@ -22,13 +22,9 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 - [x] Creazione del modello di dominio. (**Refinito, ma lo faremo sempre perché siamo AGILE**)
 - [x] Rifinimento della Navbar della homepage.
 - [x] Creazione del corpo della homepage.
-- [x] Iniziare a comporre 'AlbumPage'. 
-- [x] Iniziare a comporre 'FotografiPage'.
-- [x] Iniziare a comporre 'FotografoPage'. 
-- [x] Iniziare a comporre 'ComponiModuloPage'.
 - [x] Implementare Spring Boot al più presto.
+- [x] Terminato di comporre le '\*Page' principali.
 - [ ] Iniziare fase di Progettazione.
-- [ ] Iniziare a comporre 'ModuliPage'.
 - [ ] Implementare i metodi di retrieve delle foto pagina per pagina
 - [ ] Impostare per bene l'auth con spring boot security
 
