@@ -29,7 +29,6 @@ public class Foto {
     // private String percorsoImmagine;
     // AntiPattern, salva in file separato
     @Lob
-    @Type(type = "org.hibernate.type.BinaryType")
     private byte[] immagine;
 
     public Long getId() {

@@ -14,8 +14,21 @@
 	height: 100%;
 }
 
-.modulo {
-	margin-top: 1rem;
-	margin-bottom: 3rem;
+.sezioneDescrizione {
+	margin-top: 1.875rem;
+	margin-bottom: 1.875rem;
 	font-family: 'Ubuntu', sans-serif;
+}
+
+.albumFolder {
+	width: 11.875rem;
+	height: 9.375rem;
+	position: relative;
+	margin-bottom: 1.25rem;
+}
+
+.folderIcon {
+	color: #343A40;
+	position: absolute;
+	font-size: 10rem;
 }
