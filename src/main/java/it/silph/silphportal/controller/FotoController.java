@@ -57,7 +57,6 @@ public class FotoController {
 	return "FormFoto";
     }
     
-    @RequestMapping(value = "/foto/{id}")
     
 
 }

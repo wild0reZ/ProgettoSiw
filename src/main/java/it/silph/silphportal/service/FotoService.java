@@ -1,7 +1,5 @@
 package it.silph.silphportal.service;
 
-import java.time.LocalDate;
-import java.util.List;
 
 import javax.transaction.Transactional;
 
@@ -26,14 +24,14 @@ public class FotoService {
 	return fotoRepository.findById(id).get();
     }
     
-    @Transactional
-    public List<Foto> fotoPiuRecenti(LocalDate dataInserimento){
-	return fotoRepository.findFirst9ByDataInserimento(dataInserimento);
-    }
-    
-    @Transactional
-    public List<Foto> fotoPerTitoloETag(String titolo, List<String> tags) {
-	return fotoRepository.findFirst9ByTitoloAndTagsIn(titolo, tags);
-    }
-    
+////    @Transactional
+////    public List<Foto> fotoPiuRecenti(LocalDate dataInserimento){
+////	return fotoRepository.findFirst9ByDataInserimento(dataInserimento);
+////    }
+////    
+//    @Transactional
+//    public List<Foto> fotoPerTitoloETag(String titolo, List<String> tags) {
+//	return fotoRepository.findFirst9ByTitoloAndTagsIn(titolo, tags);
+//    }
+//    
 }

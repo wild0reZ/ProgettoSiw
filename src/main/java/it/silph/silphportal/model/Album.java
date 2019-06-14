@@ -3,6 +3,7 @@ package it.silph.silphportal.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,11 +20,16 @@ public class Album {
 
     private String descrizione;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     private List<Foto> foto;
+    
+    public Album() {
+	
+    }
 
     public Album(String titolo, String descrizione) {
 	super();
+	this.titolo = titolo;
 	this.descrizione = descrizione;
 	this.foto = new ArrayList<>();
     }
@@ -52,11 +58,11 @@ public class Album {
 	this.descrizione = descrizione;
     }
 
-    public Foto getFoto() {
+    public List<Foto> getFoto() {
 	return foto;
     }
 
-    public void setFoto(Foto foto) {
+    public void setFoto(List<Foto> foto) {
 	this.foto = foto;
     }
 }

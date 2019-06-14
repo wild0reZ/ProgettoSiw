@@ -19,20 +19,21 @@ public class Foto {
 
     private String titolo;
 
-    private String Descrizione;
+    private String descrizione;
 
     private LocalDate dataInserimento;
-
-    @OneToMany
-    private List<Tag> tags;
 
     @Lob
     private byte[] immagine;
 
+    public Foto() {
+
+    }
+
     public Foto(String titolo, String descrizione, LocalDate dataInserimento, byte[] immagine) {
 	super();
 	this.titolo = titolo;
-	Descrizione = descrizione;
+	this.descrizione = descrizione;
 	this.dataInserimento = dataInserimento;
 	this.immagine = immagine;
     }
@@ -54,11 +55,11 @@ public class Foto {
     }
 
     public String getDescrizione() {
-	return Descrizione;
+	return descrizione;
     }
 
     public void setDescrizione(String descrizione) {
-	Descrizione = descrizione;
+	this.descrizione = descrizione;
     }
 
     public LocalDate getDataInserimento() {
