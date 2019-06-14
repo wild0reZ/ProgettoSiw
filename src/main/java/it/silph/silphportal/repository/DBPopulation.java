@@ -1,15 +1,11 @@
 package it.silph.silphportal.repository;
 
-import java.awt.image.BufferedImage;
-import java.awt.image.DataBufferByte;
-import java.awt.image.WritableRaster;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.time.LocalDate;
+import java.util.concurrent.ThreadLocalRandom;
 
-import javax.imageio.ImageIO;
-
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationArguments;
 import org.springframework.boot.ApplicationRunner;
@@ -19,6 +15,7 @@ import org.springframework.stereotype.Component;
 import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Fotografo;
+import it.silph.silphportal.model.Immagine;
 
 /*
  * è un componente della nostra applicazione
@@ -37,36 +34,34 @@ public class DBPopulation implements ApplicationRunner {
 
     private void deleteAll() {
 	System.out.println("DEVDEBUG: Cancello tutto!");
-	fotografoRepository.deleteAll();
+	this.fotografoRepository.deleteAll();
     }
 
     private void addAll() throws IOException {
 	System.out.println("DEVDEBUG: Aggiungo fotografi!");
-	Fotografo f1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo");
+	Fotografo f1 = new Fotografo("Leonardo.", "Idone.", "Un bravo ragazzo.");
 	Album a1 = new Album("Album di Leo", "Un bell'album");
-	populateAlbum(a1);
+	populateAlbum(a1, f1);
 	f1.getAlbum().add(a1);
-	f1.setImmagineProfilo(extractBytes("fExample1.jpg"));
-	fotografoRepository.save(f1);
+	f1.setImmagineProfilo(new Immagine(extractBytes("fExample1.jpg")));
+	this.fotografoRepository.save(f1);
+	System.out.println("DEVDEBUG: Fotografi aggiunti!");
     }
 
-    private void populateAlbum(Album a) throws IOException {
+    private void populateAlbum(Album a, Fotografo f) throws IOException {
 	for (int i = 1; i <= 11; i++) {
-	    a.getFoto().add(new Foto("Bella Foto" + i, "Gran Foto", LocalDate.now().minusDays(i),
-		    extractBytes("example" + i + ".jpg")));
+	    Foto foto = new Foto( 
+		    "Bella Foto " + i,
+		    "Gran Foto", LocalDate.now().minusDays(ThreadLocalRandom.current().nextLong(100L)),
+		    new Immagine(extractBytes("example" + i + ".jpg")));
+	    foto.setFotografo(f);
+	    a.getFoto().add(foto);
 	}
     }
 
-    public byte[] extractBytes(String ImageName) throws IOException {
-	// open image
-	InputStream imgPath = new ClassPathResource("static/SampleData/" + ImageName).getInputStream();
-	BufferedImage bufferedImage = ImageIO.read(imgPath);
-
-	// get DataBufferBytes from Raster
-	WritableRaster raster = bufferedImage.getRaster();
-	DataBufferByte data = (DataBufferByte) raster.getDataBuffer();
-
-	return (data.getData());
+    public byte[] extractBytes(String imageName) throws IOException {
+	InputStream in = new ClassPathResource("static/SampleData/" + imageName).getInputStream();
+	return IOUtils.toByteArray(in);
     }
 
 }

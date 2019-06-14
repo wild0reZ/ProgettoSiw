@@ -1,14 +1,14 @@
 package it.silph.silphportal.model;
 
 import java.time.LocalDate;
-import java.util.List;
 
+import javax.persistence.CascadeType;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
-import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Foto {
@@ -20,17 +20,20 @@ public class Foto {
     private String titolo;
 
     private String descrizione;
-
+    
     private LocalDate dataInserimento;
 
-    @Lob
-    private byte[] immagine;
-
+    @OneToOne(cascade = CascadeType.ALL)
+    private Immagine immagine;
+    
+    @OneToOne(cascade = CascadeType.ALL)
+    private Fotografo fotografo;
+    
     public Foto() {
 
     }
 
-    public Foto(String titolo, String descrizione, LocalDate dataInserimento, byte[] immagine) {
+    public Foto(String titolo, String descrizione, LocalDate dataInserimento, Immagine immagine) {
 	super();
 	this.titolo = titolo;
 	this.descrizione = descrizione;
@@ -70,12 +73,23 @@ public class Foto {
 	this.dataInserimento = dataInserimento;
     }
 
-    public byte[] getImmagine() {
+    public Immagine getImmagine() {
 	return immagine;
     }
 
-    public void setImmagine(byte[] immagine) {
+    public void setImmagine(Immagine immagine) {
 	this.immagine = immagine;
     }
 
+    public Long getIdImmagine() {
+	return this.immagine.getId();
+    }
+
+    public Fotografo getFotografo() {
+	return this.fotografo;
+    }
+
+    public void setFotografo(Fotografo fotografo) {
+	this.fotografo = fotografo;
+    }
 }

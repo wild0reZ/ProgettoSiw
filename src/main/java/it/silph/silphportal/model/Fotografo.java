@@ -10,6 +10,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Fotografo {
@@ -23,8 +24,8 @@ public class Fotografo {
 
     private String bio;
 
-    @Lob
-    private byte[] immagineProfilo;
+    @OneToOne(cascade = CascadeType.ALL)
+    private Immagine immagineProfilo;
 
     @OneToMany(cascade = CascadeType.ALL)
     private List<Album> album;
@@ -73,11 +74,11 @@ public class Fotografo {
 	this.bio = bio;
     }
 
-    public byte[] getImmagineProfilo() {
+    public Immagine getImmagineProfilo() {
 	return immagineProfilo;
     }
 
-    public void setImmagineProfilo(byte[] immagineProfilo) {
+    public void setImmagineProfilo(Immagine immagineProfilo) {
 	this.immagineProfilo = immagineProfilo;
     }
 
@@ -89,4 +90,7 @@ public class Fotografo {
 	this.album = album;
     }
 
+    public Long getIdImmagine() {
+	return this.immagineProfilo.getId();
+    }
 }
