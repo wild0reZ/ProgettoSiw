@@ -36,6 +36,11 @@ public class FotoService {
     public List<Foto> tuttePerData() {
 	return fotoRepository.findAllByOrderByDataInserimento();
     }
+    
+    @Transactional
+    public List<Foto> prime9PerData() {
+	return fotoRepository.findFirst9ByOrderByDataInserimento();
+    }
 
 
     public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {
