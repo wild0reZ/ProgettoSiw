@@ -21,7 +21,7 @@ public class AlbumService {
     private AlbumRepository albumRepository;
 
     @Transactional
-    public Album fotoPerId(Long id) {
+    public Album albumPerId(Long id) {
 	return albumRepository.findById(id).get();
     }
 

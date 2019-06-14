@@ -39,7 +39,7 @@ public class DBPopulation implements ApplicationRunner {
 
     private void addAll() throws IOException {
 	System.out.println("DEVDEBUG: Aggiungo fotografi!");
-	Fotografo f1 = new Fotografo("Leonardo.", "Idone.", "Un bravo ragazzo.");
+	Fotografo f1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo.");
 	Album a1 = new Album("Album di Leo", "Un bell'album");
 	populateAlbum(a1, f1);
 	f1.getAlbum().add(a1);
