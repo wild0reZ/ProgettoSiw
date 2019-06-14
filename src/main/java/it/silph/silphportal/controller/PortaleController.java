@@ -26,6 +26,8 @@ public class PortaleController {
 		this.funzionarioValidator.validate(funzionario, bindingResult);
 		if(!bindingResult.hasErrors()) {
 			if(this.authService.checkCredential(funzionario)) {
+				funzionario.setRole("FUNZIONARIO");
+				model.addAttribute("funzionario", funzionario);
 				return "HomePage";
 			}else return "HomePage";
 		} else return "HomePage";

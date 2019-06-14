@@ -26,6 +26,8 @@
 
 <title>SiLPH Inc.</title>
 
+<!-- Favicon del tab -->
+<link rel="icon" type="image/ico" href="/Data/retro-photo-favicon.ico">
 
 <!-- Google fonts -->
 <link
@@ -38,6 +40,7 @@
 </head>
 
 <body>
+<a th:href="@{/addFoto}">aggiungi foto</a>
 
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -76,17 +79,15 @@
 						aria-labelledby="navbarDropdown">
 						<form th:action="@{/login}" method="post" class="px-4 py-3" th:object="${funzionario}">
 							<div class="form-group">
-								<label for="exampleDropdownFormID1">ID Funzionario</label> 
-								<input th:field="*{id}"  type="text" name="id" class="form-control" id="exampleDropdownFormID1"
+								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
+									type="text" name="username" class="form-control" id="exampleDropdownFormID1"
 									placeholder="ID" size="30">
-									<label th:if="${#fields.hasErrors('id')}" th:errors="*{id}"></label>
 							</div>
 							<div class="form-group">
 								<label for="exampleDropdownFormPassword1">Password</label> <input
-									type="password" th:field="*{password}" name="password" class="form-control"
+									type="password" name="password" class="form-control"
 									id="exampleDropdownFormPassword1" placeholder="Password"
 									size="30">
-									<label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></label>
 							</div>
 							<button type="submit" class="btn btn-primary">Sign in</button>
 						</form>

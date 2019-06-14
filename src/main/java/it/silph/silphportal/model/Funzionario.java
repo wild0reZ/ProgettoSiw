@@ -1,12 +1,10 @@
 package it.silph.silphportal.model;
 
 import javax.persistence.Entity;
-import javax.persistence.Id;
 
 @Entity
 public class Funzionario {
 
-	@Id
 	private long id;
 	
 	private String password;

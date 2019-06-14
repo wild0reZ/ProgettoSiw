@@ -21,7 +21,6 @@ public class AuthService {
 	public boolean checkCredential(Funzionario funzionario) {
 		Funzionario funzionarioLogin = this.funzionarioService.findById(funzionario.getId());
 		if(isPasswordValid(funzionarioLogin, funzionario.getPassword())) {
-			funzionario.setRole("FUNZIONARIO");
 			return true;
 		} else return false;
 	}
