@@ -5,9 +5,11 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
 @Entity
@@ -20,11 +22,14 @@ public class Album {
 
     private String descrizione;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<Foto> foto;
-    
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    private Fotografo fotografo;
+
     public Album() {
-	
+
     }
 
     public Album(String titolo, String descrizione) {
@@ -64,5 +69,17 @@ public class Album {
 
     public void setFoto(List<Foto> foto) {
 	this.foto = foto;
+    }
+
+    public Fotografo getFotografo() {
+	return fotografo;
+    }
+
+    public void setFotografo(Fotografo fotografo) {
+	this.fotografo = fotografo;
+    }
+    
+    public Long getIdImmagineCopertina() {
+	return this.foto.get(0).getIdImmagine();
     }
 }

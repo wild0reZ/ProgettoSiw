@@ -44,6 +44,7 @@ public class DBPopulation implements ApplicationRunner {
 	populateAlbum(a1, f1);
 	f1.getAlbum().add(a1);
 	f1.setImmagineProfilo(new Immagine(extractBytes("fExample1.jpg")));
+	a1.setFotografo(f1);
 	this.fotografoRepository.save(f1);
 	System.out.println("DEVDEBUG: Fotografi aggiunti!");
     }

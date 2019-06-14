@@ -26,7 +26,7 @@ public class FotoService {
     public Foto fotoPerId(Long id) {
 	return fotoRepository.findById(id).get();
     }
-    
+
     @Transactional
     public List<Foto> tutte() {
 	return fotoRepository.findAll();
@@ -36,12 +36,11 @@ public class FotoService {
     public List<Foto> tuttePerData() {
 	return fotoRepository.findAllByOrderByDataInserimento();
     }
-    
+
     @Transactional
     public List<Foto> prime9PerData() {
 	return fotoRepository.findFirst9ByOrderByDataInserimento();
     }
-
 
     public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {
 	int pageSize = pageable.getPageSize();
@@ -56,7 +55,7 @@ public class FotoService {
 	    list = gruppoFoto.subList(startItem, toIndex);
 	}
 
-	Page<Foto> fotoPage = new PageImpl<Foto>(list, PageRequest.of(currentPage, pageSize, Sort.by("dataInserimento").descending()), gruppoFoto.size());
+	Page<Foto> fotoPage = new PageImpl<Foto>(list, PageRequest.of(currentPage, pageSize), gruppoFoto.size());
 
 	return fotoPage;
     }

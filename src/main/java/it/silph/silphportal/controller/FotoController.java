@@ -42,12 +42,6 @@ public class FotoController {
 	return "FotoPage";
     }
     
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String homePageFoto(Model model) {
-	model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
-	return "HomePage";
-    }
-
     //// TODO: Bisogna ancora implementare il tutto
     //// @RequestMapping(value = "/foto", method = RequestMethod.POST)
     //// public String newFoto(@RequestParam("multipartFoto") MultipartFile mpFoto,

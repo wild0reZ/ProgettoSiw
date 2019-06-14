@@ -8,7 +8,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
@@ -27,7 +26,7 @@ public class Fotografo {
     @OneToOne(cascade = CascadeType.ALL)
     private Immagine immagineProfilo;
 
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografo")
     private List<Album> album;
 
     public Fotografo() {
