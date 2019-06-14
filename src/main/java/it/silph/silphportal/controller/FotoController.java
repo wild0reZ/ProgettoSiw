@@ -56,5 +56,8 @@ public class FotoController {
 	model.addAttribute("foto", new Foto());
 	return "FormFoto";
     }
+    
+    @RequestMapping(value = "/foto/{id}")
+    
 
 }

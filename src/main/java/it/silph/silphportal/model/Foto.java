@@ -10,26 +10,32 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.OneToMany;
 
-import org.hibernate.annotations.Type;
-
-
-
 @Entity
 public class Foto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
     private String titolo;
+
     private String Descrizione;
+
+    private LocalDate dataInserimento;
+
     @OneToMany
     private List<Tag> tags;
-    private LocalDate dataInserimento;
-    
-    // private String percorsoImmagine;
-    // AntiPattern, salva in file separato
+
     @Lob
     private byte[] immagine;
+
+    public Foto(String titolo, String descrizione, LocalDate dataInserimento, byte[] immagine) {
+	super();
+	this.titolo = titolo;
+	Descrizione = descrizione;
+	this.dataInserimento = dataInserimento;
+	this.immagine = immagine;
+    }
 
     public Long getId() {
 	return id;
