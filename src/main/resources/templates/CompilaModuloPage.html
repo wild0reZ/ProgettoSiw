@@ -93,78 +93,13 @@
 			<label for="foto-selezionate">Foto selezionate</label>
 			<div class="row" id="foto-selezionate">
 
-				<div class="col-md-2 thumbcell">
+				<div th:each="foto : ${fotoRichiesta}" class="col-md-2 thumbcell">
 					<div class="card mx-auto shadow-lg">
 						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example1.jpg" />
+							<img class="card-img"
+								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
 							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example2.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example3.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example4.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example5.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example6.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img" src="SampleData/Pics/example7.jpg" />
-							<div class="overlay">
-								<a href="#" class="card-title top-right">&times;</a>
+								<a th:href="@{'/foto/' + ${foto.id} + '/rm'}" class="card-title top-right">&times;</a>
 							</div>
 						</div>
 					</div>
@@ -173,53 +108,314 @@
 			</div>
 		</div>
 
-		<form>
+		<form th:action="@{/modulo}" th:object="${modulo}" method="POST">
 			<div class="form-group">
-				<label for="oggetto">Oggetto</label> <input type="text"
-					class="form-control" id="oggetto" placeholder="Inserisci l'oggetto">
+				<label for="oggetto">Oggetto</label> <input th:field="*{oggetto}"
+					type="text" class="form-control" id="oggetto"
+					placeholder="Inserisci l'oggetto">
 			</div>
 			<div class="form-group">
 				<label for="messaggio">Messaggio</label>
-				<textarea class="form-control" id="messaggio"
+				<textarea th:field="*{messaggio}" class="form-control"
+					id="messaggio"
 					placeholder="Inserisci il messaggio per la richiesta" rows="10"></textarea>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="nome">Nome</label> <input type="text"
-						class="form-control" id="nome" placeholder="Nome">
+					<label for="nome">Nome</label> <input th:field="*{nomeCliente}"
+						type="text" class="form-control" id="nome" placeholder="Nome">
 				</div>
 				<div class="form-group col-md-6">
-					<label for="cognome">Cognome</label> <input type="text"
-						class="form-control" id="cognome" placeholder="Cognome">
+					<label for="cognome">Cognome</label> <input
+						th:field="*{cognomeCliente}" type="text" class="form-control"
+						id="cognome" placeholder="Cognome">
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email">Email</label> <input type="email"
-					class="form-control" id="email" placeholder="mail@esempio.com">
+				<label for="email">Email</label> <input th:field="*{email}"
+					type="email" class="form-control" id="email"
+					placeholder="mail@esempio.com">
 			</div>
 			<div class="form-group">
-				<label for="telefono">Telefono</label> <input type="text"
-					class="form-control" id="telefono" placeholder="Telefono">
+				<label for="telefono">Telefono</label> <input th:field="*{telefono}"
+					type="text" class="form-control" id="telefono"
+					placeholder="Telefono">
 			</div>
 			<div class="form-group">
 				<label for="indirizzo">Indirizzo</label> <input type="text"
-					class="form-control" id="indirizzo"
+					th:field="*{indirizzo}" class="form-control" id="indirizzo"
 					placeholder="Via Trabochetto 12">
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="citta">Città</label> <input type="text"
-						class="form-control" id="citta" placeholder="Città">
+						th:field="*{citta}" class="form-control" id="citta"
+						placeholder="Città">
 				</div>
 				<div class="form-group col-md-4">
-					<label for="nazione">Nazione</label> <select id="nazione"
-						class="form-control">
-						<option selected>Scegli...</option>
-						<option>...lista nazioni...</option>
+					<label for="nazione">Nazione</label> <select th:field="*{citta}"
+						id="nazione" class="form-control">
+						<option value="DEFAULT" selected>Scegli...</option>
+						<option value="AF">Afghanistan</option>
+						<option value="AX">Isole Åland</option>
+						<option value="AL">Albania</option>
+						<option value="DZ">Algeria</option>
+						<option value="AS">Samoa Americana</option>
+						<option value="AD">Andorra</option>
+						<option value="AO">Angola</option>
+						<option value="AI">Anguilla</option>
+						<option value="AQ">Antartide</option>
+						<option value="AG">Antigua e Barbuda</option>
+						<option value="AR">Argentina</option>
+						<option value="AM">Armenia</option>
+						<option value="AW">Aruba</option>
+						<option value="AU">Australia</option>
+						<option value="AT">Austria</option>
+						<option value="AZ">Azerbaijan</option>
+						<option value="BS">Bahamas</option>
+						<option value="BH">Bahrain</option>
+						<option value="BD">Bangladesh</option>
+						<option value="BB">Barbados</option>
+						<option value="BY">Belarus</option>
+						<option value="BE">Belgio</option>
+						<option value="BZ">Belize</option>
+						<option value="BJ">Benin</option>
+						<option value="BM">Bermuda</option>
+						<option value="BT">Bhutan</option>
+						<option value="BO">Bolivia, stato plurinazionale di </option>
+						<option value="BQ">Bonaire, Sint Eustatius e Saba </option>
+						<option value="BA">Bosnia ed Erzegovina</option>
+						<option value="BW">Botswana</option>
+						<option value="BV">Isola Bouvet</option>
+						<option value="BR">Brazil</option>
+						<option value="IO">Territorio Britannico dell'Oceano Indiano</option>
+						<option value="BN">Brunei Darussalam</option>
+						<option value="BG">Bulgaria</option>
+						<option value="BF">Burkina Faso</option>
+						<option value="BI">Burundi</option>
+						<option value="KH">Cambodia</option>
+						<option value="CM">Camerun</option>
+						<option value="CA">Canada</option>
+						<option value="CV">Capo Verde</option>
+						<option value="KY">Isole Cayman</option>
+						<option value="CF">Repubblica centrafricana</option>
+						<option value="TD">Chad</option>
+						<option value="CL">Chile</option>
+						<option value="CN">China</option>
+						<option value="CX">Christmas Island</option>
+						<option value="CC">Isole Cocos (Keeling)</option>
+						<option value="CO">Colombia</option>
+						<option value="KM">Comore</option>
+						<option value="CG">Congo</option>
+						<option value="CD">Congo, Repubblica Democratica del </option>
+						<option value="CK">Isole Cook</option>
+						<option value="CR">Costa Rica</option>
+						<option value="CI">Costa d'Avorio</option>
+						<option value="HR">Croatia</option>
+						<option value="CU">Cuba</option>
+						<option value="CW">Curaçao</option>
+						<option value="CY">Cipro</option>
+						<option value="CZ">Repubblica Ceca</option>
+						<option value="DK">Danimarca</option>
+						<option value="DJ">Djibouti</option>
+						<option value="DM">Dominica</option>
+						<option value="DO">Repubblica Dominicana</option>
+						<option value="EC">Ecuador</option>
+						<option value="EG">Egitto</option>
+						<option value="SV">El Salvador</option>
+						<option value="GQ">Guinea equatoriale</option>
+						<option value="ER">Eritrea</option>
+						<option value="EE">Estonia</option>
+						<option value="ET">Etiopia</option>
+						<option value="FK">Isole Falkland (Malvinas)</option>
+						<option value="FO">Isole Faroe</option>
+						<option value="FJ">Fiji</option>
+						<option value="FI">Finlandia</option>
+						<option value="FR">Francia</option>
+						<option value="GF">Guyana francese</option>
+						<option value="PF">Polinesia francese</option>
+						<option value="TF">Territori Francesi del Sud</option>
+						<option value="GA">Gabon</option>
+						<option value="GM">Gambia</option>
+						<option value="GE">Georgia</option>
+						<option value="DE">Germania</option>
+						<option value="GH">Ghana</option>
+						<option value="GI">Gibilterra</option>
+						<option value="GR">Greece</option>
+						<option value="GL">Groenlandia</option>
+						<option value="GD">Grenada</option>
+						<option value="GP">Guadalupa</option>
+						<option value="GU">Guam</option>
+						<option value="GT">Guatemala</option>
+						<option value="GG">Guernsey</option>
+						<option value="GN">Guinea</option>
+						<option value="GW">Guinea-Bissau</option>
+						<option value="GY">Guyana</option>
+						<option value="HT">Haiti</option>
+						<option value="HM">Isole Heard Island e McDonald</option>
+						<option value="VA">Santa Sede (Stato della Città del
+							Vaticano)</option>
+						<option value="HN">Honduras</option>
+						<option value="HK">Hong Kong</option>
+						<option value="HU">Ungaria</option>
+						<option value="IS">Islanda</option>
+						<option value="IN">India</option>
+						<option value="ID">Indonesia</option>
+						<option value="IR">Iran, Repubblica islamica di</option>
+						<option value="IQ">Iraq</option>
+						<option value="IE">Irlanda</option>
+						<option value="IM">Isola di Man</option>
+						<option value="IL">Israele</option>
+						<option value="IT">Italia</option>
+						<option value="JM">Jamaica</option>
+						<option value="JP">Giappone</option>
+						<option value="JE">Jersey</option>
+						<option value="JO">Giordania</option>
+						<option value="KZ">Kazakhstan</option>
+						<option value="KE">Kenya</option>
+						<option value="KI">Kiribati</option>
+						<option value="KP">Korea, Repubblica popolare democratica
+							di</option>
+						<option value="KR">Korea, Republic of</option>
+						<option value="KW">Kuwait</option>
+						<option value="KG">Kirghizistan</option>
+						<option value="LA">Repubblica democratica popolare del
+							Laos</option>
+						<option value="LV">Latvia</option>
+						<option value="LB">Libano</option>
+						<option value="LS">Lesotho</option>
+						<option value="LR">Liberia</option>
+						<option value="LY">Libya</option>
+						<option value="LI">Liechtenstein</option>
+						<option value="LT">Lituania</option>
+						<option value="LU">Luxembourg</option>
+						<option value="MO">Macao</option>
+						<option value="MK">Macedonia, ex Repubblica jugoslava di
+						</option>
+						<option value="MG">Madagascar</option>
+						<option value="MW">Malawi</option>
+						<option value="MY">Malaysia</option>
+						<option value="MV">Maldive</option>
+						<option value="ML">Mali</option>
+						<option value="MT">Malta </​​option>
+						<option value="MH">Marshall Islands</option>
+						<option value="MQ">Martinique</option>
+						<option value="MR">Mauritania</option>
+						<option value="MU">Mauritius</option>
+						<option value="YT">Mayotte</option>
+						<option value="MX">Messico</option>
+						<option value="FM">Micronesia, Stati federati di</option>
+						<option value="MD">Moldova, Republic of</option>
+						<option value="MC">Monaco</option>
+						<option value="MN">Mongolia</option>
+						<option value="ME">Montenegro</option>
+						<option value="MS">Montserrat</option>
+						<option value="MA">Morocco</option>
+						<option value="MZ">Mozambique</option>
+						<option value="MM">Myanmar</option>
+						<option value="NA">Namibia</option>
+						<option value="NR">Nauru</option>
+						<option value="NP">Nepal</option>
+						<option value="NL">Paesi Bassi</option>
+						<option value="NC">Nuova Caledonia</option>
+						<option value="NZ">New Zealand</option>
+						<option value="NI">Nicaragua</option>
+						<option value="NE">Niger</option>
+						<option value="NG">Nigeria</option>
+						<option value="NU">Niue</option>
+						<option value="NF">Norfolk Island</option>
+						<option value="MP">Northern Mariana Islands</option>
+						<option value="NO">Norvegia</option>
+						<option value="OM">Oman</option>
+						<option value="PK">Pakistan</option>
+						<option value="PW">Palau</option>
+						<option value="PS">Palestinian Territory, Occupied</option>
+						<option value="PA">Panama</option>
+						<option value="PG">Papua Nuova Guinea</option>
+						<option value="PY">Paraguay</option>
+						<option value="PE">Peru</option>
+						<option value="PH">Filippine</option>
+						<option value="PN">Pitcairn</option>
+						<option value="PL">Poland</option>
+						<option value="PT">Portugal</option>
+						<option value="PR">Puerto Rico</option>
+						<option value="QA">Qatar</option>
+						<option value="RE">Réunion</option>
+						<option value="RO">Romania</option>
+						<option value="RU">Russian Federation</option>
+						<option value="RW">Ruanda</option>
+						<option value="BL">Saint Barthélemy</option>
+						<option value="SH">Sant'Elena, Ascensione e Tristan da
+							Cunha</option>
+						<option value="KN">Saint Kitts e Nevis</option>
+						<option value="LC">Saint Lucia</option>
+						<option value="MF">Saint Martin (parte francese) </option>
+						<option value="PM">Saint Pierre e Miquelon</option>
+						<option value="VC">Saint Vincent e Grenadine</option>
+						<option value="WS">Samoa</option>
+						<option value="SM">San Marino</option>
+						<option value="ST">Sao Tome e Principe</option>
+						<option value="SA">Arabia Saudita </​​option>
+						<option value="SN">Senegal</option>
+						<option value="RS">Serbia</option>
+						<option value="SC">Seychelles</option>
+						<option value="SL">Sierra Leone</option>
+						<option value="SG">Singapore</option>
+						<option value="SX">Sint Maarten (parte olandese)</option>
+						<option value="SK">Slovakia</option>
+						<option value="SI">Slovenia</option>
+						<option value="SB">Isole Salomone</option>
+						<option value="SO">Somalia</option>
+						<option value="ZA">Sud Africa</option>
+						<option value="GS">Georgia del Sud e isole Sandwich
+							meridionali</option>
+						<option value="SS">Sudan del Sud</option>
+						<option value="ES">Spagna</option>
+						<option value="LK">Sri Lanka</option>
+						<option value="SD">Sudan</option>
+						<option value="SR">Suriname</option>
+						<option value="SJ">Svalbard e Jan Mayen</option>
+						<option value="SZ">Swaziland</option>
+						<option value="SE">Svezia</option>
+						<option value="CH">Svizzera</option>
+						<option value="SY">Repubblica araba siriana</option>
+						<option value="TW">Taiwan, Province of China</option>
+						<option value="TJ">Tagikistan</option>
+						<option value="TZ">Tanzania, Repubblica Unita di</option>
+						<option value="TH">Thailand</option>
+						<option value="TL">Timor-Leste</option>
+						<option value="TG">Togo</option>
+						<option value="TK">Tokelau</option>
+						<option value="TO">Tonga</option>
+						<option value="TT">Trinidad e Tobago</option>
+						<option value="TN">Tunisia</option>
+						<option value="TR">Turkey</option>
+						<option value="TM">Turkmenistan</option>
+						<option value="TC">Isole Turks e Caicos</option>
+						<option value="TV">Tuvalu</option>
+						<option value="UG">Uganda</option>
+						<option value="UA">Ukraine</option>
+						<option value="AE">Emirati Arabi Uniti</option>
+						<option value="GB">Regno Unito</option>
+						<option value="US">Stati Uniti</option>
+						<option value="UM">Isole minori secondarie degli Stati
+							Uniti</option>
+						<option value="UY">Uruguay</option>
+						<option value="UZ">Uzbekistan</option>
+						<option value="VU">Vanuatu</option>
+						<option value="VE">Venezuela, Repubblica Bolivariana di</option>
+						<option value="VN">Viet Nam</option>
+						<option value="VG">Isole Vergini britanniche</option>
+						<option value="VI">Isole Vergini, Stati Uniti</option>
+						<option value="WF">Wallis e Futuna</option>
+						<option value="EH">Western Sahara</option>
+						<option value="YE">Yemen</option>
+						<option value="ZM">Zambia</option>
+						<option value="ZW">Zimbabwe</option>
 					</select>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="cap">CAP</label> <input type="text"
+					<label for="cap">CAP</label> <input th:field="*{CAP}" type="text"
 						class="form-control" id="CAP">
 				</div>
 			</div>

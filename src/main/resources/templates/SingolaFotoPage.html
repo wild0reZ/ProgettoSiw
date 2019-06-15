@@ -107,7 +107,7 @@
 					th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
 			</div>
 			<div class="middle">
-				<a class="text" href="#">+ Richiedi foto</a>
+				<a class="text" th:href="@{'/foto/' + ${foto.id} + '/req'}">+ Richiedi foto</a>
 			</div>
 		</div>
 	</div>
