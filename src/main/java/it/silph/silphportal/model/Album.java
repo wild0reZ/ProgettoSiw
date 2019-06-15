@@ -30,7 +30,7 @@ public class Album {
     // limitate creano un sacco di problemi (ad esempio, riempie
     // gli spazi vuoti con duplicati).
     // Sconfiggere la "LazyInitializationException"
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private List<Foto> foto;
 
     @ManyToOne
@@ -120,6 +120,7 @@ public class Album {
      */
     public void addFoto(Foto foto) {
 	this.foto.add(foto);
+	foto.setAlbum(this);
 	this.immagineCopertina = foto.getImmagine();
     }
 

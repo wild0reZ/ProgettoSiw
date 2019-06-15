@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import it.silph.silphportal.model.Album;
+import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Fotografo;
 import it.silph.silphportal.service.AlbumService;
 import it.silph.silphportal.service.FotoService;
@@ -55,13 +56,34 @@ public class FotoAlbumFotografiController {
 		this.albumService.tuttiPerFotografo(f));
 
 	model.addAttribute("albumFotografoPage", albumFotografoPage);
-	
+
 	int totalPages = albumFotografoPage.getTotalPages();
-	if(totalPages > 0) {
+	if (totalPages > 0) {
 	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
 	    model.addAttribute("pageNumbers", pageNumbers);
 	}
 	return "FotografoPage";
+    }
+
+    @RequestMapping(value = "/album/{id}")
+    public String albumPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
+	    @RequestParam("size") Optional<Integer> size) {
+	Album a = this.albumService.albumPerId(id);
+	model.addAttribute("album", a);
+	int currentPage = page.orElse(1);
+	int pageSize = size.orElse(35);
+
+	Page<Foto> fotoAlbumPage = fotoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+		this.fotoService.tuttePerAlbum(a));
+	
+	model.addAttribute("fotoAlbumPage", fotoAlbumPage);
+	
+	int totalPages = fotoAlbumPage.getTotalPages();
+	if (totalPages > 0) {
+	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+	    model.addAttribute("pageNumbers", pageNumbers);
+	}
+	return "SingoloAlbumPage";
     }
 
     @RequestMapping(value = "/", method = RequestMethod.GET)

@@ -13,6 +13,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 
+import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.repository.FotoRepository;
 
@@ -40,6 +41,11 @@ public class FotoService {
     @Transactional
     public List<Foto> prime9PerData() {
 	return fotoRepository.findFirst9ByOrderByDataInserimento();
+    }
+
+    @Transactional
+    public List<Foto> tuttePerAlbum(Album a) {
+	return this.fotoRepository.findAllByAlbum(a);
     }
 
     public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {

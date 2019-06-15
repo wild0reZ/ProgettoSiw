@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -11,9 +13,9 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/SingoloAlbumPage.css">
-<link rel="stylesheet" href="CSS/silphbar.css">
-<link rel="stylesheet" href="CSS/hover.css">
+<link rel="stylesheet" href="/CSS/SingoloAlbumPage.css">
+<link rel="stylesheet" href="/CSS/silphbar.css">
+<link rel="stylesheet" href="/CSS/hover.css">
 
 <title>SiLPH Inc.</title>
 
@@ -93,14 +95,8 @@
 	<!-- Fine Navigation Bar -->
 
 	<div class="container sezioneDescrizione">
-		<h1>Titolo Album</h1>
-		<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-			eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
-			ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-			aliquip ex ea commodo consequat. Duis aute irure dolor in
-			reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-			pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-			culpa qui officia deserunt mollit anim id est laborum.</p>
+		<h1 th:text="${album.titolo}">Titolo Album</h1>
+		<p th:text="${album.descrizione}">Descrizione Album</p>
 	</div>
 
 	<div class="container sezioneAlbum">
@@ -108,21 +104,22 @@
 			<!-- Preferirei fare una piccola icona in basso a destra della cartella,
 		sovrapposta all'icona dell'Album, ma ora devo fare APS -->
 
-			<div class="col-md-2 thumbcell">
+			<div th:each="foto : ${fotoAlbumPage.content}"
+				class="col-md-2 thumbcell">
 				<div class="card mx-auto shadow-lg">
 					<div class="hovereffect">
 						<a href="#"> <img class="card-img"
-							src="SampleData/Pics/example3.jpg" />
+							th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
 						</a>
 						<div class="overlay">
-							<h6 class="card-title">Titolo Foto</h6>
+							<h6 th:text="${foto.titolo}" class="card-title">Titolo Foto</h6>
 						</div>
 					</div>
 				</div>
 			</div>
 
 			<!-- Icona per aggiungere una foto/album! -->
-			<div class="col-md-3">
+			<div class="col-md-2">
 				<div class="albumFolder">
 					<a href="#"> <i class="fas fa-folder-plus folderIcon"
 						style="color: #4169E1"></i>

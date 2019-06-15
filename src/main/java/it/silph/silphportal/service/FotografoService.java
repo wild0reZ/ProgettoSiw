@@ -13,6 +13,8 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import it.silph.silphportal.model.Album;
+import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Fotografo;
 import it.silph.silphportal.repository.FotografoRepository;
 

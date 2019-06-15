@@ -30,6 +30,9 @@ public class Foto {
     @OneToOne
     private Fotografo fotografo;
     
+    @ManyToOne
+    private Album album;
+
     public Foto() {
 
     }
@@ -92,6 +95,14 @@ public class Foto {
 
     public void setFotografo(Fotografo fotografo) {
 	this.fotografo = fotografo;
+    }
+
+    public Album getAlbum() {
+        return album;
+    }
+
+    public void setAlbum(Album album) {
+        this.album = album;
     }
 
     @Override
