@@ -75,11 +75,11 @@
 	<form th:action="@{/login}" method="POST" th:object="${funzionario}">
 	    <div class="form-group">
 	        <label for="codiceFunzionario">Codice Funzionario</label>
-	        <input type="text" class="form-control" id="codiceFunzionario" placeholder="Codice Funzionario">
+	        <input type="text" class="form-control" id="codiceFunzionario" placeholder="Codice Funzionario" th:field="*{codice}">
 	    </div>
 	    <div class="form-group">
 	        <label for="inputPassword">Password</label>
-	        <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+	        <input type="password" class="form-control" id="inputPassword" placeholder="Password" th:field="*{password}">
 	    </div>
 	    <div class="form-group">
 	        <label class="form-check-label"><input type="checkbox"> Remember me</label>

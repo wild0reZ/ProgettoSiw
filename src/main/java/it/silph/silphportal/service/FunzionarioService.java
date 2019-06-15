@@ -1,7 +1,5 @@
 package it.silph.silphportal.service;
 
-import java.util.List;
-
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,8 +20,8 @@ public class FunzionarioService {
 	}
 	
 	@Transactional
-	public List<Funzionario> tutti() {
-		return (List<Funzionario>) this.funzionarioRepository.findAll();
+	public Funzionario inserisci(Funzionario funzionario) {
+		return this.funzionarioRepository.save(funzionario);
 	}
 	
 }
