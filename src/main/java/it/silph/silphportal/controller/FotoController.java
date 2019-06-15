@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -42,6 +43,12 @@ public class FotoController {
 	return "FotoPage";
     }
     
+    @RequestMapping(value = "/foto/{id}", method = RequestMethod.GET)
+    public String getSingolaFoto(@PathVariable("id") Long id, Model model) {
+	model.addAttribute("foto", this.fotoService.fotoPerId(id));
+	return "SingolaFotoPage.html";
+    }
+
     //// TODO: Bisogna ancora implementare il tutto
     //// @RequestMapping(value = "/foto", method = RequestMethod.POST)
     //// public String newFoto(@RequestParam("multipartFoto") MultipartFile mpFoto,
