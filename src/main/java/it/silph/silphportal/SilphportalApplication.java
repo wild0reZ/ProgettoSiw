@@ -2,12 +2,13 @@ package it.silph.silphportal;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.boot.web.servlet.support.SpringBootServletInitializer;
 
 @SpringBootApplication
-public class SilphportalApplication {
+public class SilphportalApplication extends SpringBootServletInitializer{
 
-	public static void main(String[] args) {
-		SpringApplication.run(SilphportalApplication.class, args);
-	}
+    public static void main(String[] args) {
+	SpringApplication.run(SilphportalApplication.class, args);
+    }
 
 }

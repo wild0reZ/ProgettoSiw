@@ -1,13 +1,18 @@
 package it.silph.silphportal.repository;
 
-import java.time.LocalDate;
 import java.util.List;
 
-import org.springframework.data.repository.CrudRepository;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
 
+import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
 
-public interface FotoRepository extends CrudRepository<Foto, Long> {
-    public List<Foto> findFirst9ByTitoloAndTagsIn(String titolo, List<String> tags);
-    public List<Foto> findFirst9ByDataInserimento(LocalDate dataInserimento);
+@Repository
+public interface FotoRepository extends JpaRepository<Foto, Long> {
+    public List<Foto> findAllByOrderByDataInserimento();
+
+    public List<Foto> findFirst9ByOrderByDataInserimento();
+
+    public List<Foto> findAllByAlbum(Album a);
 }

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+.descrizione {
+	margin-top: 2rem;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+.containerImmagine {
+	position: relative;
+	margin-bottom: 3rem;
+}
+
+.img-wrap {
+	transition: .5s ease;
+}
+
+.image {
+	opacity: 1;
+	display: block;
+	width: 100%;
+	height: auto;
+	transition: .5s ease;
+	backface-visibility: hidden;
+}
+
+.middle {
+	transition: .5s ease;
+	opacity: 0;
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	-ms-transform: translate(-50%, -50%);
+	text-align: center;
+}
+
+.containerImmagine:hover .img-wrap {
+	background-color: black;
+}
+
+.containerImmagine:hover .image {
+	opacity: 0.5;
+}
+
+.containerImmagine:hover .middle {
+	opacity: 1;
+}
+
+.text {
+	color: white;
+	font-size: 2rem;
+	font-family: 'Ubuntu', sans-serif;
+}

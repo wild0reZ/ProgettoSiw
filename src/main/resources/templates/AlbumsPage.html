@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -94,66 +96,41 @@
 
 	<div class="container sezioneAlbum">
 		<div class="row">
-			<div class="col-md-6">
+
+			<div th:each="album : ${albumPage.content}" class="col-md-6">
 				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
 					<div class="card-body d-flex flex-column align-items-end">
 						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
+							<a th:text="${album.titolo}" class="text-dark" href="#">Titolo
+								Album</a>
 						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto text-right text-truncate">Lorem
-							ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-							est, malesuada quis placerat sed, congue at odio. Suspendisse
-							rhoncus tortor et aliquet eleifend.</p>
+						<a th:text="${album.getFotografo().getNome()}" href="#"
+							class="mb-1 text-muted">Nome Fotografo</a>
+						<p th:text="${album.descrizione}"
+							class="card-text mb-auto text-right text-truncate">Descrizione
+							Album</p>
 					</div>
 					<a href="#"> <img
-						class="card-img-right flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example1.jpg"></a>
+						th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}"
+						class="card-img-right flex-auto d-none d-lg-block" /></a>
 				</div>
 			</div>
-
-			<div class="col-md-6">
-				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-					<a href="#"> <img
-						class="card-img-left flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example2.jpg"></a>
-
-					<div class="card-body d-flex flex-column align-items-start">
-						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
-						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto">Breve descrizione dell'album.
-							Parla degli argomenti presentati al suo interno.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-					<div class="card-body d-flex flex-column align-items-end">
-						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
-						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto text-right text-truncate">Lorem
-							ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-							est, malesuada quis placerat sed, congue at odio. Suspendisse
-							rhoncus tortor et aliquet eleifend.</p>
-					</div>
-					<a href="#"> <img
-						class="card-img-right flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example3.jpg"></a>
-				</div>
-			</div>
-
-
-
-
-
-			<!-- End -->
 
 		</div>
 	</div>
+
+
+	<nav aria-label="Navigatore pagine album"
+		class="justify-content-center">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:if="${albumPage.totalPages > 0}"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/listAlbum(size=${albumPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="(${pageNumber==albumPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
+		</ul>
+	</nav>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
