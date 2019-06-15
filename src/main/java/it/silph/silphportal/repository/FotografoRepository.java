@@ -8,8 +8,9 @@ import org.springframework.stereotype.Repository;
 import it.silph.silphportal.model.Fotografo;
 
 @Repository
-public interface FotografoRepository extends JpaRepository<Fotografo, Long>{
+public interface FotografoRepository extends JpaRepository<Fotografo, Long> {
 
-    public List<Fotografo> findFirst9ByOrderByAlbum_Foto_DataInserimento();
+    //@Query(value = "SELECT DISTINCT a.fotografo, MAX(f.dataInserimento) FROM Fotografo fo, Album a, Foto f WHERE fo.id = a.fotografo.id")
+    public List<Fotografo>  findAllByOrderByAlbum_Foto_DataInserimento();
 
 }

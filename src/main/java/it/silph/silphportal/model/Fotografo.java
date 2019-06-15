@@ -97,4 +97,13 @@ public class Fotografo {
     public void addAlbum(Album album) {
 	this.album.add(album);
     }
+    
+    /**
+     * Potenzialmente si dovrebbe fare per tutti gli oggetti
+     */
+    @Override
+    public boolean equals(Object obj) {
+	Fotografo f = (Fotografo) obj;
+        return this.id == f.getId();
+    }
 }

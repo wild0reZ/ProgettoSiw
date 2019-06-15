@@ -1,6 +1,7 @@
 <!DOCTYPE html>
-<html>
-
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -94,72 +95,35 @@
 
 		<div class="row justify-content-center">
 
-			<div class="col-auto mb-1 fotocell">
+			<div th:each="fotografo : ${fotografiPage.content}"
+				class="col-auto mb-1 fotocell">
 				<div class="card" style="width: 20rem;">
 					<div class="hovereffect">
 						<a href="#"><img class="card-img fitSize"
-							src="SampleData/Pics/spacey.jpg"></a>
+							th:attr="src=@{'/immagine' + '/' + ${fotografo.getImmagineProfilo().getId()}}"></a>
 						<div class="overlay">
-							<h4 class="card-title">Nome Cognome</h4>
+							<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
+								class="card-title">Nome Cognome</h4>
 						</div>
 					</div>
 				</div>
 			</div>
-
-			<div class="col-auto mb-3 fotocell">
-				<div class="card" style="width: 20rem;">
-					<div class="hovereffect">
-						<a href="#"><img class="card-img" src="SampleData/Pics/mk.jpg"></a>
-						<div class="overlay">
-							<h4 class="card-title">Nome Cognome</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-auto mb-3 fotocell">
-				<div class="card" style="width: 20rem;">
-					<div class="hovereffect">
-						<a href="#"><img class="card-img"
-							src="SampleData/Pics/user-placeholder.png"></a>
-						<div class="overlay">
-							<h4 class="card-title">Nome Cognome</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-auto mb-3 fotocell">
-				<div class="card" style="width: 20rem;">
-					<div class="hovereffect">
-						<a href="#"><img class="card-img"
-							src="SampleData/Pics/image-2.jpg"></a>
-						<div class="overlay">
-							<h4 class="card-title">Nome Cognome</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-
-			<div class="col-auto mb-3 fotocell">
-				<div class="card" style="width: 20rem;">
-					<div class="hovereffect">
-						<a href="#"><img class="card-img"
-							src="SampleData/Pics/pkc.jfif"></a>
-						<div class="overlay">
-							<h4 class="card-title">Nome Cognome</h4>
-						</div>
-					</div>
-				</div>
-			</div>
-
-
-
-
-
 
 		</div>
 	</div>
+
+	<nav aria-label="Navigatore pagine Fotografi"
+		class="justify-content-center">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:if="${fotografiPage.totalPages > 0}"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/listFotografo(size=${fotografiPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="(${pageNumber==fotografiPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
+		</ul>
+	</nav>
+
+
 
 
 

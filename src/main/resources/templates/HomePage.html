@@ -170,7 +170,7 @@
 
 
 
-	<!-- Inizio sezione Album -->
+	<!-- Inizio sezione Fotografi-->
 	<div id="fotografi-jumbotron" class="jumbotron text-center">
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Fotografi</h1>
@@ -180,7 +180,6 @@
 		</div>
 	</div>
 	<div id="fotografi-section"></div>
-	<!-- Fine sezione Album -->
 
 	<script>
 		$(function() {
@@ -226,127 +225,17 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-4 fotocell">
+				<div th:each="fotografo : ${gruppoFotografo}" class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg fotografo">
 						<div class="hovereffect">
 							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample1.jpg"
+								class="card-img"
+								th:attr="src=@{'/immagine' + '/' + ${fotografo.getImmagineProfilo().getId()}}"
 								data-toggle="modal" data-target="#fotografomodal" />
 							</a>
 							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample2.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample9.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample3.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample4.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample5.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample6.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample7.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample8.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
+								<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
+									class="card-title">Nome Cognome</h4>
 							</div>
 						</div>
 					</div>

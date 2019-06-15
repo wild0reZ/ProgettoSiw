@@ -35,6 +35,7 @@ public class AlbumService {
     public List<Album> tuttiPerData() {
 	return this.albumRepository.customFindAllByFotoDataInserimento();
     }
+
     /**
      * relativamente inefficiente, ma dovrebbe mettere una toppa al bug segnalato
      * sotto (condividono la stessa responsabilità)
