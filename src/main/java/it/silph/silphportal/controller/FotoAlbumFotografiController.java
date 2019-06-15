@@ -1,12 +1,23 @@
 package it.silph.silphportal.controller;
 
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 
+import it.silph.silphportal.model.Album;
+import it.silph.silphportal.model.Fotografo;
 import it.silph.silphportal.service.AlbumService;
 import it.silph.silphportal.service.FotoService;
 import it.silph.silphportal.service.FotografoService;
@@ -15,14 +26,14 @@ import it.silph.silphportal.service.FotografoService;
 public class FotoAlbumFotografiController {
 
     @Autowired
-    private FotografoService fotografoService ;
-    
+    private FotografoService fotografoService;
+
     @Autowired
-    private AlbumService albumService ;
-    
+    private AlbumService albumService;
+
     @Autowired
-    private FotoService fotoService ;
-    
+    private FotoService fotoService;
+
     @RequestMapping(value = "/home", method = RequestMethod.GET)
     @Transactional
     public String homePageFoto(Model model) {
@@ -32,4 +43,44 @@ public class FotoAlbumFotografiController {
 	return "HomePage";
     }
 
+    @RequestMapping(value = "/fotografo/{id}")
+    public String fotografoPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
+	    @RequestParam("size") Optional<Integer> size) {
+	Fotografo f = this.fotografoService.trovaPerId(id);
+	model.addAttribute("fotografo", f);
+	int currentPage = page.orElse(1);
+	int pageSize = size.orElse(15);
+
+	Page<Album> albumFotografoPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+		this.albumService.tuttiPerFotografo(f));
+
+	model.addAttribute("albumFotografoPage", albumFotografoPage);
+	
+	int totalPages = albumFotografoPage.getTotalPages();
+	if(totalPages > 0) {
+	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+	    model.addAttribute("pageNumbers", pageNumbers);
+	}
+	return "FotografoPage";
+    }
+
+    @RequestMapping(value = "/", method = RequestMethod.GET)
+    public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
+	    @RequestParam("size") Optional<Integer> size) {
+	int currentPage = page.orElse(1);
+	int pageSize = size.orElse(10);
+
+	Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+		this.albumService.tuttiPerData());
+
+	model.addAttribute("albumPage", albumPage);
+
+	int totalPages = albumPage.getTotalPages();
+	if (totalPages > 0) {
+	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+	    model.addAttribute("pageNumbers", pageNumbers);
+	}
+
+	return "AlbumsPage";
+    }
 }

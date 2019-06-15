@@ -10,6 +10,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -22,8 +23,8 @@ public class FotografoController {
     @Autowired
     private FotografoService fotografoService;
 
-    @RequestMapping(value = "/listFotografo", method = RequestMethod.GET)
-    public String listFotografo(Model model, @RequestParam("page") Optional<Integer> page,
+    @RequestMapping(value = "/listFotografi", method = RequestMethod.GET)
+    public String listFotografi(Model model, @RequestParam("page") Optional<Integer> page,
 	    @RequestParam("size") Optional<Integer> size) {
 	int currentPage = page.orElse(1);
 	int pageSize = size.orElse(9);

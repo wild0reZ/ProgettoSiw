@@ -75,4 +75,9 @@ public class FotografoService {
 	return fotografoPage;
     }
 
+    @Transactional
+    public Fotografo trovaPerId(Long id) {
+	return this.fotografoRepository.findById(id).get();
+    }
+
 }

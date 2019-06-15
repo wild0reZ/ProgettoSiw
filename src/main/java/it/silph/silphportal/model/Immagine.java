@@ -40,5 +40,10 @@ public class Immagine {
         this.fileImmagine = immagine;
     }
     
-    
+    @Override
+    public boolean equals(Object obj) {
+	Immagine i = (Immagine) obj;
+        return this.id == i.getId();
+    }
+
 }

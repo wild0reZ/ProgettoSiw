@@ -93,4 +93,11 @@ public class Foto {
     public void setFotografo(Fotografo fotografo) {
 	this.fotografo = fotografo;
     }
+
+    @Override
+    public boolean equals(Object obj) {
+	Foto f = (Foto) obj;
+        return this.id == f.getId();
+    }
+
 }

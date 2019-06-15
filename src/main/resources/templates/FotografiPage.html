@@ -117,7 +117,7 @@
 		<ul class="pagination justify-content-center">
 			<li class="page-item" th:if="${fotografiPage.totalPages > 0}"
 				th:each="pageNumber : ${pageNumbers}"><a
-				th:href="@{/listFotografo(size=${fotografiPage.size}, page=${pageNumber})}"
+				th:href="@{/listFotografi(size=${fotografiPage.size}, page=${pageNumber})}"
 				th:text=${pageNumber}
 				th:class="(${pageNumber==fotografiPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
 		</ul>

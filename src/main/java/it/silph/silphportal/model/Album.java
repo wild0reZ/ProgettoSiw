@@ -122,4 +122,11 @@ public class Album {
 	this.foto.add(foto);
 	this.immagineCopertina = foto.getImmagine();
     }
+
+    @Override
+    public boolean equals(Object obj) {
+	Album a = (Album) obj;
+        return this.id == a.getId();
+    }
+
 }
