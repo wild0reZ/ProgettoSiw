@@ -12,7 +12,18 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
 	http
 	.authorizeRequests()
-	.antMatchers("/*")
+	.antMatchers("/**")
+	.permitAll()
+	.antMatchers("/ModuliPage")
+	.hasRole("FUNZIONARIO")
+	.anyRequest()
+	.authenticated()
+	.and()
+	.formLogin()
+	.loginPage("/loginPage")
+	.permitAll()
+	.and()
+	.logout()
 	.permitAll();
     }
     

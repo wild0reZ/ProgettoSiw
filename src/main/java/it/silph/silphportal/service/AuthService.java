@@ -20,11 +20,16 @@ public class AuthService {
 	
 	public boolean checkCredential(Funzionario funzionario) {
 		Funzionario funzionarioLogin = this.funzionarioService.findByCodice(funzionario.getCodice());
-		if(isPasswordValid(funzionarioLogin, funzionario.getPassword())) {
-			funzionarioLogin.setRole("FUNZIONARIO");
-			this.funzionarioService.inserisci(funzionarioLogin);
-			return true;
-		} else return false;
+		try {
+			if(isPasswordValid(funzionarioLogin, funzionario.getPassword())) {
+				funzionarioLogin.setRole("FUNZIONARIO");
+				this.funzionarioService.inserisci(funzionarioLogin);
+				return true;
+			} else return false;
+		
+		} catch (Exception e) {
+			return false;
+		}
 	}
 	
 }

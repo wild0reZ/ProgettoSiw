@@ -30,6 +30,8 @@ public class PortaleController {
 		
 		if(funzionario != null) {
 			if(this.authService.checkCredential(funzionario)) {
+				
+				model.addAttribute("funzionario", this.funzionarioService.findByCodice(funzionario.getCodice()));
 				return "HomePage";
 			} else return "LoginPage";
 		}else return "Loginpage";
