@@ -116,7 +116,7 @@
 					<div class="card mx-auto shadow-lg">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${foto.getIdImmagine()}}"
+								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}"
 								data-toggle="modal" data-target="#imagemodal" />
 							</a>
 							<div class="overlay">
@@ -158,7 +158,7 @@
 								Album</p>
 						</div>
 						<a href="#"> <img
-							th:attr="src=@{'/immagine' + '/' + ${album.getIdImmagineCopertina()}}"
+							th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}"
 							class="card-img-right flex-auto d-none d-lg-block" /></a>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,7 +24,7 @@ public class Fotografo {
 
     private String bio;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Immagine immagineProfilo;
 
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "fotografo")
@@ -91,5 +92,9 @@ public class Fotografo {
 
     public Long getIdImmagine() {
 	return this.immagineProfilo.getId();
+    }
+    
+    public void addAlbum(Album album) {
+	this.album.add(album);
     }
 }

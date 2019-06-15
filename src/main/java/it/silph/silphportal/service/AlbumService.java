@@ -1,5 +1,6 @@
 package it.silph.silphportal.service;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -22,22 +23,34 @@ public class AlbumService {
 
     @Transactional
     public Album albumPerId(Long id) {
-	return albumRepository.findById(id).get();
+	return this.albumRepository.findById(id).get();
     }
 
     @Transactional
-    public List<Album> tutte() {
-	return albumRepository.findAll();
+    public List<Album> tutti() {
+	return this.albumRepository.findAll();
     }
 
     @Transactional
-    public List<Album> tuttePerData() {
-	return albumRepository.findAllByOrderByFoto_DataInserimento();
+    public List<Album> tuttiPerData() {
+	return this.albumRepository.customFindAllByFotoDataInserimento();
     }
-
+    /**
+     * relativamente inefficiente, ma dovrebbe mettere una toppa al bug segnalato
+     * sotto (condividono la stessa responsabilità)
+     * @return
+     */
     @Transactional
-    public List<Album> primi10PerData() {
-	return albumRepository.findFirst10ByOrderByFoto_DataInserimento();
+    public List<Album> primi10PerDataFraTutte() {
+	List<Album> l = this.albumRepository.customFindAllByFotoDataInserimento();
+	if (l.size() > 10) {
+	    List<Album> shrink = new ArrayList<>();
+	    for (int i = 10; i >= 0; i--) {
+		shrink.add(l.get(i));
+	    }
+	    return shrink;
+	}
+	return l;
     }
 
     public Page<Album> findPaginated(Pageable pageable, List<Album> gruppoAlbum) {

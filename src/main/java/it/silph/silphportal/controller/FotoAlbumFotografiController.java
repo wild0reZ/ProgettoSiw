@@ -27,7 +27,7 @@ public class FotoAlbumFotografiController {
     @Transactional
     public String homePageFoto(Model model) {
 	model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
-	model.addAttribute("gruppoAlbum", this.albumService.primi10PerData());
+	model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());
 	model.addAttribute("gruppoFotografi", this.fotografoService.primi9PerData());
 	return "HomePage";
     }

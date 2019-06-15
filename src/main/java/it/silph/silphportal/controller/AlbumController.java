@@ -29,7 +29,7 @@ public class AlbumController {
 	int pageSize = size.orElse(10);
 
 	Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.albumService.tuttePerData());
+		this.albumService.tuttiPerData());
 
 	model.addAttribute("albumPage", albumPage);
 

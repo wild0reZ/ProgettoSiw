@@ -56,7 +56,7 @@ public class DBPopulation implements ApplicationRunner {
 		    "Gran Foto", LocalDate.now().minusDays(ThreadLocalRandom.current().nextLong(100L)),
 		    new Immagine(extractBytes("example" + i + ".jpg")));
 	    foto.setFotografo(f);
-	    a.getFoto().add(foto);
+	    a.addFoto(foto);
 	}
     }
 

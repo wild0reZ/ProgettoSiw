@@ -4,6 +4,7 @@ import java.time.LocalDate;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -23,10 +24,10 @@ public class Foto {
     
     private LocalDate dataInserimento;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Immagine immagine;
     
-    @ManyToOne(cascade = CascadeType.ALL)
+    @OneToOne
     private Fotografo fotografo;
     
     public Foto() {
@@ -81,10 +82,10 @@ public class Foto {
 	this.immagine = immagine;
     }
 
-    public Long getIdImmagine() {
-	return this.immagine.getId();
-    }
-
+//    public Long getIdImmagine() {
+//	return this.immagine.getId();
+//    }
+//
     public Fotografo getFotografo() {
 	return this.fotografo;
     }
