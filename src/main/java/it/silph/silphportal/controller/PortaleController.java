@@ -3,33 +3,38 @@ package it.silph.silphportal.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import it.silph.silphportal.model.Funzionario;
 import it.silph.silphportal.service.AuthService;
-import it.silph.silphportal.service.FunzionarioValidator;
+import it.silph.silphportal.service.FunzionarioService;
 
 @Controller
 public class PortaleController {
 	
 	@Autowired
-	FunzionarioValidator funzionarioValidator;
+	FunzionarioService funzionarioService;
 	
 	@Autowired
 	AuthService authService;
 	
-	@PostMapping("/login")
-	public String loginFunzionario(@Validated @ModelAttribute("funzionario") Funzionario funzionario, Model model, BindingResult bindingResult) {
-		this.funzionarioValidator.validate(funzionario, bindingResult);
-		if(!bindingResult.hasErrors()) {
-			if(this.authService.checkCredential(funzionario)) {
-				funzionario.setRole("FUNZIONARIO");
-				model.addAttribute("funzionario", funzionario);
+	@RequestMapping("/loginPage")
+	public String loginPage(Model model) {
+		model.addAttribute("funzionario", new Funzionario());
+		return "LoginPage";
+	}
+	
+	@RequestMapping("/login")
+	public String login(@ModelAttribute("funzionario") Funzionario funzionario, Model model) {
+		
+		if(funzionario != null) {
+			Funzionario temp = this.funzionarioService.findByCodice(funzionario.getCodice());
+			if(temp.getPassword().equals(funzionario.getPassword())) {
+				System.out.print("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 				return "HomePage";
-			}else return "HomePage";
-		} else return "HomePage";
+			} else return "LoginPage";
+		}else return "Loginpage";
+		
 	}
 }
