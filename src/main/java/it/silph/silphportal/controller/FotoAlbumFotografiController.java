@@ -35,7 +35,7 @@ public class FotoAlbumFotografiController {
 	@Autowired
 	private FotoService fotoService;
 
-	@RequestMapping(value = "/home", method = RequestMethod.GET)
+	@RequestMapping(value = "/", method = RequestMethod.GET)
 	@Transactional
 	public String homePageFoto(Model model) {
 		model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
