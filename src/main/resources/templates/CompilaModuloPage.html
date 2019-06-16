@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head profile="http://www.w3.org/2005/10/profile">
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -89,72 +91,95 @@
 	<!-- Inizio Sezione Modulo -->
 	<div class="container mx-auto modulo">
 		<h1 class="bd-title">Modulo Richiesta</h1>
-		<div class="container">
-			<label for="foto-selezionate">Foto selezionate</label>
-			<div class="row" id="foto-selezionate">
+		<form th:action="@{/modulo}" th:object="${modulo}" method="POST">
+			<div class="container">
+				<label for="foto-selezionate">Foto selezionate</label>
+				<div class="row" id="foto-selezionate">
 
-				<div th:each="foto : ${fotoRichiesta}" class="col-md-2 thumbcell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<img class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
-							<div class="overlay">
-								<a th:href="@{'/foto/' + ${foto.id} + '/rm'}" class="card-title top-right">&times;</a>
+					<div th:each="fotoR, iStat: ${fotoRichiesta}"
+						class="col-md-2 thumbcell">
+						<div class="card mx-auto shadow-lg">
+							<div class="hovereffect">
+								<img class="card-img"
+									th:attr="src=@{'/immagine' + '/' + ${fotoR.getImmagine().getId()}}" />
+								<div class="overlay">
+									<a th:href="@{'/foto/' + ${fotoR.id} + '/rm'}"
+										class="card-title top-right">&times;</a>
+								</div>
 							</div>
 						</div>
 					</div>
+
 				</div>
-
 			</div>
-		</div>
 
-		<form th:action="@{/modulo}" th:object="${modulo}" method="POST">
 			<div class="form-group">
-				<label for="oggetto">Oggetto</label> <input th:field="*{oggetto}"
-					type="text" class="form-control" id="oggetto"
-					placeholder="Inserisci l'oggetto">
+				<label for="oggetto">Oggetto <span
+					th:if="${#fields.hasErrors('oggetto')}" th:errors="*{oggetto}"></span></label>
+				<input th:field="*{oggetto}" type="text" class="form-control"
+					id="oggetto" placeholder="Inserisci l'oggetto" />
 			</div>
 			<div class="form-group">
-				<label for="messaggio">Messaggio</label>
+				<label for="messaggio">Messaggio <span
+					th:if="${#fields.hasErrors('messaggio')}" th:errors="*{messaggio}"></span></label>
 				<textarea th:field="*{messaggio}" class="form-control"
 					id="messaggio"
 					placeholder="Inserisci il messaggio per la richiesta" rows="10"></textarea>
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="nome">Nome</label> <input th:field="*{nomeCliente}"
-						type="text" class="form-control" id="nome" placeholder="Nome">
+					<label for="nome">Nome <span
+						th:if="${#fields.hasErrors('nomeCliente')}"
+						th:errors="*{nomeCliente}"></span></label> <input
+						th:field="*{nomeCliente}" type="text" class="form-control"
+						id="nome" placeholder="Nome" />
 				</div>
 				<div class="form-group col-md-6">
-					<label for="cognome">Cognome</label> <input
+					<label for="cognome">Cognome <span
+						th:if="${#fields.hasErrors('cognomeCliente')}"
+						th:errors="*{cognomeCliente}"></span></label> <input
 						th:field="*{cognomeCliente}" type="text" class="form-control"
-						id="cognome" placeholder="Cognome">
+						id="cognome" placeholder="Cognome" />
 				</div>
 			</div>
 			<div class="form-group">
-				<label for="email">Email</label> <input th:field="*{email}"
-					type="email" class="form-control" id="email"
-					placeholder="mail@esempio.com">
-			</div>
-			<div class="form-group">
-				<label for="telefono">Telefono</label> <input th:field="*{telefono}"
-					type="text" class="form-control" id="telefono"
-					placeholder="Telefono">
-			</div>
-			<div class="form-group">
-				<label for="indirizzo">Indirizzo</label> <input type="text"
-					th:field="*{indirizzo}" class="form-control" id="indirizzo"
-					placeholder="Via Trabochetto 12">
+				<label for="email">Email <span
+					th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span></label>
+				<input th:field="*{email}" type="email" class="form-control"
+					id="email" placeholder="mail@esempio.com" />
 			</div>
 			<div class="form-row">
 				<div class="form-group col-md-6">
-					<label for="citta">Città</label> <input type="text"
-						th:field="*{citta}" class="form-control" id="citta"
-						placeholder="Città">
+					<label for="telefono">Telefono <span
+						th:if="${#fields.hasErrors('telefono')}" th:errors="*{telefono}"></span></label>
+					<input th:field="*{telefono}" type="text" class="form-control"
+						id="telefono" placeholder="Telefono" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="nomeAzienda">Nome Azienda <span
+						th:if="${#fields.hasErrors('nomeAzienda')}"
+						th:errors="*{nomeAzienda}"></span></label> <input
+						th:field="*{nomeAzienda}" type="text" class="form-control"
+						id="nomeAzienda" placeholder="Nome Azienda" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="indirizzo">Indirizzo <span
+					th:if="${#fields.hasErrors('indirizzo')}" th:errors="*{indirizzo}"></span></label>
+				<input type="text" th:field="*{indirizzo}" class="form-control"
+					id="indirizzo" placeholder="Via Trabochetto 12" />
+			</div>
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="citta">Città <span
+						th:if="${#fields.hasErrors('citta')}" th:errors="*{citta}"></span></label>
+					<input type="text" th:field="*{citta}" class="form-control"
+						id="citta" placeholder="Città" />
 				</div>
 				<div class="form-group col-md-4">
-					<label for="nazione">Nazione</label> <select th:field="*{citta}"
-						id="nazione" class="form-control">
+					<label for="nazione">Nazione <span
+						th:if="${#fields.hasErrors('nazione')}" th:errors="*{nazione}"></span></label>
+					<select th:field="*{nazione}" id="nazione" class="form-control">
 						<option value="DEFAULT" selected>Scegli...</option>
 						<option value="AF">Afghanistan</option>
 						<option value="AX">Isole Åland</option>
@@ -182,13 +207,14 @@
 						<option value="BJ">Benin</option>
 						<option value="BM">Bermuda</option>
 						<option value="BT">Bhutan</option>
-						<option value="BO">Bolivia, stato plurinazionale di </option>
-						<option value="BQ">Bonaire, Sint Eustatius e Saba </option>
+						<option value="BO">Bolivia, stato plurinazionale di</option>
+						<option value="BQ">Bonaire, Sint Eustatius e Saba</option>
 						<option value="BA">Bosnia ed Erzegovina</option>
 						<option value="BW">Botswana</option>
 						<option value="BV">Isola Bouvet</option>
 						<option value="BR">Brazil</option>
-						<option value="IO">Territorio Britannico dell'Oceano Indiano</option>
+						<option value="IO">Territorio Britannico dell'Oceano
+							Indiano</option>
 						<option value="BN">Brunei Darussalam</option>
 						<option value="BG">Bulgaria</option>
 						<option value="BF">Burkina Faso</option>
@@ -207,7 +233,7 @@
 						<option value="CO">Colombia</option>
 						<option value="KM">Comore</option>
 						<option value="CG">Congo</option>
-						<option value="CD">Congo, Repubblica Democratica del </option>
+						<option value="CD">Congo, Repubblica Democratica del</option>
 						<option value="CK">Isole Cook</option>
 						<option value="CR">Costa Rica</option>
 						<option value="CI">Costa d'Avorio</option>
@@ -297,7 +323,7 @@
 						<option value="MY">Malaysia</option>
 						<option value="MV">Maldive</option>
 						<option value="ML">Mali</option>
-						<option value="MT">Malta </​​option>
+						<option value="MT">Malta</option>
 						<option value="MH">Marshall Islands</option>
 						<option value="MQ">Martinique</option>
 						<option value="MR">Mauritania</option>
@@ -349,7 +375,7 @@
 							Cunha</option>
 						<option value="KN">Saint Kitts e Nevis</option>
 						<option value="LC">Saint Lucia</option>
-						<option value="MF">Saint Martin (parte francese) </option>
+						<option value="MF">Saint Martin (parte francese)</option>
 						<option value="PM">Saint Pierre e Miquelon</option>
 						<option value="VC">Saint Vincent e Grenadine</option>
 						<option value="WS">Samoa</option>
@@ -415,13 +441,15 @@
 					</select>
 				</div>
 				<div class="form-group col-md-2">
-					<label for="cap">CAP</label> <input th:field="*{CAP}" type="text"
-						class="form-control" id="CAP">
+					<label for="cap">CAP <span
+						th:if="${#fields.hasErrors('CAP')}" th:errors="*{CAP}"></span></label> <input
+						th:field="*{CAP}" type="text" class="form-control" id="CAP" />
 				</div>
 			</div>
 			<button type="submit" class="btn btn-primary">Invia</button>
 		</form>
 	</div>
+
 	<!-- JS Per alcune animazioni di Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
 		integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo"
@@ -434,6 +462,7 @@
 		src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
 		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
 		crossorigin="anonymous"></script>
+
 
 </body>
 </html>

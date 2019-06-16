@@ -25,9 +25,11 @@ public class ModuloValidator implements Validator{
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "email", "errore");
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "telefono", "errore");
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "citta", "errore");
-	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nazione", "errore");
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "CAP", "errore");
 	ValidationUtils.rejectIfEmptyOrWhitespace(errors, "nomeAzienda", "errore");
+	Modulo modulo = (Modulo) target;
+	if(modulo.getNazione().equals("DEFAULT"))
+	    errors.rejectValue("nazione", "errore");
     }
 
 }

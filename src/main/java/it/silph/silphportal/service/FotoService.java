@@ -48,6 +48,11 @@ public class FotoService {
 	return this.fotoRepository.findAllByAlbum(a);
     }
 
+    @Transactional
+    public List<Foto> trovaDaListaPerId(List<Long> idFotoRichiesta) {
+	return this.fotoRepository.findAllById(idFotoRichiesta);
+    }
+
     public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {
 	int pageSize = pageable.getPageSize();
 	int currentPage = pageable.getPageNumber();
@@ -65,4 +70,5 @@ public class FotoService {
 
 	return fotoPage;
     }
+
 }

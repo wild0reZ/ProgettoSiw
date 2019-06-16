@@ -21,15 +21,15 @@ public class Foto {
     private String titolo;
 
     private String descrizione;
-    
+
     private LocalDate dataInserimento;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private Immagine immagine;
-    
+
     @OneToOne
     private Fotografo fotografo;
-    
+
     @ManyToOne
     private Album album;
 
@@ -85,10 +85,6 @@ public class Foto {
 	this.immagine = immagine;
     }
 
-//    public Long getIdImmagine() {
-//	return this.immagine.getId();
-//    }
-//
     public Fotografo getFotografo() {
 	return this.fotografo;
     }
@@ -98,17 +94,17 @@ public class Foto {
     }
 
     public Album getAlbum() {
-        return album;
+	return album;
     }
 
     public void setAlbum(Album album) {
-        this.album = album;
+	this.album = album;
     }
 
     @Override
     public boolean equals(Object obj) {
 	Foto f = (Foto) obj;
-        return this.id == f.getId();
+	return this.id == f.getId();
     }
 
 }

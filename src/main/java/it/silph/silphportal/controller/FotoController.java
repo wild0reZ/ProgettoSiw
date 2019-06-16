@@ -60,14 +60,16 @@ public class FotoController {
     @RequestMapping(value = "/foto/{id}/req", method = RequestMethod.GET)
     public RedirectView addToRichiesta(@PathVariable("id") Long id,
 	    @ModelAttribute("fotoRichiesta") List<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
-	fotoRichiesta.add(this.fotoService.fotoPerId(id));
+	Foto f = this.fotoService.fotoPerId(id);
+	if (!fotoRichiesta.contains(f))
+	    fotoRichiesta.add(f);
 	rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
 	return new RedirectView("/newModulo");
     }
 
     @RequestMapping(value = "/foto/{id}/rm", method = RequestMethod.GET)
     public RedirectView removeFromRichiesta(@PathVariable("id") Long id,
-	    @ModelAttribute("fotoRichiesta") List<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
+	    @ModelAttribute("fotoRichiesta") ArrayList<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
 	for (Foto foto : fotoRichiesta) {
 	    if (foto.getId() == id) {
 		fotoRichiesta.remove(foto);

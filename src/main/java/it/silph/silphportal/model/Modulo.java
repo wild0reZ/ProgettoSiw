@@ -6,15 +6,16 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 @Entity
+//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "modulo_foto" }) })
 public class Modulo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToMany
+    @ManyToMany
     private List<Foto> foto;
 
     private String oggetto;
@@ -40,13 +41,10 @@ public class Modulo {
     private String nomeAzienda;
 
     public Modulo() {
-
     }
 
-    public Modulo(List<Foto> foto, String oggetto, String messaggio, String nomeCliente, String cognomeCliente,
-	    String indirizzo, String email, String telefono, String citta, String nazione, String CAP,
-	    String nomeAzienda) {
-	this.foto = foto;
+    public Modulo(String oggetto, String messaggio, String nomeCliente, String cognomeCliente, String indirizzo,
+	    String email, String telefono, String citta, String nazione, String CAP, String nomeAzienda) {
 	this.oggetto = oggetto;
 	this.messaggio = messaggio;
 	this.nomeCliente = nomeCliente;
