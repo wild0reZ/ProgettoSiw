@@ -21,32 +21,32 @@ import it.silph.silphportal.service.AlbumService;
 
 @Controller
 public class AlbumController {
-    @Autowired
-    private AlbumService albumService;
+	@Autowired
+	private AlbumService albumService;
 
-    @RequestMapping(value = "/listAlbum", method = RequestMethod.GET)
-    public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(10);
+	@RequestMapping(value = "/listAlbum", method = RequestMethod.GET)
+	public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(10);
 
-	Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.albumService.tuttiPerData());
+		Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.albumService.tuttiPerData());
 
-	model.addAttribute("albumPage", albumPage);
+		model.addAttribute("albumPage", albumPage);
 
-	int totalPages = albumPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
+		int totalPages = albumPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+
+		return "AlbumsPage";
 	}
 
-	return "AlbumsPage";
-    }
-
-    @RequestMapping(value = "/fotografo/{id}/newAlbum", method = RequestMethod.POST)
-    public String newAlbum(@PathVariable("id") Long id, @ModelAttribute("album") Album album) {
-	return "404"; // AhiAhiAhi!!!
-    }
+	@RequestMapping(value = "/fotografo/{id}/newAlbum", method = RequestMethod.POST)
+	public String newAlbum(@PathVariable("id") Long id, @ModelAttribute("album") Album album) {
+		return "404"; // AhiAhiAhi!!!
+	}
 
 }

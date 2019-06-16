@@ -13,15 +13,11 @@ public class FunzionarioService {
 	
 	@Autowired
 	FunzionarioRepository funzionarioRepository;
-	
-	@Transactional
-	public Funzionario findByCodice(String codice) {	
-		return this.funzionarioRepository.findByCodice(codice);
-	}
-	
+
 	@Transactional
 	public Funzionario inserisci(Funzionario funzionario) {
 		return this.funzionarioRepository.save(funzionario);
 	}
+
 	
 }
