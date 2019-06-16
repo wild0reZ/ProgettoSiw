@@ -14,16 +14,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	.authorizeRequests()
 	.antMatchers("/**")
 	.permitAll()
-	.antMatchers("/ModuliPage")
+	.antMatchers("/author/auth")
 	.hasRole("FUNZIONARIO")
 	.anyRequest()
 	.authenticated()
 	.and()
 	.formLogin()
-	.loginPage("/login") // TODO: va implementata una pagina di reindirizzamento per i login
+	.loginPage("/loginPage")
 	.permitAll()
 	.and()
 	.logout()
 	.permitAll();
     }
+    
 }

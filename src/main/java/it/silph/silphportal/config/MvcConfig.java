@@ -20,5 +20,6 @@ public class MvcConfig implements WebMvcConfigurer {
 	registry.addViewController("/ModuliPage").setViewName("ModuliPage");
 	registry.addViewController("/SingoloAlbumPage").setViewName("SingoloAlbumPage");
 	registry.addViewController("/VisualizzaModuloPage").setViewName("VisualizzaModuloPage");
+	registry.addViewController("/auth").setViewName("OnlyAuth");
     }
 }

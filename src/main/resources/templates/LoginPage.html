@@ -1,7 +1,5 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-	xmlns:th="https://www.thymeleaf.org"
-	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -68,120 +66,26 @@
 							placeholder="Cerca" aria-label="Cerca">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
-				</li>
 			</ul>
 		</div>
 	</nav>
 	<!-- Fine Navigation Bar -->
 
-	<!-- Inizio sezione Foto -->
-	<div id="foto-jumbotron" class="jumbotron text-center">
-		<div class="container-fluid">
-			<h1 class="jumbotron-heading">Foto</h1>
-			<p class="lead">
-				<i>le nostre immagini più recenti.</i> <br> <a href="#"
-					class="link ">Altre foto</a>
-			</p>
-		</div>
+	<div class="container">
+	<form th:action="@{/login}" method="POST" th:object="${funzionario}">
+	    <div class="form-group">
+	        <label for="codiceFunzionario">Codice Funzionario</label>
+	        <input type="text" class="form-control" id="codiceFunzionario" placeholder="Codice Funzionario" th:field="*{codice}">
+	    </div>
+	    <div class="form-group">
+	        <label for="inputPassword">Password</label>
+	        <input type="password" class="form-control" id="inputPassword" placeholder="Password" th:field="*{password}">
+	    </div>
+	    <button type="submit" class="btn btn-primary">Login</button>
+	</form>
+	
 	</div>
 
-
-	<div id="foto-section">
-		<div class="container">
-			<div class="row">
-
-				<div th:each="foto : ${gruppoFoto}" class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
-								class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
-							</a>
-							<div class="overlay">
-								<h4 th:text="${foto.titolo}" class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- Fine sezione Foto -->
-
-	<!-- Inizio sezione Album -->
-	<div id="album-jumbotron" class="jumbotron text-center">
-		<div class="container-fluid">
-			<h1 class="jumbotron-heading">Album</h1>
-			<p class="lead">
-				<i>le nostre raccolte più attuali.</i>
-			</p>
-		</div>
-	</div>
-	<div id="album-section">
-		<div class="container">
-			<div class="row mb-2">
-
-				<div th:each="album : ${gruppoAlbum}" class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a th:text="${album.titolo}" class="text-dark"
-									th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
-							</h3>
-							<a th:text="${album.getFotografo().getNome()}" href="#"
-								class="mb-1 text-muted">Nome Fotografo</a>
-							<p th:text="${album.descrizione}"
-								class="card-text mb-auto text-right text-truncate">Descrizione
-								Album</p>
-						</div>
-						<a th:href="@{'/album/' + ${album.id}}"> <img
-							th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}"
-							class="card-img-right flex-auto d-none d-lg-block" /></a>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
-	<!-- Fine sezione Album -->
-
-
-
-	<!-- Inizio sezione Fotografi-->
-	<div id="fotografi-jumbotron" class="jumbotron text-center">
-		<div class="container-fluid">
-			<h1 class="jumbotron-heading">Fotografi</h1>
-			<p class="lead">
-				<i>i nostri artisti più giovani.</i>
-			</p>
-		</div>
-	</div>
-	<div id="fotografi-section"></div>
-
-	<div id="foto-section">
-		<div class="container">
-			<div class="row">
-
-				<div th:each="fotografo : ${gruppoFotografo}"
-					class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
-								class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${fotografo.getImmagineProfilo().getId()}}" />
-							</a>
-							<div class="overlay">
-								<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
-									class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-			</div>
-		</div>
-	</div>
 
 	<!-- JS Per alcune animazioni di Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
