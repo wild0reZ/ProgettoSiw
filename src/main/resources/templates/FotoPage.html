@@ -97,138 +97,35 @@
 			<h1 class="text-center title">Foto recenti</h1>
 			<div class="row">
 
-				<div class="col-md-4 fotocell">
+				<div th:each="foto : ${fotoPage.content}" class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg">
 						<div class="hovereffect">
 							<a href="#" class="pop"> <img class="card-img"
-								src="/SampleData/Pics/example1.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
+								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}"
+								data-toggle="modal" data-target="#imagemodal" />
 							</a>
 							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
+								<h4 th:text="${foto.titolo}" class="card-title">Titolo Foto</h4>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example2.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example3.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example4.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example5.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example6.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example7.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example8.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example9.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
 
 			</div>
 		</div>
 	</div>
 	<!-- Fine sezione Foto -->
 
+	<nav aria-label="Navigatore pagine foto" class="justify-content-center">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:if="${fotoPage.totalPages > 0}"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/listFoto(size=${fotoPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="(${pageNumber==fotoPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
+		</ul>
+	</nav>
 
 </body>
+
 </html>

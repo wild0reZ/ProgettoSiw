@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -11,8 +13,8 @@
 	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
 	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
-<link rel="stylesheet" href="CSS/silphbar.css">
-<link rel="stylesheet" href="CSS/FotografoPage.css">
+<link rel="stylesheet" href="/CSS/FotografoPage.css">
+<link rel="stylesheet" href="/CSS/silphbar.css">
 
 <title>SiLPH Inc.</title>
 
@@ -95,89 +97,36 @@
 		<div class="row">
 			<div class="col-md-3">
 				<div class="rounded-circle profilePic shadow-lg"
-					style="background-image: url(http://localhost:8080/SILPHsrl/SampleData/Pics/fExample1.jpg);"></div>
+					th:style="'background-image: url(http://localhost:8080/immagine/' + ${fotografo.getImmagineProfilo().getId()} + ');'"></div>
 			</div>
 			<div class="col-md-9">
-				<h1>Nome Fotografo</h1>
-				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-					do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-					enim ad minim veniam, quis nostrud exercitation ullamco laboris
-					nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-					reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-					pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-					culpa qui officia deserunt mollit anim id est laborum.</p>
+				<h1 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}">Nome
+					Fotografo</h1>
+				<p th:text="${fotografo.bio}">Descrizione Fotografo</p>
 			</div>
 		</div>
 	</div>
 
 	<div class="container sezioneAlbum">
 		<div class="row">
-			<!-- Preferirei fare una piccola icona in basso a destra della cartella,
-		sovrapposta all'icona dell'Album, ma ora devo fare APS -->
-		
-			<div class="col-md-3">
-				<div class="albumFolder">
-					<a href="#"> <img class="folderThumbnail"
-						src="SampleData/Pics/example1.jpg" /> <i
-						class="fas fa-folder folderIcon"></i>
-					</a>
-				</div>
-					<a class="text-center" href="">Titolo Album</a>
-				</p>
-			</div>
 
-			<div class="col-md-3">
+			<div th:each="album : ${albumFotografoPage}" class="col-md-3">
 				<div class="albumFolder">
 					<a href="#"> <img class="folderThumbnail"
-						src="SampleData/Pics/example2.jpg" /> <i
-						class="fas fa-folder folderIcon"></i>
+						th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}" />
+						<i class="fas fa-folder folderIcon"></i>
 					</a>
 				</div>
-				<p>
-					<a class="text-center" href="">Titolo Album</a>
-				</p>
-			</div>
-
-			<div class="col-md-3">
-				<div class="albumFolder">
-					<a href="#"> <img class="folderThumbnail"
-						src="SampleData/Pics/example3.jpg" /> <i
-						class="fas fa-folder folderIcon"></i>
-					</a>
-				</div>
-				<p>
-					<a class="text-center" href="">Titolo Album</a>
-				</p>
-			</div>
-
-			<div class="col-md-3">
-				<div class="albumFolder">
-					<a href="#"> <img class="folderThumbnail"
-						src="SampleData/Pics/example4.jpg" /> <i
-						class="fas fa-folder folderIcon"></i>
-					</a>
-				</div>
-				<p>
-					<a class="text-center" href="">Titolo Album</a>
-				</p>
-			</div>
-
-			<div class="col-md-3">
-				<div class="albumFolder">
-					<a href="#"> <img class="folderThumbnail"
-						src="SampleData/Pics/example5.jpg" /> <i
-						class="fas fa-folder folderIcon"></i>
-					</a>
-				</div>
-				<p>
-					<a class="text-center" href="">Titolo Album</a>
+				<a th:text="${album.titolo}" class="text-center" href="">Titolo
+					Album</a>
 				</p>
 			</div>
 
 			<!-- Icona per aggiungere una foto/album! -->
 			<div class="col-md-3">
 				<div class="albumFolder">
-					<a href="#"> <i class="fas fa-folder-plus folderIcon" style="color: #4169E1 "></i>
+					<a href="#"> <i class="fas fa-folder-plus folderIcon"
+						style="color: #4169E1"></i>
 					</a>
 				</div>
 				<p>
@@ -186,8 +135,26 @@
 			</div>
 			<!-- End -->
 
+
 		</div>
 	</div>
+
+	<nav aria-label="Navigatore pagine Fotografo"
+		class="justify-content-center">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:if="${albumFotografoPage.totalPages > 0}"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/fotografo/${fotografo.id}/(size=${albumFotografoPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="(${pageNumber==albumFotografoPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
+		</ul>
+	</nav>
+
+
+
+
+
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
