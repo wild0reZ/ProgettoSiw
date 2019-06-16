@@ -13,9 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
-import org.hibernate.FetchMode;
-import org.hibernate.annotations.Fetch;
-
 @Entity
 public class Album {
     @Id
@@ -26,10 +23,6 @@ public class Album {
 
     private String descrizione;
 
-    // Cambiando il FetchType a EAGER funziona, ma le query
-    // limitate creano un sacco di problemi (ad esempio, riempie
-    // gli spazi vuoti con duplicati).
-    // Sconfiggere la "LazyInitializationException"
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private List<Foto> foto;
 

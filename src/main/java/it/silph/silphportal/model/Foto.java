@@ -34,7 +34,11 @@ public class Foto {
     private Album album;
 
     public Foto() {
-
+	this.dataInserimento = LocalDate.now();
+    }
+    
+    public Foto(String titolo, String descrizione, Immagine immagine, Fotografo fotografo, Album album) {
+	
     }
 
     public Foto(String titolo, String descrizione, LocalDate dataInserimento, Immagine immagine) {
