@@ -15,6 +15,7 @@ import org.springframework.stereotype.Component;
 import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Fotografo;
+import it.silph.silphportal.model.Funzionario;
 import it.silph.silphportal.model.Immagine;
 
 /*
@@ -48,13 +49,13 @@ public class DBPopulation implements ApplicationRunner {
 	this.funzionarioRepository.save(f2);
 	System.out.println("DEVDEBUG: Funzionari aggiunti!");
 	System.out.println("DEVDEBUG: Aggiungo fotografi!");
-	Fotografo f1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo.");
+	Fotografo fo1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo.");
 	Album a1 = new Album("Album di Leo", "Un bell'album");
-	populateAlbum(a1, f1);
-	f1.getAlbum().add(a1);
-	f1.setImmagineProfilo(new Immagine(extractBytes("fExample1.jpg")));
-	a1.setFotografo(f1);
-	this.fotografoRepository.save(f1);
+	populateAlbum(a1, fo1);
+	fo1.getAlbum().add(a1);
+	fo1.setImmagineProfilo(new Immagine(extractBytes("fExample1.jpg")));
+	a1.setFotografo(fo1);
+	this.fotografoRepository.save(fo1);
 	System.out.println("DEVDEBUG: Fotografi aggiunti!");
     }
 

@@ -8,58 +8,55 @@ import javax.persistence.Id;
 @Entity
 public class Funzionario {
 
-	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private long id;
-	
-	private String codice;
-	
-	private String password;
-	
-	private String role;
-	
-	public Funzionario() {
-	}
-	
-	public Funzionario(String codice, String password) {
-		this.codice = codice;
-		this.password = password;
-		this.role = "FUNZIONARIO";
-	}
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
 
-	public long getId() {
-		return id;
-	}
+    private String codice;
 
-	public void setId(long id) {
-		this.id = id;
-	}
+    private String password;
 
-	public String getCodice() {
-		return codice;
-	}
+    private String role;
 
-	public void setCodice(String codice) {
-		this.codice = codice;
-	}
+    public Funzionario() {
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public Funzionario(String codice, String password) {
+	this.codice = codice;
+	this.password = password;
+	this.role = "FUNZIONARIO";
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public long getId() {
+	return id;
+    }
 
-	public String getRole() {
-		return role;
-	}
+    public void setId(long id) {
+	this.id = id;
+    }
 
-	public void setRole(String role) {
-		this.role = role;
-	}
-	
-	
-	
-	
+    public String getCodice() {
+	return codice;
+    }
+
+    public void setCodice(String codice) {
+	this.codice = codice;
+    }
+
+    public String getPassword() {
+	return password;
+    }
+
+    public void setPassword(String password) {
+	this.password = password;
+    }
+
+    public String getRole() {
+	return role;
+    }
+
+    public void setRole(String role) {
+	this.role = role;
+    }
+
 }

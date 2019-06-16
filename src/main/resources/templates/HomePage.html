@@ -68,8 +68,7 @@
 							placeholder="Cerca" aria-label="Cerca">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
-									type="text" name="username" class="form-control"
-									id="exampleDropdownFormID1" placeholder="ID" size="30">
+				</li>
 			</ul>
 		</div>
 	</nav>
@@ -168,7 +167,8 @@
 					class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg fotografo">
 						<div class="hovereffect">
-							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img class="card-img"
+							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
+								class="card-img"
 								th:attr="src=@{'/immagine' + '/' + ${fotografo.getImmagineProfilo().getId()}}" />
 							</a>
 							<div class="overlay">
