@@ -1,5 +1,6 @@
 package it.silph.silphportal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -10,15 +11,20 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 
 import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.service.FotoService;
 
 @Controller
+@SessionAttributes("fotoRichiesta")
 public class FotoController {
     @Autowired
     private FotoService fotoService;
@@ -42,11 +48,42 @@ public class FotoController {
 
 	return "FotoPage";
     }
-    
+
     @RequestMapping(value = "/foto/{id}", method = RequestMethod.GET)
     public String getSingolaFoto(@PathVariable("id") Long id, Model model) {
 	model.addAttribute("foto", this.fotoService.fotoPerId(id));
 	return "SingolaFotoPage.html";
+    }
+
+    // Aggiunge la foto selezionata alle fotoRichiesta e fa vedere lo stato
+    // dell'ordine
+    @RequestMapping(value = "/foto/{id}/req", method = RequestMethod.GET)
+    public RedirectView addToRichiesta(@PathVariable("id") Long id,
+	    @ModelAttribute("fotoRichiesta") List<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
+	Foto f = this.fotoService.fotoPerId(id);
+	if (!fotoRichiesta.contains(f))
+	    fotoRichiesta.add(f);
+	rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
+	return new RedirectView("/newModulo");
+    }
+
+    @RequestMapping(value = "/foto/{id}/rm", method = RequestMethod.GET)
+    public RedirectView removeFromRichiesta(@PathVariable("id") Long id,
+	    @ModelAttribute("fotoRichiesta") ArrayList<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
+	for (Foto foto : fotoRichiesta) {
+	    if (foto.getId() == id) {
+		fotoRichiesta.remove(foto);
+		break;
+	    }
+	}
+	rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
+	return new RedirectView("/newModulo");
+    }
+
+    // crea una lista foto per la sessione
+    @ModelAttribute("fotoRichiesta")
+    public List<Foto> fotoRichiesta() {
+	return new ArrayList<Foto>();
     }
 
     //// TODO: Bisogna ancora implementare il tutto

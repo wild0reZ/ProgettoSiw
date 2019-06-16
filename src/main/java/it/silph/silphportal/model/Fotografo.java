@@ -96,6 +96,7 @@ public class Fotografo {
     
     public void addAlbum(Album album) {
 	this.album.add(album);
+	album.setFotografo(this);
     }
     
     /**
