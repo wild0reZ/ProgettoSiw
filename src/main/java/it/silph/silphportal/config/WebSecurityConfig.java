@@ -14,7 +14,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	.authorizeRequests()
 	.antMatchers("/**")
 	.permitAll()
-	.antMatchers("/ModuliPage")
+	.antMatchers("/author/auth")
 	.hasRole("FUNZIONARIO")
 	.anyRequest()
 	.authenticated()

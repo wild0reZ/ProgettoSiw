@@ -22,8 +22,6 @@ public class AuthService {
 		Funzionario funzionarioLogin = this.funzionarioService.findByCodice(funzionario.getCodice());
 		try {
 			if(isPasswordValid(funzionarioLogin, funzionario.getPassword())) {
-				funzionarioLogin.setRole("FUNZIONARIO");
-				this.funzionarioService.inserisci(funzionarioLogin);
 				return true;
 			} else return false;
 		

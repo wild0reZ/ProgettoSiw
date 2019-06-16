@@ -24,6 +24,7 @@ public class Funzionario {
 	public Funzionario(String codice, String password) {
 		this.codice = codice;
 		this.password = password;
+		this.role = "FUNZIONARIO";
 	}
 
 	public long getId() {

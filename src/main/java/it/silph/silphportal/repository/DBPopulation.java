@@ -32,7 +32,9 @@ public class DBPopulation implements ApplicationRunner {
 	private void addAll() throws IOException {
 		System.out.println("DEVDEBUG: Aggiungo funzionari!");
 		Funzionario f1 = new Funzionario("1234", "1234");
+		Funzionario f2 = new Funzionario("1111", "1234");
 		this.funzionarioRepository.save(f1);
+		this.funzionarioRepository.save(f2);
 		System.out.println("DEVDEBUG: Funzionari aggiunti!");
 	}
 
