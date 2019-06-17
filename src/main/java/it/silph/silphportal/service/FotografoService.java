@@ -82,4 +82,16 @@ public class FotografoService {
 	return this.fotografoRepository.findById(id).get();
     }
 
+    @Transactional
+    public void inserisci(Fotografo fotografo) {
+	this.fotografoRepository.save(fotografo);
+    }
+
+    @Transactional
+    public void addAlbum(Long id, Album album) {
+	Fotografo fotografo = this.fotografoRepository.getOne(id);
+	fotografo.addAlbum(album);
+	this.fotografoRepository.save(fotografo);
+    }
+
 }

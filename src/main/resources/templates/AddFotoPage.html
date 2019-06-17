@@ -1,18 +1,16 @@
-<!doctype html>
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:th="https://www.thymeleaf.org"
 	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+<title>SiLPH Inc.</title>
 
-<!-- Bootstrap CSS -->
+<!-- Link per il CSS di Bootstrap -->
 <link rel="stylesheet"
-	href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-	integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
 	crossorigin="anonymous">
 
 <!--  Link per le icone di FontAwesome -->
@@ -21,21 +19,15 @@
 	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
 	crossorigin="anonymous">
 
+<!-- CSS locale per override -->
+<link rel="stylesheet" href="/CSS/silphbar.css">
+<link rel="stylesheet" href="/CSS/AddFotoPage.css">
+
+
 <!-- Google fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches|Oswald|Ubuntu&display=swap"
 	rel="stylesheet">
-
-<link
-	href="https://fonts.googleapis.com/css?family=Roboto+Slab:100,300,400,700"
-	rel="stylesheet">
-
-<!-- CSS locale per override -->
-<link rel="stylesheet" href="/CSS/SingolaFotoPage.css">
-<link rel="stylesheet" href="/CSS/silphbar.css">
-<link rel="stylesheet" href="/CSS/hover.css">
-
-<title>SiLPH Inc.</title>
 </head>
 <body>
 
@@ -61,11 +53,11 @@
 				<li class="nav-item">
 					<form class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca">
+							placeholder="Cerca" aria-label="Search">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fas fa-file-alt moduli-icon"></i></a>
+						class="fas fa-file-alt selected-entry moduli-icon"></i></a>
 				<li class="nav-item dropdown"><a
 					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
 					role="button" data-toggle="dropdown" aria-haspopup="true"
@@ -74,15 +66,15 @@
 					<div
 						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
 						aria-labelledby="navbarDropdown">
-						<form th:action="@{/login}" method="post" class="px-4 py-3">
+						<form class="px-4 py-3">
 							<div class="form-group">
 								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
-									type="text" name="username" class="form-control"
-									id="exampleDropdownFormID1" placeholder="ID" size="30">
+									type="text" class="form-control" id="exampleDropdownFormID1"
+									placeholder="ID" size="30">
 							</div>
 							<div class="form-group">
 								<label for="exampleDropdownFormPassword1">Password</label> <input
-									type="password" name="password" class="form-control"
+									type="password" class="form-control"
 									id="exampleDropdownFormPassword1" placeholder="Password"
 									size="30">
 							</div>
@@ -92,42 +84,26 @@
 			</ul>
 		</div>
 	</nav>
-
 	<!-- Fine Navigation Bar -->
-	<div class="container">
-		<div class="descrizione">
-			<h1 class="title" th:text="${foto.titoloFoto}">Titolo Foto</h1>
-			<p th:text="${foto.getAlbum().getTitoloAlbum()}"></p>
-			<p
-				th:text="${foto.getAlbum().getFotografo().getNome()} + ' ' + ${foto.getAlbum().getFotografo().getCognome()}"></p>
-		</div>
-		<div class="containerImmagine">
-			<div class="img-wrap">
-				<img class="image" style="width: 100%"
-					th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
+
+	<div class="container mx-auto foto-form">
+		<h1 class="bd-title">Aggiungi una Foto all'Album</h1>
+		<form th:object="${foto}"
+			th:action="@{'/album/' + ${album.id} + '/foto'}" method="POST"
+			enctype="multipart/form-data">
+			<div class="form-group">
+				<label>Titolo Foto <span
+					th:if="${#fields.hasErrors('titoloFoto')}"
+					th:errors="*{titoloFoto}"></span></label> <input class="form-control"
+					th:field="*{titoloFoto}" />
 			</div>
-			<div class="middle">
-				<a class="text" th:href="@{'/foto/' + ${foto.id} + '/req'}">+ Richiedi foto</a>
+			<div class="form-group">
+				<label>File </label><input class="form-control-file" type="file"
+					accept="image/*" name="multipart" required />
 			</div>
-		</div>
+			<button class="btn btn-primary" type="submit">Aggiungi</button>
+		</form>
 	</div>
-
-
-
-
-	<!-- Optional JavaScript -->
-	<!-- jQuery first, then Popper.js, then Bootstrap JS -->
-	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
-		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
-		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
-		crossorigin="anonymous"></script>
-	<script
-		src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
-		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
-		crossorigin="anonymous"></script>
 
 </body>
 </html>

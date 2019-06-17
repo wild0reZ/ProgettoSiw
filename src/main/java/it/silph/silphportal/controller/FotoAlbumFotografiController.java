@@ -36,7 +36,6 @@ public class FotoAlbumFotografiController {
     private FotoService fotoService;
 
     @RequestMapping(value = "/home", method = RequestMethod.GET)
-    @Transactional
     public String homePageFoto(Model model) {
 	model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
 	model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());

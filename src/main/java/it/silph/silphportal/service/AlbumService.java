@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import it.silph.silphportal.model.Album;
+import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Fotografo;
 import it.silph.silphportal.repository.AlbumRepository;
 
@@ -76,6 +79,18 @@ public class AlbumService {
 	Page<Album> albumPage = new PageImpl<Album>(list, PageRequest.of(currentPage, pageSize), gruppoAlbum.size());
 
 	return albumPage;
+    }
+
+    @Transactional
+    public void addFoto(Long id, Foto foto) {
+	Album a = this.albumRepository.getOne(id);
+	a.addFoto(foto);
+	this.albumRepository.save(a);
+    }
+
+    @Transactional
+    public void inserisci(Album album) {
+	this.albumRepository.save(album);
     }
 
 }

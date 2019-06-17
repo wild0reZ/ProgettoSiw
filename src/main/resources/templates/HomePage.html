@@ -98,7 +98,7 @@
 								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
 							</a>
 							<div class="overlay">
-								<h4 th:text="${foto.titolo}" class="card-title">Titolo Foto</h4>
+								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo Foto</h4>
 							</div>
 						</div>
 					</div>
@@ -126,7 +126,7 @@
 					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
 						<div class="card-body d-flex flex-column align-items-end">
 							<h3 class="mb-0">
-								<a th:text="${album.titolo}" class="text-dark"
+								<a th:text="${album.titoloAlbum}" class="text-dark"
 									th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
 							</h3>
 							<a th:text="${album.getFotografo().getNome()}" href="#"
