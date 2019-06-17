@@ -97,7 +97,7 @@
 	<div class="container">
 		<div class="descrizione">
 			<h1 class="title" th:text="${foto.titoloFoto}">Titolo Foto</h1>
-			<p th:text="${foto.getAlbum().getTitolo()}"></p>
+			<p th:text="${foto.getAlbum().getTitoloAlbum()}"></p>
 			<p
 				th:text="${foto.getAlbum().getFotografo().getNome()} + ' ' + ${foto.getAlbum().getFotografo().getCognome()}"></p>
 		</div>
