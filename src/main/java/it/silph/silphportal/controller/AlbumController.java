@@ -30,30 +30,30 @@ import it.silph.silphportal.validator.FotoValidator;
 
 @Controller
 public class AlbumController {
-    @Autowired
-    private AlbumService albumService;
+	@Autowired
+	private AlbumService albumService;
     @Autowired
     private FotoValidator fotoValidator;
 
-    @RequestMapping(value = "/listAlbum", method = RequestMethod.GET)
-    public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(10);
+	@RequestMapping(value = "/listAlbum", method = RequestMethod.GET)
+	public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(10);
 
-	Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.albumService.tuttiPerData());
+		Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.albumService.tuttiPerData());
 
-	model.addAttribute("albumPage", albumPage);
+		model.addAttribute("albumPage", albumPage);
 
-	int totalPages = albumPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
+		int totalPages = albumPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+
+		return "AlbumsPage";
 	}
-
-	return "AlbumsPage";
-    }
 
     @RequestMapping(value = "/album/{id}/newFoto", method = RequestMethod.GET)
     public String newFoto(@PathVariable("id") Long id, Model model) {
@@ -63,7 +63,7 @@ public class AlbumController {
 	}
 	model.addAttribute("immagine", new Immagine());
 	return "AddFotoPage.html";
-    }
+	}
 
     @RequestMapping(value = "/album/{id}/foto", method = RequestMethod.POST)
     public String addNewFoto(@PathVariable("id") Long id, @Valid @ModelAttribute("foto") Foto foto,

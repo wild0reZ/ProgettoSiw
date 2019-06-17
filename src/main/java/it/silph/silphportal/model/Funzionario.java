@@ -1,5 +1,6 @@
 package it.silph.silphportal.model;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -10,53 +11,60 @@ public class Funzionario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @Column(name = "id", columnDefinition = "serial", nullable = false)
+    protected long id;
 
-    private String codice;
-
-    private String password;
-
-    private String role;
-
-    public Funzionario() {
+    @Column(name = "username", unique = true)
+    protected String username;
+    
+    @Column(name = "password")
+    protected String password;
+    
+    @Column(name = "role")
+    protected String role;
+    
+    public Funzionario(Long id, String username, String password, String role) {
+        this.id = id;
+        this.username = username;
+        this.password = password;
+        this.role = role;
     }
 
-    public Funzionario(String codice, String password) {
-	this.codice = codice;
-	this.password = password;
-	this.role = "FUNZIONARIO";
+     public Funzionario() {
     }
 
-    public long getId() {
-	return id;
-    }
+	public long getId() {
+		return id;
+	}
 
-    public void setId(long id) {
-	this.id = id;
-    }
+	public void setId(long id) {
+		this.id = id;
+	}
 
-    public String getCodice() {
-	return codice;
-    }
+	public String getUsername() {
+		return username;
+	}
 
-    public void setCodice(String codice) {
-	this.codice = codice;
-    }
+	public void setUsername(String username) {
+		this.username = username;
+	}
 
-    public String getPassword() {
-	return password;
-    }
+	public String getPassword() {
+		return password;
+	}
 
-    public void setPassword(String password) {
-	this.password = password;
-    }
+	public void setPassword(String password) {
+		this.password = password;
+	}
 
-    public String getRole() {
-	return role;
-    }
+	public String getRole() {
+		return role;
+	}
 
-    public void setRole(String role) {
-	this.role = role;
-    }
+	public void setRole(String role) {
+		this.role = role;
+	}
+     
+     
 
 }

@@ -26,82 +26,63 @@ import it.silph.silphportal.service.FotografoService;
 @Controller
 public class FotoAlbumFotografiController {
 
-    @Autowired
-    private FotografoService fotografoService;
+	@Autowired
+	private FotografoService fotografoService;
 
-    @Autowired
-    private AlbumService albumService;
+	@Autowired
+	private AlbumService albumService;
 
-    @Autowired
-    private FotoService fotoService;
+	@Autowired
+	private FotoService fotoService;
 
-    @RequestMapping(value = "/home", method = RequestMethod.GET)
-    public String homePageFoto(Model model) {
-	model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
-	model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());
-	model.addAttribute("gruppoFotografo", this.fotografoService.primi9PerDataFraTutti());
-	return "HomePage";
-    }
-
-    @RequestMapping(value = "/fotografo/{id}")
-    public String fotografoPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	Fotografo f = this.fotografoService.trovaPerId(id);
-	model.addAttribute("fotografo", f);
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(15);
-
-	Page<Album> albumFotografoPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.albumService.tuttiPerFotografo(f));
-
-	model.addAttribute("albumFotografoPage", albumFotografoPage);
-
-	int totalPages = albumFotografoPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
-	}
-	return "FotografoPage";
-    }
-
-    @RequestMapping(value = "/album/{id}")
-    public String albumPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	Album a = this.albumService.albumPerId(id);
-	model.addAttribute("album", a);
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(35);
-
-	Page<Foto> fotoAlbumPage = fotoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.fotoService.tuttePerAlbum(a));
-	
-	model.addAttribute("fotoAlbumPage", fotoAlbumPage);
-	
-	int totalPages = fotoAlbumPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
-	}
-	return "SingoloAlbumPage";
-    }
-
-    @RequestMapping(value = "/", method = RequestMethod.GET)
-    public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(10);
-
-	Page<Album> albumPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.albumService.tuttiPerData());
-
-	model.addAttribute("albumPage", albumPage);
-
-	int totalPages = albumPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
+	@RequestMapping(value = "/", method = RequestMethod.GET)
+	public String homePageFoto(Model model) {
+		model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
+		model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());
+		model.addAttribute("gruppoFotografo", this.fotografoService.primi9PerDataFraTutti());
+		return "HomePage";
 	}
 
-	return "AlbumsPage";
-    }
+	@RequestMapping(value = "/fotografo/{id}")
+	public String fotografoPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		Fotografo f = this.fotografoService.trovaPerId(id);
+		model.addAttribute("fotografo", f);
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(15);
+
+		Page<Album> albumFotografoPage = albumService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.albumService.tuttiPerFotografo(f));
+
+		model.addAttribute("albumFotografoPage", albumFotografoPage);
+
+		int totalPages = albumFotografoPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+		return "FotografoPage";
+	}
+
+	@RequestMapping(value = "/album/{id}")
+	public String albumPage(@PathVariable("id") Long id, Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		Album a = this.albumService.albumPerId(id);
+		model.addAttribute("album", a);
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(35);
+
+		Page<Foto> fotoAlbumPage = fotoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.fotoService.tuttePerAlbum(a));
+
+		model.addAttribute("fotoAlbumPage", fotoAlbumPage);
+
+		int totalPages = fotoAlbumPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+		return "SingoloAlbumPage";
+	}
+
 }
