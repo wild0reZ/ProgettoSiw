@@ -19,7 +19,7 @@ public class Album {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String titolo;
+    private String titoloAlbum;
 
     private String descrizione;
 
@@ -33,7 +33,7 @@ public class Album {
     private Immagine immagineCopertina;
 
     public Album() {
-
+	this.foto = new ArrayList<>();
     }
 
     /**
@@ -41,9 +41,9 @@ public class Album {
      * @param titolo
      * @param descrizione
      */
-    public Album(String titolo, String descrizione) {
+    public Album(String titoloAlbum, String descrizione) {
 	super();
-	this.titolo = titolo;
+	this.titoloAlbum = titoloAlbum;
 	this.descrizione = descrizione;
 	this.foto = new ArrayList<>();
     }
@@ -67,12 +67,12 @@ public class Album {
 	this.id = id;
     }
 
-    public String getTitolo() {
-	return titolo;
+    public String getTitoloAlbum() {
+	return titoloAlbum;
     }
 
-    public void setTitolo(String titolo) {
-	this.titolo = titolo;
+    public void setTitoloAlbum(String titoloAlbum) {
+	this.titoloAlbum = titoloAlbum;
     }
 
     public String getDescrizione() {
@@ -121,6 +121,11 @@ public class Album {
     public boolean equals(Object obj) {
 	Album a = (Album) obj;
         return this.id == a.getId();
+    }
+
+    public void addToFotografo(Fotografo fotografo) {
+	this.fotografo = fotografo;
+	fotografo.getAlbum().add(this);
     }
 
 }

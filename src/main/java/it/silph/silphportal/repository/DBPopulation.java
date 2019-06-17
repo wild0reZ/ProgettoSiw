@@ -51,9 +51,8 @@ public class DBPopulation implements ApplicationRunner {
 
     private void populateAlbum(Album a, Fotografo f) throws IOException {
 	for (int i = 1; i <= 11; i++) {
-	    Foto foto = new Foto( 
-		    "Bella Foto " + i,
-		    "Gran Foto", LocalDate.now().minusDays(ThreadLocalRandom.current().nextLong(100L)),
+	    Foto foto = new Foto("Bella Foto " + i,
+		    LocalDate.now().minusDays(ThreadLocalRandom.current().nextLong(100L)),
 		    new Immagine(extractBytes("example" + i + ".jpg")));
 	    foto.setFotografo(f);
 	    a.addFoto(foto);

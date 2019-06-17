@@ -18,9 +18,8 @@ public class Foto {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    private String titolo;
+    private String titoloFoto;
 
-    private String descrizione;
 
     private LocalDate dataInserimento;
 
@@ -37,14 +36,13 @@ public class Foto {
 	this.dataInserimento = LocalDate.now();
     }
     
-    public Foto(String titolo, String descrizione, Immagine immagine, Fotografo fotografo, Album album) {
+    public Foto(String titolo, Immagine immagine, Fotografo fotografo, Album album) {
 	
     }
 
-    public Foto(String titolo, String descrizione, LocalDate dataInserimento, Immagine immagine) {
+    public Foto(String titolo, LocalDate dataInserimento, Immagine immagine) {
 	super();
-	this.titolo = titolo;
-	this.descrizione = descrizione;
+	this.titoloFoto = titolo;
 	this.dataInserimento = dataInserimento;
 	this.immagine = immagine;
     }
@@ -57,20 +55,12 @@ public class Foto {
 	this.id = id;
     }
 
-    public String getTitolo() {
-	return titolo;
+    public String getTitoloFoto() {
+	return titoloFoto;
     }
 
-    public void setTitolo(String titolo) {
-	this.titolo = titolo;
-    }
-
-    public String getDescrizione() {
-	return descrizione;
-    }
-
-    public void setDescrizione(String descrizione) {
-	this.descrizione = descrizione;
+    public void setTitoloFoto(String titoloFoto) {
+	this.titoloFoto = titoloFoto;
     }
 
     public LocalDate getDataInserimento() {
