@@ -20,7 +20,7 @@
 
 <!-- CSS locale per override -->
 <link rel="stylesheet" href="CSS/silphbar.css">
-<link rel="stylesheet" href="CSS/AddAlbumAndFotoPage.css">
+<link rel="stylesheet" href="CSS/AddFotografoPage.css">
 
 
 <!-- Google fonts -->
@@ -30,13 +30,96 @@
 </head>
 <body>
 
-	<form th:object="${fotografo}" th:action="@{/fotografo}" method="POST"
-		enctype="multipart/form-data">
-		Nome Fotografo <input th:field="*{nome}" /> Cognome Fotografo <input
-			th:field="*{cognome}" /> Breve Biografia <input th:field="*{bio}" />
-		Immagine Profilo <input type="file" accept="image/*" name="multipart" />
-		<button type="submit">Do It!</button>
-		<input>
-	</form>
+	<!-- Inizio Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="#"> <i
+			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
+				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<form class="form-inline my-2 my-lg-0">
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Cerca" aria-label="Search">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				<li class="nav-item"><a class="nav-link" href="#"><i
+						class="fas fa-file-alt selected-entry moduli-icon"></i></a>
+				<li class="nav-item dropdown"><a
+					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+					role="button" data-toggle="dropdown" aria-haspopup="true"
+					aria-expanded="false"><i
+						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
+					<div
+						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
+						aria-labelledby="navbarDropdown">
+						<form class="px-4 py-3">
+							<div class="form-group">
+								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
+									type="text" class="form-control" id="exampleDropdownFormID1"
+									placeholder="ID" size="30">
+							</div>
+							<div class="form-group">
+								<label for="exampleDropdownFormPassword1">Password</label> <input
+									type="password" class="form-control"
+									id="exampleDropdownFormPassword1" placeholder="Password"
+									size="30">
+							</div>
+							<button type="submit" class="btn btn-primary">Sign in</button>
+						</form>
+					</div></li>
+			</ul>
+		</div>
+	</nav>
+	<!-- Fine Navigation Bar -->
+
+	<!-- Inizio Form -->
+	<div class="container mx-auto fotografo-form">
+		<h1 class="bd-title">Aggiungi un Nuovo Fotografo</h1>
+		<form th:object="${fotografo}" th:action="@{/fotografo}" method="POST"
+			enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nome">Nome <span
+						th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></label><input
+						class="form-control" placeholder="Inserisci il nome"
+						th:field="*{nome}" id="nome" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="cognome">Cognome <span
+						th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span></label><input
+						class="form-control" placeholder="Inserisci il cognome"
+						th:field="*{cognome}" id="cognome" />
+				</div>
+			</div>
+			<div class="form-group">
+				<label for="bio">Breve Biografia <span
+					th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}"></span></label>
+				<textarea class="form-control"
+					placeholder="Inserisci qualche riga che ti descriva" id="bio"
+					th:field="*{bio}"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="immagine">Immagine Profilo <span
+					th:if="${#fields.hasErrors('immagineProfilo')}"
+					th:errors="*{immagineProfilo}"></span></label><input class="form-control-file"
+					id="immagine" type="file" accept="image/*" name="multipart" required/>
+			</div>
+			<button class="btn btn-primary" type="submit">Aggiungi</button>
+		</form>
+	</div>
+	<!-- Fine Form -->
 </body>
 </html>

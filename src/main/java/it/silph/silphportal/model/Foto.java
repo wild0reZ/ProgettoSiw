@@ -20,7 +20,6 @@ public class Foto {
 
     private String titoloFoto;
 
-
     private LocalDate dataInserimento;
 
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
