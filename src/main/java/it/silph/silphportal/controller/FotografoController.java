@@ -34,8 +34,8 @@ import it.silph.silphportal.validator.FotografoValidator;
 
 @Controller
 public class FotografoController {
-	@Autowired
-	private FotografoService fotografoService;
+    @Autowired
+    private FotografoService fotografoService;
     @Autowired
     private ImmagineService immagineService;
 
@@ -46,25 +46,25 @@ public class FotografoController {
     @Autowired
     private FotografoValidator fotografoValidator;
 
-	@RequestMapping(value = "/listFotografi", method = RequestMethod.GET)
-	public String listFotografi(Model model, @RequestParam("page") Optional<Integer> page,
-			@RequestParam("size") Optional<Integer> size) {
-		int currentPage = page.orElse(1);
-		int pageSize = size.orElse(9);
+    @RequestMapping(value = "/listFotografi", method = RequestMethod.GET)
+    public String listFotografi(Model model, @RequestParam("page") Optional<Integer> page,
+	    @RequestParam("size") Optional<Integer> size) {
+	int currentPage = page.orElse(1);
+	int pageSize = size.orElse(9);
 
-		Page<Fotografo> fotografiPage = fotografoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-				this.fotografoService.tuttiPerData());
+	Page<Fotografo> fotografiPage = fotografoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+		this.fotografoService.tuttiPerData());
 
-		model.addAttribute("fotografiPage", fotografiPage);
+	model.addAttribute("fotografiPage", fotografiPage);
 
-		int totalPages = fotografiPage.getTotalPages();
-		if (totalPages > 0) {
-			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-			model.addAttribute("pageNumbers", pageNumbers);
-		}
-
-		return "FotografiPage";
+	int totalPages = fotografiPage.getTotalPages();
+	if (totalPages > 0) {
+	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+	    model.addAttribute("pageNumbers", pageNumbers);
 	}
+
+	return "FotografiPage";
+    }
 
     @RequestMapping(value = "/fotografo/{id}/newAlbum")
     public String newAlbumFotografo(@PathVariable("id") Long id, Model model) {

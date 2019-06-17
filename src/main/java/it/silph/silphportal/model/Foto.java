@@ -1,6 +1,7 @@
 package it.silph.silphportal.model;
 
 import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -8,6 +9,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 
@@ -34,9 +36,9 @@ public class Foto {
     public Foto() {
 	this.dataInserimento = LocalDate.now();
     }
-    
+
     public Foto(String titolo, Immagine immagine, Fotografo fotografo, Album album) {
-	
+
     }
 
     public Foto(String titolo, LocalDate dataInserimento, Immagine immagine) {

@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
+import it.silph.silphportal.model.Modulo;
 import it.silph.silphportal.repository.FotoRepository;
 
 @Service
@@ -53,6 +54,11 @@ public class FotoService {
 	return this.fotoRepository.findAllById(idFotoRichiesta);
     }
 
+    @Transactional
+    public List<Foto> fotoPerModulo(Long id) {
+	return this.fotoRepository.findAllByModuloId(id);
+    }
+
     public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {
 	int pageSize = pageable.getPageSize();
 	int currentPage = pageable.getPageNumber();
@@ -69,6 +75,15 @@ public class FotoService {
 	Page<Foto> fotoPage = new PageImpl<Foto>(list, PageRequest.of(currentPage, pageSize), gruppoFoto.size());
 
 	return fotoPage;
+    }
+
+    @Transactional
+    public void searchFoto(List<Foto> fotoSearch, String query) {
+	List<Foto> foto = this.fotoRepository.findByTitoloFotoContaining(query);
+	for(Foto fto : foto) {
+	    System.out.println(fto.toString());
+	}
+	fotoSearch.addAll(foto);
     }
 
 }
