@@ -6,6 +6,8 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -63,14 +65,31 @@ public class FotografoController {
     }
 
     @RequestMapping(value = "/fotografo/{id}/album", method = RequestMethod.POST)
-    public String addAlbumFotografo(@PathVariable("id") Long id, @ModelAttribute("album") Album album,
-	    @ModelAttribute("foto") Foto foto, @RequestParam("multipart") MultipartFile mpf) throws IOException {
+    public String addAlbumFotografo(@PathVariable("id") Long id, @Valid @ModelAttribute("album") Album album,
+	    @Valid @ModelAttribute("foto") Foto foto, @RequestParam("multipart") MultipartFile mpf) throws IOException {
 	Immagine i = this.immagineService.inserisci(new Immagine(mpf.getBytes()));
 	foto.setImmagine(i);
 	album.addFoto(foto);
 	foto.setFotografo(this.fotografoService.trovaPerId(id));
 	this.fotografoService.addAlbum(id, album);
 	this.fotografoService.inserisci(this.fotografoService.trovaPerId(id));
+	return "OperazioneCompletataPage.html";
+    }
+
+    @RequestMapping(value = "/newFotografo", method = RequestMethod.GET)
+    public String newFotografo(Model model) {
+	model.addAttribute("immagine", new Immagine());
+	model.addAttribute("fotografo", new Fotografo());
+	return "AddFotografoPage.html";
+    }
+
+    @RequestMapping(value = "/fotografo", method = RequestMethod.POST)
+    public String addNewFotografo(@ModelAttribute("immagine") Immagine immagine,
+	    @Valid @ModelAttribute("fotografo") Fotografo fotografo, @RequestParam("multipart") MultipartFile mpf)
+	    throws IOException {
+	immagine.setFileImmagine(mpf.getBytes());
+	fotografo.setImmagineProfilo(immagine);
+	this.fotografoService.inserisci(fotografo);
 	return "OperazioneCompletataPage.html";
     }
 

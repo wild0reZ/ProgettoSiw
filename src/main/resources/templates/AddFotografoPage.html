@@ -30,12 +30,11 @@
 </head>
 <body>
 
-	<form th:action="@{'/fotografo/' + ${fotografo.id} + '/album'}"
-		method="POST" enctype="multipart/form-data">
-		Titolo Album <input th:field="${album.titoloAlbum}" name="titoloAlbum"/> Descrizione Album <input
-			th:field="${album.descrizione}" name="descrizione"/> Titolo Foto <input
-			th:value="${foto.titoloFoto}" name="titoloFoto" /> File <input type="file"
-			accept="image/*" name="multipart" />
+	<form th:object="${fotografo}" th:action="@{/fotografo}" method="POST"
+		enctype="multipart/form-data">
+		Nome Fotografo <input th:field="*{nome}" /> Cognome Fotografo <input
+			th:field="*{cognome}" /> Breve Biografia <input th:field="*{bio}" />
+		Immagine Profilo <input type="file" accept="image/*" name="multipart" />
 		<button type="submit">Do It!</button>
 		<input>
 	</form>
