@@ -73,7 +73,7 @@
 	<!-- Fine Navigation Bar -->
 
 	<div class="container sezioneDescrizione">
-		<h1 th:text="${album.titolo}">Titolo Album</h1>
+		<h1 th:text="${album.titoloAlbum}">Titolo Album</h1>
 		<p th:text="${album.descrizione}">Descrizione Album</p>
 	</div>
 
@@ -90,7 +90,7 @@
 							th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
 						</a>
 						<div class="overlay">
-							<h6 th:text="${foto.titolo}" class="card-title">Titolo Foto</h6>
+							<h6 th:text="${foto.titoloFoto}" class="card-title">Titolo Foto</h6>
 						</div>
 					</div>
 				</div>

@@ -19,8 +19,8 @@
 	crossorigin="anonymous">
 
 <!-- CSS locale per override -->
-<link rel="stylesheet" href="/CSS/silphbar.css">
-<link rel="stylesheet" href="/CSS/AddAlbumAndFotoPage.css">
+<link rel="stylesheet" href="CSS/silphbar.css">
+<link rel="stylesheet" href="CSS/AddFotografoPage.css">
 
 
 <!-- Google fonts -->
@@ -29,6 +29,7 @@
 	rel="stylesheet">
 </head>
 <body>
+
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="#"> <i
@@ -85,57 +86,40 @@
 	<!-- Fine Navigation Bar -->
 
 	<!-- Inizio Form -->
-	<div class="container mx-auto album-foto-form">
-		<h1 class="bd-title">Nuovo Album</h1>
-		<form th:action="@{'/fotografo/' + ${fotografo.id} + '/album'}"
-			method="POST" enctype="multipart/form-data">
-			<div class="container">
-				<div class="row">
-					<div class="col-md-6">
-						<h3 class="text-muted">
-							<i>Album</i>
-						</h3>
-						<div class="form-group">
-							<label for="titoloAlbum">Titolo Album <span
-								th:if="${#fields.hasErrors('${album.titoloAlbum}')}"
-								th:errors="${album.titoloAlbum}"></span></label> <input
-								placeholder="Inserisci il Titolo"
-								th:field="${album.titoloAlbum}" class="form-control"
-								name="titoloAlbum" id="titoloAlbum" />
-						</div>
-						<div class="form-group">
-							<label for="descrizione">Descrizione Album <span
-								th:if="${#fields.hasErrors('${album.descrizione}')}"
-								th:errors="${album.descrizione}"></span></label>
-							<textarea placeholder="Inserisci una breve Descrizione"
-								class="form-control" th:field="${album.descrizione}"
-								name="descrizione" id="descrizione"></textarea>
-						</div>
-						<button type="submit" class="btn btn-primary">Do It!</button>
-					</div>
-					<div class="col-md-6">
-						<h3 class="text-muted">
-							<i>Foto</i>
-						</h3>
-						<div class="form-group">
-							<label for="titoloFoto">Titolo Foto <span
-								th:if="${#fields.hasErrors('${foto.titoloFoto}')}"
-								th:errors="${foto.titoloFoto}"></span></label> <input
-								placeholder="Inserisci il Titolo" class="form-control"
-								id="titoloFoto" th:field="${foto.titoloFoto}" name="titoloFoto" />
-						</div>
-						<div class="form-group">
-							<label for="file">File </label><input
-								placeholder="Seleziona la foto iniziale" class="form-control-file"
-								type="file" accept="image/*" name="multipart" required/>
-						</div>
-					</div>
+	<div class="container mx-auto fotografo-form">
+		<h1 class="bd-title">Aggiungi un Nuovo Fotografo</h1>
+		<form th:object="${fotografo}" th:action="@{/fotografo}" method="POST"
+			enctype="multipart/form-data">
+			<div class="form-row">
+				<div class="form-group col-md-6">
+					<label for="nome">Nome <span
+						th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></label><input
+						class="form-control" placeholder="Inserisci il nome"
+						th:field="*{nome}" id="nome" />
+				</div>
+				<div class="form-group col-md-6">
+					<label for="cognome">Cognome <span
+						th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span></label><input
+						class="form-control" placeholder="Inserisci il cognome"
+						th:field="*{cognome}" id="cognome" />
 				</div>
 			</div>
+			<div class="form-group">
+				<label for="bio">Breve Biografia <span
+					th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}"></span></label>
+				<textarea class="form-control"
+					placeholder="Inserisci qualche riga che ti descriva" id="bio"
+					th:field="*{bio}"></textarea>
+			</div>
+			<div class="form-group">
+				<label for="immagine">Immagine Profilo <span
+					th:if="${#fields.hasErrors('immagineProfilo')}"
+					th:errors="*{immagineProfilo}"></span></label><input class="form-control-file"
+					id="immagine" type="file" accept="image/*" name="multipart" required/>
+			</div>
+			<button class="btn btn-primary" type="submit">Aggiungi</button>
 		</form>
 	</div>
 	<!-- Fine Form -->
-
-
 </body>
 </html>

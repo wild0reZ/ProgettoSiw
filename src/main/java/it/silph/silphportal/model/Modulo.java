@@ -1,21 +1,24 @@
 package it.silph.silphportal.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 
 @Entity
-//@Table(uniqueConstraints = { @UniqueConstraint(columnNames = { "id", "modulo_foto" }) })
 public class Modulo {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToMany
+    // Errato, il cascadeType non dovrebbe servire, ma ahime
+    @ManyToMany(cascade = { CascadeType.REFRESH, CascadeType.MERGE, CascadeType.DETACH }, fetch = FetchType.EAGER)
     private List<Foto> foto;
 
     private String oggetto;
@@ -41,6 +44,7 @@ public class Modulo {
     private String nomeAzienda;
 
     public Modulo() {
+	this.foto = new ArrayList<>();
     }
 
     public Modulo(String oggetto, String messaggio, String nomeCliente, String cognomeCliente, String indirizzo,
@@ -56,6 +60,7 @@ public class Modulo {
 	this.nazione = nazione;
 	this.CAP = CAP;
 	this.nomeAzienda = nomeAzienda;
+	this.foto = new ArrayList<>();
     }
 
     public Long getId() {

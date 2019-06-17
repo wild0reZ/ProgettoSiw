@@ -17,4 +17,9 @@ public class ImmagineService {
     public Immagine immaginePerId(Long id) {
 	return this.immagineRepository.findById(id).get();
     }
+    
+    @Transactional
+    public Immagine inserisci(Immagine immagine) {
+	return this.immagineRepository.save(immagine);
+    }
 }

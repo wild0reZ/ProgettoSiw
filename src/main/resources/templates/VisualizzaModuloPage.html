@@ -31,7 +31,6 @@
 <body>
 
 	<!-- Inizio Navigation Bar -->
-	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="/"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
@@ -47,10 +46,13 @@
 				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
 				<li class="nav-item"><a class="nav-link" href="listFoto">Fotografie</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/moduliPage}">Moduli</a></li>
-				<li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link" th:href="@{/login}">Login</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()" ><a class="nav-link" th:href="@{/logout}">Logout</a></li>
-				
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/moduliPage}">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/login}">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/logout}">Logout</a></li>
+
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
@@ -68,64 +70,16 @@
 	<!-- Inizio Sezione Modulo -->
 	<div class="container mx-auto modulo">
 		<h3 class="bd-title">Modulo Richiesta</h3>
+		
 		<div class="container">
 			<div class="foto-richieste">
 				<label for="foto-selezionate">Foto richieste</label>
 				<div class="row">
 
-					<div class="col-md-2 thumbcell">
+					<div th:each="foto : ${modulo.getFoto()}" class="col-md-2 thumbcell">
 						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example1.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example2.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example3.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example4.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example5.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example6.jpg" />
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-2 thumbcell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<img class="card-img" src="SampleData/Pics/example7.jpg" />
-							</div>
+								<img class="card-img"
+									th:attr="src=@{'/immagine/' + ${foto.getImmagine().getId()}}" />
 						</div>
 					</div>
 
@@ -133,31 +87,16 @@
 			</div>
 		</div>
 
-		<h4>Oggetto</h4>
-		<p>(Messaggio) Lorem ipsum dolor sit amet, consectetur adipiscing
-			elit. Aenean a tortor sit amet sapien sodales ultricies. Etiam sit
-			amet felis eget neque molestie tincidunt in id ligula. Sed vitae
-			rutrum erat. Nulla sit amet arcu diam. Cras nec sagittis metus, vel
-			scelerisque urna. Phasellus ac magna sit amet nunc tincidunt
-			pulvinar. Vestibulum vitae metus odio. Praesent tristique nec nulla
-			vitae scelerisque. Mauris non sem nec turpis efficitur ullamcorper et
-			nec urna. Fusce mattis eu nulla vel imperdiet. Vivamus varius nec
-			erat blandit placerat. Morbi at ex velit. Phasellus interdum, orci
-			vel interdum facilisis, ipsum urna condimentum turpis, in volutpat
-			metus orci ut metus. Integer mollis turpis eu fermentum cursus.
-			Mauris viverra ut massa eget dictum. Curabitur at elit eget odio
-			tincidunt sodales. Quisque mollis fringilla purus, a hendrerit risus
-			placerat tincidunt. Morbi iaculis, turpis ut scelerisque vestibulum,
-			felis orci pharetra nulla, vitae ullamcorper justo lectus aliquam mi.
-			Nulla dolor eros, congue et velit a, facilisis congue felis. Sed sit
-			amet quam in lectus suscipit rhoncus eu vel mauris. Donec finibus eu
-			risus non eleifend. Aliquam erat volutpat. Proin sit amet lorem
-			ullamcorper, congue nibh id, porta ante. Mauris sit amet varius erat,
-			a venenatis tortor. Cras quis ullamcorper ante.</p>
-		<p>Nome Cognome</p>
-		<p>email@esempio.com</p>
-		<p>3481122333</p>
-		<p>Via Trabochetto 123, 00146, Roma, Italia</p>
+		<h4 th:text="${modulo.getOggetto()}">Oggetto</h4>
+		<p th:text="${modulo.getMessaggio()}">Messaggio</p>
+		<p
+			th:text="${modulo.getNomeCliente()} + ' ' + ${modulo.getCognomeCliente()} + ', ' + ${modulo.getNomeAzienda()}">Nome
+			Cognome, Azienda</p>
+		<p th:text="${modulo.getEmail()}">email@esempio.com</p>
+		<p th:text="${modulo.getTelefono()}">3481122333</p>
+		<p
+			th:text="${modulo.getIndirizzo()} + ', ' + ${modulo.getCAP()} + ', ' + ${modulo.getCitta()} + ', ' + ${modulo.getNazione()}">Via
+			Trabochetto 123, 00146, Roma, Italia</p>
 
 	</div>
 	<!-- JS Per alcune animazioni di Bootstrap -->
