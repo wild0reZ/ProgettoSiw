@@ -26,7 +26,7 @@ public class Album {
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "album")
     private List<Foto> foto;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.EAGER)
     private Fotografo fotografo;
     
     @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
