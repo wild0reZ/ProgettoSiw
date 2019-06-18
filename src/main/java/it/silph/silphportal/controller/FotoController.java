@@ -86,30 +86,4 @@ public class FotoController {
 	return new ArrayList<Foto>();
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public String serachFoto(Model model, @RequestParam("query") String query) {
-	List<Foto> fotoSearch = new ArrayList<>();
-	this.fotoService.searchFoto(fotoSearch, query);
-	model.addAttribute("fotoSearch", fotoSearch);
-	return "SearchFotoPage.html";
-    }
-
-    //// TODO: Bisogna ancora implementare il tutto
-    //// @RequestMapping(value = "/foto", method = RequestMethod.POST)
-    //// public String newFoto(@RequestParam("multipartFoto") MultipartFile mpFoto,
-    //// @ModelAttribute("foto") Foto foto,
-    //// Model model) throws IOException {
-    //// foto.setDataInserimento(LocalDate.now());
-    //// foto.setImmagine(mpFoto.getBytes());
-    //// this.fotoService.aggiungiFoto(foto);
-    //// model.addAttribute("foto", foto);
-    //// return "FotoPage";
-    //// }
-    ////
-    // @RequestMapping(value = "/addFoto")
-    // public String addFoto(Model model) {
-    // model.addAttribute("foto", new Foto());
-    // return "FormFoto";
-    // }
-    //
 }

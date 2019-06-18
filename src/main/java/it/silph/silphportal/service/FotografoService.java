@@ -94,4 +94,10 @@ public class FotografoService {
 	this.fotografoRepository.save(fotografo);
     }
 
+    @Transactional
+    public void searchFoto(List<Fotografo> albumSearch, String queryNome, String queryCognome) {
+	List<Fotografo> fotografi = this.fotografoRepository.findByNomeOrCognomeContainingIgnoreCase(queryNome, queryCognome);
+	albumSearch.addAll(fotografi);
+    }
+
 }

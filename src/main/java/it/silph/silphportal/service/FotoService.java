@@ -79,10 +79,7 @@ public class FotoService {
 
     @Transactional
     public void searchFoto(List<Foto> fotoSearch, String query) {
-	List<Foto> foto = this.fotoRepository.findByTitoloFotoContaining(query);
-	for(Foto fto : foto) {
-	    System.out.println(fto.toString());
-	}
+	List<Foto> foto = this.fotoRepository.findByTitoloFotoContainingIgnoreCase(query);
 	fotoSearch.addAll(foto);
     }
 

@@ -39,6 +39,7 @@
 </head>
 <body>
 
+
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
 		<a class="navbar-brand" href="/"> <i
@@ -54,38 +55,61 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="listFoto">Fotografie</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/moduliPage}">Moduli</a></li>
-				<li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link" th:href="@{/login}">Login</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()" ><a class="nav-link" th:href="@{/logout}">Logout</a></li>
-				
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" href="javascript: document.logoutForm.submit()"
+					style="color: #4169E1;">Logout</a></li>
+				<li sec:authorize="isAnonymous()" th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i
+						th:if="${session.fotoRichiesta.size() > 0}"
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<form class="form-inline my-2 my-lg-0">
+					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
+					<select class="form-control" name="entity">
+					<option value="FOTO">Foto</option>
+					<option value="ALBUM">Album</option>
+					<option value="FOTOGRAFO">Fotografo</option></select>
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca">
+							placeholder="Cerca" aria-label="Cerca" name="query">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</li>
 			</ul>
 		</div>
 	</nav>
+	<form sec:authorize="isAuthenticated()" name="logoutForm"
+		th:action="@{/logout}" method="post" th:hidden="true">
+		<input hidden="true" type="submit" value="Sign Out" />
+	</form>
 	<!-- Fine Navigation Bar -->
+
+
 	<div class="container">
 		<div class="descrizione">
-			<h1 class="title" th:text="${foto.titoloFoto}">Titolo Foto</h1>
-			<p th:text="${foto.getAlbum().getTitoloAlbum()}"></p>
-			<p
-				th:text="${foto.getAlbum().getFotografo().getNome()} + ' ' + ${foto.getAlbum().getFotografo().getCognome()}"></p>
+			<h1 class="title mr-5" th:text="${foto.titoloFoto}">Titolo Foto</h1>
+			<a th:href="@{'/album/' + ${foto.getAlbum().getId()}}"><span
+				th:text="${foto.getAlbum().getTitoloAlbum()}" class="mr-5"></span></a> <a
+				th:href="@{'/fotografo/' + ${foto.getAlbum().getFotografo().getId()}}"><span
+				th:text="${foto.getAlbum().getFotografo().getNome()} + ' ' + ${foto.getAlbum().getFotografo().getCognome()}"
+				class="text-muted"></span></a>
 		</div>
 		<div class="containerImmagine">
 			<div class="img-wrap">
-				<img class="image" style="width: 100%"
-					th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
+				<img class="image" style="width: 100%; height: 100%"
+					th:attr="src=@{'/immagine/' + ${foto.getImmagine().getId()}}" />
 			</div>
-			<div class="middle">
-				<a class="text" th:href="@{'/foto/' + ${foto.id} + '/req'}">+ Richiedi foto</a>
+			<div sec:authorize="isAnonymous()" class="middle">
+				<a class="text" th:href="@{'/foto/' + ${foto.id} + '/req'}">+
+					Richiedi foto</a>
 			</div>
 		</div>
 	</div>

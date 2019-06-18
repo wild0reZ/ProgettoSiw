@@ -60,8 +60,9 @@
 					class="nav-link" th:href="@{/loginFunzionario}"
 					style="color: #4169E1;">Login</a></li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"><a
-					class="nav-link" th:href="@{/logout}" style="color: #4169E1;">Logout</a></li>
-				<li th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" href="javascript: document.logoutForm.submit()"
+					style="color: #4169E1;">Logout</a></li>
+				<li sec:authorize="isAnonymous()" th:if="${session.fotoRichiesta != null}" class="nav-item"><a
 					class="nav-link" th:href="@{/newModulo}"><i
 						th:if="${session.fotoRichiesta.size() > 0}"
 						class="fas fa-file-alt" style="color: #4169E1"><span
@@ -71,6 +72,10 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
+					<select class="form-control" name="entity">
+					<option value="FOTO">Foto</option>
+					<option value="ALBUM">Album</option>
+					<option value="FOTOGRAFO">Fotografo</option></select>
 						<input class="form-control mr-sm-2" type="search"
 							placeholder="Cerca" aria-label="Cerca" name="query">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
@@ -79,9 +84,11 @@
 			</ul>
 		</div>
 	</nav>
+	<form sec:authorize="isAuthenticated()" name="logoutForm"
+		th:action="@{/logout}" method="post" th:hidden="true">
+		<input hidden="true" type="submit" value="Sign Out" />
+	</form>
 	<!-- Fine Navigation Bar -->
-
-
 
 	<div class="container sezioneFotografo">
 		<div class="row">
@@ -102,7 +109,8 @@
 
 			<div th:each="album : ${albumFotografoPage}" class="col-md-3">
 				<div class="albumFolder">
-					<a href="@{'/album/' + ${album.id}}"> <img class="folderThumbnail"
+					<a href="@{'/album/' + ${album.id}}"> <img
+						class="folderThumbnail"
 						th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}" />
 						<i class="fas fa-folder folderIcon"></i>
 					</a>
@@ -115,8 +123,8 @@
 			<!-- Icona per aggiungere una foto/album! -->
 			<div sec:authorize="isAuthenticated()" class="col-md-3">
 				<div class="albumFolder">
-					<a th:href="@{'/fotografo/' + ${fotografo.id} + '/newAlbum'}"> <i class="fas fa-folder-plus folderIcon"
-						style="color: #4169E1"></i>
+					<a th:href="@{'/fotografo/' + ${fotografo.id} + '/newAlbum'}">
+						<i class="fas fa-folder-plus folderIcon" style="color: #4169E1"></i>
 					</a>
 				</div>
 				<p>

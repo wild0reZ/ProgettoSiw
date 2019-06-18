@@ -25,5 +25,5 @@ public interface FotoRepository extends JpaRepository<Foto, Long> {
     @Query("SELECT f FROM Foto f WHERE f.titoloFoto LIKE %:query%")
     public List<Foto> searchAllByQuery(@Param("query") String query);
 
-    public List<Foto> findByTitoloFotoContaining(String titolo);
+    public List<Foto> findByTitoloFotoContainingIgnoreCase(String titolo);
 }

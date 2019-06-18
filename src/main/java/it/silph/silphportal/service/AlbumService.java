@@ -93,4 +93,10 @@ public class AlbumService {
 	this.albumRepository.save(album);
     }
 
+    @Transactional
+    public void searchAlbum(List<Album> albumSearch, String query) {
+	List<Album> album = this.albumRepository.findByTitoloAlbumContainingIgnoreCase(query);
+	albumSearch.addAll(album);
+    }
+
 }

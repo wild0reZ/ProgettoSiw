@@ -1,5 +1,6 @@
 package it.silph.silphportal.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -88,6 +89,35 @@ public class FotoAlbumFotografiController {
 	    model.addAttribute("pageNumbers", pageNumbers);
 	}
 	return "SingoloAlbumPage";
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public String searchFoto(Model model, @RequestParam("entity") String entity, @RequestParam("query") String query) {
+	switch (entity) {
+	case "FOTO":
+	    List<Foto> fotoSearch = new ArrayList<>();
+	    this.fotoService.searchFoto(fotoSearch, query);
+	    model.addAttribute("fotoSearch", fotoSearch);
+	    break;
+	case "ALBUM":
+	    List<Album> albumSearch = new ArrayList<>();
+	    this.albumService.searchAlbum(albumSearch, query);
+	    model.addAttribute("albumSearch", albumSearch);
+	    break;
+	case "FOTOGRAFO":
+	    List<Fotografo> fotografoSearch = new ArrayList<>();
+	    String[] nomeCognome= query.split(" ");
+	    String nome;
+	    String cognome;
+	    try { nome = nomeCognome[0]; } 
+	    catch(Exception e) { nome = ""; }
+	    try { cognome = nomeCognome[1]; } 
+	    catch(Exception e) { cognome = ""; }
+	    this.fotografoService.searchFoto(fotografoSearch, nome, cognome);
+	    model.addAttribute("fotografiSearch", fotografoSearch);
+	    break;
+	}
+	return "SearchPage.html";
     }
 
 }

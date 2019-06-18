@@ -22,4 +22,6 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
     public List<Album> customFindAllByFotoDataInserimento();
 
     public List<Album> findAllByFotografo(Fotografo fotografo);
+
+    public List<Album> findByTitoloAlbumContainingIgnoreCase(String query);
 }
