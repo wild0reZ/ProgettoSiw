@@ -41,7 +41,7 @@
 
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="#"> <i
+		<a class="navbar-brand" href="/"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -52,24 +52,37 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
-				<li class="nav-item"><a class="nav-link" href="/loginPage">Login</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/logout}" style="color: #4169E1;">Logout</a></li>
+				<li th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i th:if="${session.fotoRichiesta.size() > 0}"
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<form class="form-inline my-2 my-lg-0">
+					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca">
+							placeholder="Cerca" aria-label="Cerca" name="query">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
+				</li>
 			</ul>
 		</div>
 	</nav>
 	<!-- Fine Navigation Bar -->
 
-	<div class="container">
+	<div sec:authorize="isAnonymous()" class="container"
+		style="margin-top: 3rem">
 		<p th:if="${loginError}" style="color: red;">Autenticazione
 			fallita</p>
 		<form th:action="@{/loginFunzionario}" method="POST">
@@ -86,6 +99,18 @@
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
 
+	</div>
+	<div sec:authorize="isAuthenticated()" class="jumbotron text-center"
+		style="background-color: white; margin-top: 3rem;">
+		<div class="container-fluid">
+			<h1 class="jumbotron-heading">Non sei autorizzato ad accedere a
+				questa pagina.</h1>
+			<p class="lead">
+				<i>esegui il <a th:href="@{/logout}">logout</a> per accedere al
+					servizio.
+				</i>
+			</p>
+		</div>
 	</div>
 
 

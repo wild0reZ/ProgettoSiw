@@ -38,10 +38,6 @@ public class ModuloController {
     private ModuloService moduloService;
     @Autowired
     private ModuloValidator moduloValidator;
-    @Autowired
-    private FotoService fotoService;
-    @Autowired
-    private FotoRepository fotoRepository;
 
     @RequestMapping(value = "/newModulo", method = RequestMethod.GET)
     public String newModulo(@ModelAttribute("fotoRichiesta") ArrayList<Foto> fotoRichiesta, Model model) {

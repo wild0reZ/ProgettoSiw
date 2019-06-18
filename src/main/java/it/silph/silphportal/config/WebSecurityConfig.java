@@ -27,7 +27,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
-		.antMatchers("/ModuliPage").hasAnyAuthority("FUNZIONARIO")
+		.antMatchers("/listModuli", "/fotografo/{id}/newAlbum", "/modulo/{id}", "/newFotografo", "/fotografo/{id}/newAlbum", "/album/{id}/newFoto").hasAnyAuthority("FUNZIONARIO")
 	        .antMatchers("/newModulo").access("not( hasRole('FUNZIONARIO') ) and isAnonymous()")
 		.and()
 		.formLogin()
