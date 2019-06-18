@@ -13,7 +13,6 @@ public class FunzionarioController {
 	
 	@RequestMapping(value = {"/moduliPage"}, method = RequestMethod.GET)
 	public String moduliFunzionario (Model model) {
-		
 		UserDetails details = (UserDetails) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		String role = details.getAuthorities().iterator().next().getAuthority();
 		model.addAttribute("role", role);
@@ -21,6 +20,21 @@ public class FunzionarioController {
 		return "Modulipage";
 		
 	}
+	
+	@RequestMapping(value = "/loginFunzionario", method = RequestMethod.GET)
+	public String loggaFunzionario() {
+	    return "LoginPage.html";
+	}
+	
+	
+	@RequestMapping(value = "/failedLogin" , method = RequestMethod.GET)
+	public String loginFallito(Model model) {
+	    model.addAttribute("loginError", true);
+	    return "LoginPage.html";
+	}
+	
+	
+
 
 }
 	

@@ -58,11 +58,19 @@
 			<ul class="navbar-nav mr-auto">
 				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
 				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="listFoto">Fotografie</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()"><a class="nav-link" th:href="@{/moduliPage}">Moduli</a></li>
-				<li class="nav-item" sec:authorize="isAnonymous()" ><a class="nav-link" th:href="@{/login}">Login</a></li>
-				<li class="nav-item" sec:authorize="isAuthenticated()" ><a class="nav-link" th:href="@{/logout}">Logout</a></li>
-				
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/logout}" style="color: #4169E1;">Logout</a></li>
+				<li th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
@@ -82,8 +90,8 @@
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Foto</h1>
 			<p class="lead">
-				<i>le nostre immagini più recenti.</i> <br> <a href="#"
-					class="link ">Altre foto</a>
+				<i>le nostre immagini più recenti.</i> <br> <a
+					th:href="@{/listFoto}" class="link ">Altre foto</a>
 			</p>
 		</div>
 	</div>
@@ -98,10 +106,11 @@
 						<div class="hovereffect">
 							<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
 								class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
+								th:attr="src=@{'/immagine/' + ${foto.getImmagine().getId()}}" />
 							</a>
 							<div class="overlay">
-								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo Foto</h4>
+								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
+									Foto</h4>
 							</div>
 						</div>
 					</div>
@@ -117,7 +126,8 @@
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Album</h1>
 			<p class="lead">
-				<i>le nostre raccolte più attuali.</i>
+				<i>le nostre raccolte più attuali.</i> <br> <a
+					th:href="@{/listAlbum}" class="link ">Altri Album</a>
 			</p>
 		</div>
 	</div>
@@ -139,7 +149,7 @@
 								Album</p>
 						</div>
 						<a th:href="@{'/album/' + ${album.id}}"> <img
-							th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}"
+							th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
 							class="card-img-right flex-auto d-none d-lg-block" /></a>
 					</div>
 				</div>
@@ -156,7 +166,8 @@
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Fotografi</h1>
 			<p class="lead">
-				<i>i nostri artisti più giovani.</i>
+				<i>i nostri artisti più giovani.</i> <br> <a
+					th:href="@{/listFotografi}" class="link ">Altre Foto</a>
 			</p>
 		</div>
 	</div>

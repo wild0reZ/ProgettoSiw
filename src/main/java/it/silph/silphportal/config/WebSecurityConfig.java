@@ -22,15 +22,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	private Environment environment;
 
-	private DataSource dataSource;
 
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
 		http.authorizeRequests()
 		.antMatchers("/").permitAll()
 		.antMatchers("/ModuliPage").hasAnyAuthority("FUNZIONARIO")
+	        .antMatchers("/newModulo").access("not( hasRole('FUNZIONARIO') ) and isAnonymous()")
 		.and()
 		.formLogin()
+		.loginPage("/loginFunzionario")
+		.failureUrl("/failedLogin")
 		.defaultSuccessUrl("/")
 		.and()
 		.logout()
