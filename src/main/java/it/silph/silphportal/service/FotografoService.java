@@ -38,7 +38,7 @@ public class FotografoService {
     @Transactional
     public List<Fotografo> primi9PerDataFraTutti() {
 	List<Fotografo> l = removeDuplicates(this.fotografoRepository.findAllByOrderByAlbum_Foto_DataInserimento());
-	if (l.size() > 9) {
+	if (l.size() > 9) {	
 	    List<Fotografo> shrink = new ArrayList<>();
 	    for (int i = 9; i >= 0; i--) {
 		shrink.add(l.get(i));
