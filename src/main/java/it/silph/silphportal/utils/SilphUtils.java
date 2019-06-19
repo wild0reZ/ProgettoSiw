@@ -11,7 +11,7 @@ public final class SilphUtils {
     private final static String[] imageMimeTypes = { "image/aces", "image/avci", "image/avcs", "image/bmp", "image/cgm",
 	    "image/dicom-rle", "image/emf", "image/example", "image/fits", "image/g3fax", "image/heic",
 	    "image/heic-sequence", "image/heif", "image/heif-sequence", "image/hej2k", "image/hsj2", "image/jls",
-	    "image/jp2", "image/jph", "image/jphc", "image/jpm", "image/jpx", "image/jxr", "image/naplps", "image/png",
+	    "image/jp2", "image/jpeg", "image/jph", "image/jphc", "image/jpm", "image/jpx", "image/jxr", "image/naplps", "image/png",
 	    "image/prs.btif", "image/prs.pti", "image/pwg-raster", "image/t38", "image/tiff", "image/tiff-fx",
 	    "image/vnd.adobe.photoshop", "image/vnd.airzip.accelerator.azv", "image/vnd.cns.inf2",
 	    "image/vnd.dece.graphic", "image/vnd.djvu", "image/vnd.dwg", "image/vnd.dxf", "image/vnd.dvb.subtitle",
