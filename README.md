@@ -12,7 +12,7 @@ the right, we value the items on the left more.*
 
 [Link](https://agilemanifesto.org/principles.html) per le 12 regole dello svilluppo *Agile*.
 
-> ### 
+> ### Informazioni per l'esecuzione
 > * I dati di postgresql sono, **username** = postgres, **password** = ciao123
 > * Per accedere come funzionario **Codice funzionario** = 1111, **Password** = 4321
 > * Abbiamo creato un DBPopulation, quindi all'avvio ci saranno già fotografi/foto/album 
