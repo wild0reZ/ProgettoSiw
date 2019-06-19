@@ -26,64 +26,64 @@ import it.silph.silphportal.service.FotoService;
 @Controller
 @SessionAttributes("fotoRichiesta")
 public class FotoController {
-    @Autowired
-    private FotoService fotoService;
+	@Autowired
+	private FotoService fotoService;
 
-    @RequestMapping(value = "/listFoto", method = RequestMethod.GET)
-    public String listFoto(Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(9);
+	@RequestMapping(value = "/listFoto", method = RequestMethod.GET)
+	public String listFoto(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(9);
 
-	Page<Foto> fotoPage = fotoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.fotoService.tuttePerData());
+		Page<Foto> fotoPage = fotoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.fotoService.tuttePerData());
 
-	model.addAttribute("fotoPage", fotoPage);
+		model.addAttribute("fotoPage", fotoPage);
 
-	int totalPages = fotoPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
+		int totalPages = fotoPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+
+		return "FotoPage";
 	}
 
-	return "FotoPage";
-    }
-
-    @RequestMapping(value = "/foto/{id}", method = RequestMethod.GET)
-    public String getSingolaFoto(@PathVariable("id") Long id, Model model) {
-	model.addAttribute("foto", this.fotoService.fotoPerId(id));
-	return "SingolaFotoPage.html";
-    }
-
-    // Aggiunge la foto selezionata alle fotoRichiesta e fa vedere lo stato
-    // dell'ordine
-    @RequestMapping(value = "/foto/{id}/req", method = RequestMethod.GET)
-    public RedirectView addToRichiesta(@PathVariable("id") Long id,
-	    @ModelAttribute("fotoRichiesta") List<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
-	Foto f = this.fotoService.fotoPerId(id);
-	if (!fotoRichiesta.contains(f))
-	    fotoRichiesta.add(f);
-	rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
-	return new RedirectView("/newModulo");
-    }
-
-    @RequestMapping(value = "/foto/{id}/rm", method = RequestMethod.GET)
-    public RedirectView removeFromRichiesta(@PathVariable("id") Long id,
-	    @ModelAttribute("fotoRichiesta") ArrayList<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
-	for (Foto foto : fotoRichiesta) {
-	    if (foto.getId() == id) {
-		fotoRichiesta.remove(foto);
-		break;
-	    }
+	@RequestMapping(value = "/foto/{id}", method = RequestMethod.GET)
+	public String getSingolaFoto(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("foto", this.fotoService.fotoPerId(id));
+		return "SingolaFotoPage.html";
 	}
-	rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
-	return new RedirectView("/newModulo");
-    }
 
-    // crea una lista foto per la sessione
-    @ModelAttribute("fotoRichiesta")
-    public List<Foto> fotoRichiesta() {
-	return new ArrayList<Foto>();
-    }
+	// Aggiunge la foto selezionata alle fotoRichiesta e fa vedere lo stato
+	// dell'ordine
+	@RequestMapping(value = "/foto/{id}/req", method = RequestMethod.GET)
+	public RedirectView addToRichiesta(@PathVariable("id") Long id,
+			@ModelAttribute("fotoRichiesta") List<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
+		Foto f = this.fotoService.fotoPerId(id);
+		if (!fotoRichiesta.contains(f))
+			fotoRichiesta.add(f);
+		rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
+		return new RedirectView("/newModulo");
+	}
+
+	@RequestMapping(value = "/foto/{id}/rm", method = RequestMethod.GET)
+	public RedirectView removeFromRichiesta(@PathVariable("id") Long id,
+			@ModelAttribute("fotoRichiesta") ArrayList<Foto> fotoRichiesta, RedirectAttributes rAttributes) {
+		for (Foto foto : fotoRichiesta) {
+			if (foto.getId() == id) {
+				fotoRichiesta.remove(foto);
+				break;
+			}
+		}
+		rAttributes.addFlashAttribute("fotoRichiesta", fotoRichiesta);
+		return new RedirectView("/newModulo");
+	}
+
+	// crea una lista foto per la sessione
+	@ModelAttribute("fotoRichiesta")
+	public List<Foto> fotoRichiesta() {
+		return new ArrayList<Foto>();
+	}
 
 }

@@ -9,7 +9,6 @@ import org.springframework.stereotype.Repository;
 
 import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
-import it.silph.silphportal.model.Modulo;
 
 @Repository
 public interface FotoRepository extends JpaRepository<Foto, Long> {
