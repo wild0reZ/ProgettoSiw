@@ -56,20 +56,51 @@ public class DBPopulation implements ApplicationRunner {
 		f2 = this.funzionarioRepository.save(f2);
 
 		System.out.println("DEVDEBUG: Funzionari aggiunti!");
+		
 		System.out.println("DEVDEBUG: Aggiungo fotografi!");
 		Fotografo fo1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo.");
+		Fotografo fo2 = new Fotografo("Maria", "Doe", "Fotografo per matrimoni");
+		Fotografo fo3 = new Fotografo("Julia", "Peace", "Fotografo per passione");
+		Fotografo fo4 = new Fotografo("Travis", "McKean", "Food photographer");
+		
 		Album a1 = new Album("Album di Leo", "Un bell'album");
-		populateAlbum(a1, fo1);
+		Album a2 = new Album("Album di John", "Foto Varie");
+		Album a3 = new Album("Album di Norman", "La mia vita");
+		Album a4 = new Album("Album di Travis", "Something..");
+		
+		populateAlbum(a1, fo1, 1);
+		populateAlbum(a2, fo2, 11);
+		populateAlbum(a3, fo3, 22);
+		populateAlbum(a4, fo4, 33);
+		
+		
 		fo1.getAlbum().add(a1);
 		fo1.setImmagineProfilo(new Immagine(extractBytes("fExample1.jpg")));
 		a1.setFotografo(fo1);
+		
+		fo2.getAlbum().add(a2);
+		fo2.setImmagineProfilo(new Immagine(extractBytes("fExample2.jpg")));
+		a2.setFotografo(fo2);
+		
+		fo3.getAlbum().add(a3);
+		fo3.setImmagineProfilo(new Immagine(extractBytes("fExample3.jpg")));
+		a3.setFotografo(fo3);
+		
+		fo4.getAlbum().add(a4);
+		fo4.setImmagineProfilo(new Immagine(extractBytes("fExample4.jpg")));
+		a4.setFotografo(fo4);
+		
 		this.fotografoRepository.save(fo1);
+		this.fotografoRepository.save(fo2);
+		this.fotografoRepository.save(fo3);
+		this.fotografoRepository.save(fo4);
 		System.out.println("DEVDEBUG: Fotografi aggiunti!");
 	}
 
-	private void populateAlbum(Album a, Fotografo f) throws IOException {
-		for (int i = 1; i <= 11; i++) {
-	    Foto foto = new Foto("Bella Foto " + i,
+	private void populateAlbum(Album a, Fotografo f, int numeroFoto) throws IOException {
+
+		for (int i = numeroFoto; i <= (numeroFoto+10); i++) {
+	    Foto foto = new Foto("Foto " + i,
 		    LocalDate.now().minusDays(ThreadLocalRandom.current().nextLong(100L)),
 					new Immagine(extractBytes("example" + i + ".jpg")));
 			foto.setFotografo(f);
