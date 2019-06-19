@@ -14,7 +14,7 @@ import it.silph.silphportal.model.Foto;
 public interface FotoRepository extends JpaRepository<Foto, Long> {
     public List<Foto> findAllByOrderByDataInserimento();
 
-    public List<Foto> findFirst9ByOrderByDataInserimento();
+    public List<Foto> findFirst9ByOrderByDataInserimentoDesc();
 
     public List<Foto> findAllByAlbum(Album a);
     

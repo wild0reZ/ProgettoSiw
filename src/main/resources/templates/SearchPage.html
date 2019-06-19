@@ -73,11 +73,11 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
-					<select class="form-control" name="entity">
-					<option value="FOTO">Foto</option>
-					<option value="ALBUM">Album</option>
-					<option value="FOTOGRAFO">Fotografo</option></select>
-						<input class="form-control mr-sm-2" type="search"
+						<select class="form-control" name="entity">
+							<option value="FOTO">Foto</option>
+							<option value="ALBUM">Album</option>
+							<option value="FOTOGRAFO">Fotografo</option>
+						</select> <input class="form-control mr-sm-2" type="search"
 							placeholder="Cerca" aria-label="Cerca" name="query">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
@@ -90,26 +90,25 @@
 		<input hidden="true" type="submit" value="Sign Out" />
 	</form>
 	<!-- Fine Navigation Bar -->
-
+	<div>
+	</div>
 	<!-- Inizio sezione Foto -->
 	<div id="elementi-section">
 		<div class="container">
 			<h1 class="text-center title">Elementi Ricercati</h1>
 			<div class="row">
 
-				<div th:if="${fotoSearch != null}">
-					<div th:each="foto : ${fotoSearch}" class="col-md-4 fotocell">
-						<div class="card mx-auto shadow-lg">
-							<div class="hovereffect">
-								<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
-									class="card-img"
-									th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}"
-									data-toggle="modal" data-target="#imagemodal" />
-								</a>
-								<div class="overlay">
-									<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
-										Foto</h4>
-								</div>
+				<div th:each="foto : ${fotoSearch}" class="col-md-4 fotocell">
+					<div class="card mx-auto shadow-lg">
+						<div class="hovereffect">
+							<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
+								class="card-img"
+								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}"
+								data-toggle="modal" data-target="#imagemodal" />
+							</a>
+							<div class="overlay">
+								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
+									Foto</h4>
 							</div>
 						</div>
 					</div>
@@ -117,43 +116,39 @@
 				<!-- Fine sezione Foto -->
 
 				<!-- Inizio sezione Album -->
-				<div th:if="${albumSearch != null}">
-					<div th:each="album : ${albumSearch}" class="col-md-6">
-						<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-							<div class="card-body d-flex flex-column align-items-end">
-								<h3 class="mb-0">
-									<a th:text="${album.titoloAlbum}" class="text-dark"
-										th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
-								</h3>
-								<a th:text="${album.getFotografo().getNome()}"
-									th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
-									class="mb-1 text-muted">Nome Fotografo</a>
-								<p th:text="${album.descrizione}"
-									class="card-text mb-auto text-right text-truncate">Descrizione
-									Album</p>
-							</div>
-							<a th:href="@{'/album/' + ${album.id}}"> <img
-								th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
-								class="card-img-right flex-auto d-none d-lg-block" /></a>
+				<div th:each="album : ${albumSearch}" class="col-md-6">
+					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+						<div class="card-body d-flex flex-column align-items-end">
+							<h3 class="mb-0">
+								<a th:text="${album.titoloAlbum}" class="text-dark"
+									th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
+							</h3>
+							<a th:text="${album.getFotografo().getNome()}"
+								th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
+								class="mb-1 text-muted">Nome Fotografo</a>
+							<p th:text="${album.descrizione}"
+								class="card-text mb-auto text-right text-truncate">Descrizione
+								Album</p>
 						</div>
+						<a th:href="@{'/album/' + ${album.id}}"> <img
+							th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
+							class="card-img-right flex-auto d-none d-lg-block" /></a>
 					</div>
 				</div>
 				<!-- Fine sezione Album -->
 
 				<!-- Inizio sezione fotografi -->
-				<div th:if="${fotografiSearch != null}">
-					<div th:each="fotografo : ${fotografiSearch}"
-						class="col-md-4 fotocell">
-						<div class="card mx-auto shadow-lg fotografo">
-							<div class="hovereffect">
-								<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
-									class="card-img"
-									th:attr="src=@{'/immagine/' + ${fotografo.getImmagineProfilo().getId()}}" />
-								</a>
-								<div class="overlay">
-									<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
-										class="card-title">Nome Cognome</h4>
-								</div>
+				<div th:each="fotografo : ${fotografiSearch}"
+					class="col-md-4 fotocell">
+					<div class="card mx-auto shadow-lg fotografo">
+						<div class="hovereffect">
+							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
+								class="card-img"
+								th:attr="src=@{'/immagine/' + ${fotografo.getImmagineProfilo().getId()}}" />
+							</a>
+							<div class="overlay">
+								<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
+									class="card-title">Nome Cognome</h4>
 							</div>
 						</div>
 					</div>

@@ -41,7 +41,7 @@ public class FotoService {
 
 	@Transactional
 	public List<Foto> prime9PerData() {
-		return fotoRepository.findFirst9ByOrderByDataInserimento();
+		return fotoRepository.findFirst9ByOrderByDataInserimentoDesc();
 	}
 
 	@Transactional
@@ -61,7 +61,7 @@ public class FotoService {
 	
 	@Transactional
 	public List<Foto> primi9PerDataFraTutte() {
-		List<Foto> l = removeDuplicates(this.fotoRepository.findFirst9ByOrderByDataInserimento());
+		List<Foto> l = removeDuplicates(this.fotoRepository.findFirst9ByOrderByDataInserimentoDesc());
 		if (l.size() > 9) {
 			List<Foto> shrink = new ArrayList<>();
 			for (int i = 9; i >= 0; i--) {
