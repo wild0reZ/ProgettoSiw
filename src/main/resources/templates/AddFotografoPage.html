@@ -54,7 +54,8 @@
 				<li class="nav-item" sec:authorize="isAuthenticated()"><a
 					class="nav-link" href="javascript: document.logoutForm.submit()"
 					style="color: #4169E1;">Logout</a></li>
-				<li sec:authorize="isAnonymous()" th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+				<li sec:authorize="isAnonymous()"
+					th:if="${session.fotoRichiesta != null}" class="nav-item"><a
 					class="nav-link" th:href="@{/newModulo}"><i
 						th:if="${session.fotoRichiesta.size() > 0}"
 						class="fas fa-file-alt" style="color: #4169E1"><span
@@ -64,11 +65,11 @@
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
 					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
-					<select class="form-control" name="entity">
-					<option value="FOTO">Foto</option>
-					<option value="ALBUM">Album</option>
-					<option value="FOTOGRAFO">Fotografo</option></select>
-						<input class="form-control mr-sm-2" type="search"
+						<select class="form-control" name="entity">
+							<option value="FOTO">Foto</option>
+							<option value="ALBUM">Album</option>
+							<option value="FOTOGRAFO">Fotografo</option>
+						</select> <input class="form-control mr-sm-2" type="search"
 							placeholder="Cerca" aria-label="Cerca" name="query" required>
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
@@ -87,35 +88,34 @@
 	<!-- Inizio Form -->
 	<div class="container mx-auto fotografo-form">
 		<h1 class="bd-title">Aggiungi un Nuovo Fotografo</h1>
-		<form th:object="${fotografo}" th:action="@{/fotografo}" method="POST"
+		<form  th:action="@{/fotografo}" method="POST"
 			enctype="multipart/form-data">
 			<div class="form-row">
 				<div class="form-group col-md-6">
 					<label for="nome">Nome <span
-						th:if="${#fields.hasErrors('nome')}" th:errors="*{nome}"></span></label><input
+						th:if="${#fields.hasErrors('${fotografo.nome}')}" th:errors="${fotografo.nome}"></span></label><input
 						class="form-control" placeholder="Inserisci il nome"
-						th:field="*{nome}" id="nome" />
+						th:field="${fotografo.nome}" id="nome" />
 				</div>
 				<div class="form-group col-md-6">
 					<label for="cognome">Cognome <span
-						th:if="${#fields.hasErrors('cognome')}" th:errors="*{cognome}"></span></label><input
+						th:if="${#fields.hasErrors('${fotografo.cognome}')}" th:errors="${fotografo.cognome}"></span></label><input
 						class="form-control" placeholder="Inserisci il cognome"
-						th:field="*{cognome}" id="cognome" />
+						th:field="${fotografo.cognome}" id="cognome" />
 				</div>
 			</div>
 			<div class="form-group">
 				<label for="bio">Breve Biografia <span
-					th:if="${#fields.hasErrors('bio')}" th:errors="*{bio}"></span></label>
+					th:if="${#fields.hasErrors('${fotografo.bio}')}" th:errors="${fotografo.bio}"></span></label>
 				<textarea class="form-control"
 					placeholder="Inserisci qualche riga che ti descriva" id="bio"
-					th:field="*{bio}"></textarea>
+					th:field="${fotografo.bio}"></textarea>
 			</div>
 			<div class="form-group">
 				<label for="immagine">Immagine Profilo <span
-					th:if="${#fields.hasErrors('immagineProfilo')}"
-					th:errors="*{immagineProfilo}"></span></label><input
-					class="form-control-file" id="immagine" type="file"
-					accept="image/*" name="multipart" required />
+					th:text="${erroreFile}"></span></label><input class="form-control-file"
+					id="immagine" type="file" accept="image/*" name="multipart"
+					required />
 			</div>
 			<button class="btn btn-primary" type="submit">Aggiungi</button>
 		</form>

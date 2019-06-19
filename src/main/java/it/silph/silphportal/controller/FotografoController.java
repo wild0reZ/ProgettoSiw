@@ -8,6 +8,7 @@ import java.util.stream.IntStream;
 
 import javax.validation.Valid;
 
+import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -28,6 +29,7 @@ import it.silph.silphportal.model.Fotografo;
 import it.silph.silphportal.model.Immagine;
 import it.silph.silphportal.service.FotografoService;
 import it.silph.silphportal.service.ImmagineService;
+import it.silph.silphportal.utils.SilphUtils;
 import it.silph.silphportal.validator.AlbumValidator;
 import it.silph.silphportal.validator.FotoValidator;
 import it.silph.silphportal.validator.FotografoValidator;
@@ -86,7 +88,8 @@ public class FotografoController {
 			@RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
 		albumValidator.validate(album, resultAlbum);
 		fotoValidator.validate(foto, resultFoto);
-		if (!(resultAlbum.hasErrors() || resultFoto.hasErrors())) {
+	boolean isImage = SilphUtils.isImage(mpf);
+	if (!resultAlbum.hasErrors() && !resultFoto.hasErrors() && isImage) {
 			Immagine i = this.immagineService.inserisci(new Immagine(mpf.getBytes()));
 			foto.setImmagine(i);
 			album.addFoto(foto);
@@ -97,6 +100,8 @@ public class FotografoController {
 		}
 		rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", resultFoto);
 		rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.album", resultAlbum);
+	if (!isImage)
+	    rAttribute.addFlashAttribute("erroreFile", "Formato file non valido");
 		rAttribute.addFlashAttribute("foto", foto);
 		rAttribute.addFlashAttribute("album", album);
 		return "redirect:/fotografo/{id}/newAlbum";
@@ -104,23 +109,33 @@ public class FotografoController {
 
 	@RequestMapping(value = "/newFotografo", method = RequestMethod.GET)
 	public String newFotografo(Model model) {
-		model.addAttribute("immagine", new Immagine());
-		model.addAttribute("fotografo", new Fotografo());
+	if (!model.containsAttribute("immagine")) {
+	    model.addAttribute("immagine", new Immagine());
+	}
+	if (!model.containsAttribute("fotografo")) {
+	    model.addAttribute("fotografo", new Fotografo());
+	}
 		return "AddFotografoPage.html";
 	}
 
 	@RequestMapping(value = "/fotografo", method = RequestMethod.POST)
 	public String addNewFotografo(@ModelAttribute("immagine") Immagine immagine,
 			@Valid @ModelAttribute("fotografo") Fotografo fotografo, @RequestParam("multipart") MultipartFile mpf,
-			BindingResult result) throws IOException {
+	    BindingResult result, RedirectAttributes rAttribute) throws IOException {
 		this.fotografoValidator.validate(fotografo, result);
-		if (!result.hasErrors()) {
+	boolean isImage = SilphUtils.isImage(mpf);
+	if (!result.hasErrors() && isImage) {
 			immagine.setFileImmagine(mpf.getBytes());
 			fotografo.setImmagineProfilo(immagine);
 			this.fotografoService.inserisci(fotografo);
 			return "OperazioneCompletataPage.html";
 		}
-		return "AddFotografoPage.html";
+	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.fotografo", result);
+	if (!isImage)
+	    rAttribute.addFlashAttribute("erroreFile", "Formato file non valido");
+	rAttribute.addFlashAttribute("fotografo", fotografo);
+	rAttribute.addFlashAttribute("immagine", immagine);
+	return "redirect:/newFotografo";
 	}
 
 }
