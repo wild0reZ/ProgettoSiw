@@ -43,7 +43,7 @@ public class FotoAlbumFotografiController {
 		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 		if (auth.isAuthenticated())
 			status.setComplete();
-		model.addAttribute("gruppoFoto", this.fotoService.primi9PerDataFraTutte());
+		model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
 		model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());
 		model.addAttribute("gruppoFotografo", this.fotografoService.primi9PerDataFraTutti());
 		return "HomePage";

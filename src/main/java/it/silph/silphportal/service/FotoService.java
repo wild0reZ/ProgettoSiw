@@ -1,9 +1,7 @@
 package it.silph.silphportal.service;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
 
@@ -59,22 +57,6 @@ public class FotoService {
 		return this.fotoRepository.findAllByModuloId(id);
 	}
 	
-	@Transactional
-	public List<Foto> primi9PerDataFraTutte() {
-		List<Foto> l = removeDuplicates(this.fotoRepository.findFirst9ByOrderByDataInserimentoDesc());
-		if (l.size() > 9) {
-			List<Foto> shrink = new ArrayList<>();
-			for (int i = 9; i >= 0; i--) {
-				shrink.add(l.get(i));
-			}
-			return shrink;
-		}
-		return l;
-	}
-	
-	private List<Foto> removeDuplicates(List<Foto> l) {
-		return l.stream().distinct().collect(Collectors.toList());
-	}
 
 	public Page<Foto> findPaginated(Pageable pageable, List<Foto> gruppoFoto) {
 		int pageSize = pageable.getPageSize();

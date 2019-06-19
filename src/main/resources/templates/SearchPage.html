@@ -56,6 +56,8 @@
 				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
 				<li class="nav-item" sec:authorize="isAuthenticated()"><a
 					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/newFotografo}" style="color: #4169E1;">Aggiungi Fotografo</a></li>
 				<li class="nav-item" sec:authorize="isAnonymous()"><a
 					class="nav-link" th:href="@{/loginFunzionario}"
 					style="color: #4169E1;">Login</a></li>
@@ -93,70 +95,77 @@
 	<div>
 	</div>
 	<!-- Inizio sezione Foto -->
-	<div id="elementi-section">
+	<div id="elementi-section" th:if="${fotoSearch } != null OR ${albumSearch} != null OR ${fotografiSearch} != null">
 		<div class="container">
 			<h1 class="text-center title">Elementi Ricercati</h1>
 			<div class="row">
 
-				<div th:each="foto : ${fotoSearch}" class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg">
-						<div class="hovereffect">
-							<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
-								class="card-img"
-								th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}"
-								data-toggle="modal" data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
-									Foto</h4>
+				
+					<div th:each="foto : ${fotoSearch}" class="col-md-4 fotocell">
+						<div class="card mx-auto shadow-lg">
+							<div class="hovereffect">
+								<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
+									class="card-img"
+									th:attr="src=@{'/immagine' + '/' + ${foto.getImmagine().getId()}}" />
+								</a>
+								<div class="overlay">
+									<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
+										Foto</h4>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				<!-- Fine sezione Foto -->
 
 				<!-- Inizio sezione Album -->
-				<div th:each="album : ${albumSearch}" class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a th:text="${album.titoloAlbum}" class="text-dark"
-									th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
-							</h3>
-							<a th:text="${album.getFotografo().getNome()}"
-								th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
-								class="mb-1 text-muted">Nome Fotografo</a>
-							<p th:text="${album.descrizione}"
-								class="card-text mb-auto text-right text-truncate">Descrizione
-								Album</p>
+					<div th:each="album : ${albumSearch}" class="col-md-6">
+						<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
+							<div class="card-body d-flex flex-column align-items-end">
+								<h3 class="mb-0">
+									<a th:text="${album.titoloAlbum}" class="text-dark"
+										th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
+								</h3>
+								<a th:text="${album.getFotografo().getNome()}"
+									th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
+									class="mb-1 text-muted">Nome Fotografo</a>
+								<p th:text="${album.descrizione}"
+									class="card-text mb-auto text-right text-truncate">Descrizione
+									Album</p>
+							</div>
+							<a th:href="@{'/album/' + ${album.id}}"> <img
+								th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
+								class="card-img-right flex-auto d-none d-lg-block" /></a>
 						</div>
 						<a th:href="@{'/album/' + ${album.id}}"> <img
 							th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
 							class="card-img-right flex-auto d-none d-lg-block" /></a>
 					</div>
-				</div>
 				<!-- Fine sezione Album -->
 
 				<!-- Inizio sezione fotografi -->
-				<div th:each="fotografo : ${fotografiSearch}"
-					class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
-								class="card-img"
-								th:attr="src=@{'/immagine/' + ${fotografo.getImmagineProfilo().getId()}}" />
-							</a>
-							<div class="overlay">
-								<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
-									class="card-title">Nome Cognome</h4>
+					<div th:each="fotografo : ${fotografiSearch}"
+						class="col-md-4 fotocell">
+						<div class="card mx-auto shadow-lg fotografo">
+							<div class="hovereffect">
+								<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
+									class="card-img"
+									th:attr="src=@{'/immagine/' + ${fotografo.getImmagineProfilo().getId()}}" />
+								</a>
+								<div class="overlay">
+									<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
+										class="card-title">Nome Cognome</h4>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 				<!-- Fine sezione fotografi -->
 
 			</div>
 		</div>
+	</div>
+	
+	<div th:unless="${fotoSearch} == null OR ${albumSearch} == null OR ${fotografiSearch} == null">
+   		<div>Cane</div>
 	</div>
 
 
