@@ -80,7 +80,7 @@
 							<option value="ALBUM">Album</option>
 							<option value="FOTOGRAFO">Fotografo</option>
 						</select> <input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca" name="query">
+							placeholder="Cerca" aria-label="Cerca" name="query" required>
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
 				</li>
@@ -95,9 +95,10 @@
 	<div>
 	</div>
 	<!-- Inizio sezione Foto -->
-	<div id="elementi-section" th:if="${fotoSearch } != null OR ${albumSearch} != null OR ${fotografiSearch} != null">
+	<div id="elementi-section">
+	<h3 class="text-center" title th:if="${fotoSearch.size() == 0}">Sembra che la tua ricerca non abbia prodotto risultati! Prova ad effettuare un'altra ricerca.</h3>
 		<div class="container">
-			<h1 class="text-center title">Elementi Ricercati</h1>
+			<h1 class="text-center title" th:if="${fotoSearch.size() != 0}">Elementi Ricercati</h1>
 			<div class="row">
 
 				
@@ -162,10 +163,6 @@
 
 			</div>
 		</div>
-	</div>
-	
-	<div th:unless="${fotoSearch} == null OR ${albumSearch} == null OR ${fotografiSearch} == null">
-   		<div>Cane</div>
 	</div>
 
 

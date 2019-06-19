@@ -32,8 +32,8 @@ import it.silph.silphportal.validator.FotoValidator;
 public class AlbumController {
 	@Autowired
 	private AlbumService albumService;
-    @Autowired
-    private FotoValidator fotoValidator;
+	@Autowired
+	private FotoValidator fotoValidator;
 
 	@RequestMapping(value = "/listAlbum", method = RequestMethod.GET)
 	public String listAlbum(Model model, @RequestParam("page") Optional<Integer> page,
@@ -55,31 +55,31 @@ public class AlbumController {
 		return "AlbumsPage";
 	}
 
-    @RequestMapping(value = "/album/{id}/newFoto", method = RequestMethod.GET)
-    public String newFoto(@PathVariable("id") Long id, Model model) {
-	model.addAttribute("album", this.albumService.albumPerId(id));
-	if (!model.containsAttribute("foto")) {
-	    model.addAttribute("foto", new Foto());
-	}
-	model.addAttribute("immagine", new Immagine());
-	return "AddFotoPage.html";
+	@RequestMapping(value = "/album/{id}/newFoto", method = RequestMethod.GET)
+	public String newFoto(@PathVariable("id") Long id, Model model) {
+		model.addAttribute("album", this.albumService.albumPerId(id));
+		if (!model.containsAttribute("foto")) {
+			model.addAttribute("foto", new Foto());
+		}
+		model.addAttribute("immagine", new Immagine());
+		return "AddFotoPage.html";
 	}
 
-    @RequestMapping(value = "/album/{id}/foto", method = RequestMethod.POST)
-    public String addNewFoto(@PathVariable("id") Long id, @Valid @ModelAttribute("foto") Foto foto,
-	    BindingResult result, @ModelAttribute("immagine") Immagine immagine,
-	    @RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
-	this.fotoValidator.validate(foto, result);
-	if (!result.hasErrors()) {
-	    immagine.setFileImmagine(mpf.getBytes());
-	    foto.setImmagine(immagine);
-	    foto.setFotografo(this.albumService.albumPerId(id).getFotografo());
-	    this.albumService.addFoto(id, foto);
-	    this.albumService.inserisci(this.albumService.albumPerId(id));
-	    return "OperazioneCompletataPage.html";
+	@RequestMapping(value = "/album/{id}/foto", method = RequestMethod.POST)
+	public String addNewFoto(@PathVariable("id") Long id, @Valid @ModelAttribute("foto") Foto foto,
+			BindingResult result, @ModelAttribute("immagine") Immagine immagine,
+			@RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
+		this.fotoValidator.validate(foto, result);
+		if (!result.hasErrors()) {
+			immagine.setFileImmagine(mpf.getBytes());
+			foto.setImmagine(immagine);
+			foto.setFotografo(this.albumService.albumPerId(id).getFotografo());
+			this.albumService.addFoto(id, foto);
+			this.albumService.inserisci(this.albumService.albumPerId(id));
+			return "OperazioneCompletataPage.html";
+		}
+		rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", result);
+		rAttribute.addFlashAttribute("foto", foto);
+		return "redirect:/album/{id}/newFoto";
 	}
-	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", result);
-	rAttribute.addFlashAttribute("foto", foto);
-	return "redirect:/album/{id}/newFoto";
-    }
 }
