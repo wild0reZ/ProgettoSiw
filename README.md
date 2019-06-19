@@ -12,21 +12,28 @@ the right, we value the items on the left more.*
 
 [Link](https://agilemanifesto.org/principles.html) per le 12 regole dello svilluppo *Agile*.
 
+> ### 
+> * I dati di postgresql sono, **username** = postgres, **password** = ciao123
+> * Per accedere come funzionario **Codice funzionario** = 1111, **Password** = 4321
+> * Abbiamo creato un DBPopulation, quindi all'avvio ci saranno già fotografi/foto/album 
+
+
 ## Scadenze
-Il progetto è da consegnare entro il **21 Giugno 2019**.
+Il progetto è da consegnare entro il **20 Giugno 2019 alle ore 19**.
 
 ## A che punto siamo?
 - [x] Primo incontro con scrittura dei casi d'uso.
 - [x] Creazione del modello di dominio. (**Refinito, ma lo faremo sempre perché siamo AGILE**)
 - [x] Rifinimento della Navbar della homepage.
 - [x] Creazione del corpo della homepage.
-- [ ] Iniziare fase di Progettazione.
-- [ ] Iniziare a comporre 'AlbumPage'. 
-- [ ] Iniziare a comporre 'FotografiPage'.
+- [x] Iniziare fase di Progettazione.
+- [x] Iniziare a comporre 'AlbumPage'. 
+- [x] Iniziare a comporre 'FotografiPage'.
 - [x] Iniziare a comporre 'FotografoPage'. 
-- [ ] Iniziare a comporre 'ModuliPage'.
+- [x] Iniziare a comporre 'ModuliPage'.
 - [x] Iniziare a comporre 'ComponiModuloPage'.
-- [ ] Implementare Spring Boot al più presto.
+- [x] Implementare Spring Boot al più presto.
+- [x] Implementare Auth.
 
 ## Risorse utili
 * **[Link](https://sites.google.com/site/roma3siweb/materiale-didattico)** per il *materiale didattico* del professore.
