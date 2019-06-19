@@ -1,7 +1,6 @@
 package it.silph.silphportal.controller;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -13,7 +12,6 @@ import org.apache.tika.Tika;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
-import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -38,106 +36,106 @@ import it.silph.silphportal.validator.FotografoValidator;
 
 @Controller
 public class FotografoController {
-    @Autowired
-    private FotografoService fotografoService;
-    @Autowired
-    private ImmagineService immagineService;
+	@Autowired
+	private FotografoService fotografoService;
+	@Autowired
+	private ImmagineService immagineService;
 
-    @Autowired
-    private FotoValidator fotoValidator;
-    @Autowired
-    private AlbumValidator albumValidator;
-    @Autowired
-    private FotografoValidator fotografoValidator;
+	@Autowired
+	private FotoValidator fotoValidator;
+	@Autowired
+	private AlbumValidator albumValidator;
+	@Autowired
+	private FotografoValidator fotografoValidator;
 
-    @RequestMapping(value = "/listFotografi", method = RequestMethod.GET)
-    public String listFotografi(Model model, @RequestParam("page") Optional<Integer> page,
-	    @RequestParam("size") Optional<Integer> size) {
-	int currentPage = page.orElse(1);
-	int pageSize = size.orElse(9);
+	@RequestMapping(value = "/listFotografi", method = RequestMethod.GET)
+	public String listFotografi(Model model, @RequestParam("page") Optional<Integer> page,
+			@RequestParam("size") Optional<Integer> size) {
+		int currentPage = page.orElse(1);
+		int pageSize = size.orElse(9);
 
-	Page<Fotografo> fotografiPage = fotografoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
-		this.fotografoService.tuttiPerData());
+		Page<Fotografo> fotografiPage = fotografoService.findPaginated(PageRequest.of(currentPage - 1, pageSize),
+				this.fotografoService.tuttiPerData());
 
-	model.addAttribute("fotografiPage", fotografiPage);
+		model.addAttribute("fotografiPage", fotografiPage);
 
-	int totalPages = fotografiPage.getTotalPages();
-	if (totalPages > 0) {
-	    List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
-	    model.addAttribute("pageNumbers", pageNumbers);
+		int totalPages = fotografiPage.getTotalPages();
+		if (totalPages > 0) {
+			List<Integer> pageNumbers = IntStream.rangeClosed(1, totalPages).boxed().collect(Collectors.toList());
+			model.addAttribute("pageNumbers", pageNumbers);
+		}
+
+		return "FotografiPage";
 	}
 
-	return "FotografiPage";
-    }
-
-    @RequestMapping(value = "/fotografo/{id}/newAlbum")
-    public String newAlbumFotografo(@PathVariable("id") Long id, Model model) {
-	if (!model.containsAttribute("album")) {
-	    model.addAttribute("album", new Album());
+	@RequestMapping(value = "/fotografo/{id}/newAlbum")
+	public String newAlbumFotografo(@PathVariable("id") Long id, Model model) {
+		if (!model.containsAttribute("album")) {
+			model.addAttribute("album", new Album());
+		}
+		if (!model.containsAttribute("foto")) {
+			model.addAttribute("foto", new Foto());
+		}
+		Fotografo temp = new Fotografo();
+		temp.setId(id);
+		model.addAttribute("fotografo", temp);
+		return "AddAlbumAndFotoPage.html";
 	}
-	if (!model.containsAttribute("foto")) {
-	    model.addAttribute("foto", new Foto());
-	}
-	Fotografo temp = new Fotografo();
-	temp.setId(id);
-	model.addAttribute("fotografo", temp);
-	return "AddAlbumAndFotoPage.html";
-    }
 
-    @RequestMapping(value = "/fotografo/{id}/album", method = RequestMethod.POST)
-    public String addAlbumFotografo(@PathVariable("id") Long id, @Valid @ModelAttribute("album") Album album,
-	    BindingResult resultAlbum, @Valid @ModelAttribute("foto") Foto foto, BindingResult resultFoto,
-	    @RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
-	albumValidator.validate(album, resultAlbum);
-	fotoValidator.validate(foto, resultFoto);
+	@RequestMapping(value = "/fotografo/{id}/album", method = RequestMethod.POST)
+	public String addAlbumFotografo(@PathVariable("id") Long id, @Valid @ModelAttribute("album") Album album,
+			BindingResult resultAlbum, @Valid @ModelAttribute("foto") Foto foto, BindingResult resultFoto,
+			@RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
+		albumValidator.validate(album, resultAlbum);
+		fotoValidator.validate(foto, resultFoto);
 	boolean isImage = SilphUtils.isImage(mpf);
 	if (!resultAlbum.hasErrors() && !resultFoto.hasErrors() && isImage) {
-	    Immagine i = this.immagineService.inserisci(new Immagine(mpf.getBytes()));
-	    foto.setImmagine(i);
-	    album.addFoto(foto);
-	    foto.setFotografo(this.fotografoService.trovaPerId(id));
-	    this.fotografoService.addAlbum(id, album);
-	    this.fotografoService.inserisci(this.fotografoService.trovaPerId(id));
-	    return "OperazioneCompletataPage.html";
-	}
-	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", resultFoto);
-	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.album", resultAlbum);
+			Immagine i = this.immagineService.inserisci(new Immagine(mpf.getBytes()));
+			foto.setImmagine(i);
+			album.addFoto(foto);
+			foto.setFotografo(this.fotografoService.trovaPerId(id));
+			this.fotografoService.addAlbum(id, album);
+			this.fotografoService.inserisci(this.fotografoService.trovaPerId(id));
+			return "OperazioneCompletataPage.html";
+		}
+		rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", resultFoto);
+		rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.album", resultAlbum);
 	if (!isImage)
 	    rAttribute.addFlashAttribute("erroreFile", "Formato file non valido");
-	rAttribute.addFlashAttribute("foto", foto);
-	rAttribute.addFlashAttribute("album", album);
-	return "redirect:/fotografo/{id}/newAlbum";
-    }
+		rAttribute.addFlashAttribute("foto", foto);
+		rAttribute.addFlashAttribute("album", album);
+		return "redirect:/fotografo/{id}/newAlbum";
+	}
 
-    @RequestMapping(value = "/newFotografo", method = RequestMethod.GET)
-    public String newFotografo(Model model) {
+	@RequestMapping(value = "/newFotografo", method = RequestMethod.GET)
+	public String newFotografo(Model model) {
 	if (!model.containsAttribute("immagine")) {
 	    model.addAttribute("immagine", new Immagine());
 	}
 	if (!model.containsAttribute("fotografo")) {
 	    model.addAttribute("fotografo", new Fotografo());
 	}
-	return "AddFotografoPage.html";
-    }
+		return "AddFotografoPage.html";
+	}
 
-    @RequestMapping(value = "/fotografo", method = RequestMethod.POST)
-    public String addNewFotografo(@ModelAttribute("immagine") Immagine immagine,
-	    @Valid @ModelAttribute("fotografo") Fotografo fotografo, @RequestParam("multipart") MultipartFile mpf,
+	@RequestMapping(value = "/fotografo", method = RequestMethod.POST)
+	public String addNewFotografo(@ModelAttribute("immagine") Immagine immagine,
+			@Valid @ModelAttribute("fotografo") Fotografo fotografo, @RequestParam("multipart") MultipartFile mpf,
 	    BindingResult result, RedirectAttributes rAttribute) throws IOException {
-	this.fotografoValidator.validate(fotografo, result);
+		this.fotografoValidator.validate(fotografo, result);
 	boolean isImage = SilphUtils.isImage(mpf);
 	if (!result.hasErrors() && isImage) {
-	    immagine.setFileImmagine(mpf.getBytes());
-	    fotografo.setImmagineProfilo(immagine);
-	    this.fotografoService.inserisci(fotografo);
-	    return "OperazioneCompletataPage.html";
-	}
+			immagine.setFileImmagine(mpf.getBytes());
+			fotografo.setImmagineProfilo(immagine);
+			this.fotografoService.inserisci(fotografo);
+			return "OperazioneCompletataPage.html";
+		}
 	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.fotografo", result);
 	if (!isImage)
 	    rAttribute.addFlashAttribute("erroreFile", "Formato file non valido");
 	rAttribute.addFlashAttribute("fotografo", fotografo);
 	rAttribute.addFlashAttribute("immagine", immagine);
 	return "redirect:/newFotografo";
-    }
+	}
 
 }
