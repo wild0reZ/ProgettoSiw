@@ -64,8 +64,8 @@ public class DBPopulation implements ApplicationRunner {
 		Fotografo fo4 = new Fotografo("Travis", "McKean", "Food photographer");
 		
 		Album a1 = new Album("Album di Leo", "Un bell'album");
-		Album a2 = new Album("Album di John", "Foto Varie");
-		Album a3 = new Album("Album di Norman", "La mia vita");
+		Album a2 = new Album("Album di Maria", "Foto Varie");
+		Album a3 = new Album("Album di Julia", "La mia vita");
 		Album a4 = new Album("Album di Travis", "Something..");
 		
 		populateAlbum(a1, fo1, 1);
