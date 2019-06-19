@@ -26,6 +26,7 @@ import it.silph.silphportal.model.Album;
 import it.silph.silphportal.model.Foto;
 import it.silph.silphportal.model.Immagine;
 import it.silph.silphportal.service.AlbumService;
+import it.silph.silphportal.utils.SilphUtils;
 import it.silph.silphportal.validator.FotoValidator;
 
 @Controller
@@ -70,7 +71,8 @@ public class AlbumController {
 	    BindingResult result, @ModelAttribute("immagine") Immagine immagine,
 	    @RequestParam("multipart") MultipartFile mpf, RedirectAttributes rAttribute) throws IOException {
 	this.fotoValidator.validate(foto, result);
-	if (!result.hasErrors()) {
+	boolean isImage = SilphUtils.isImage(mpf);
+	if (!result.hasErrors() && isImage) {
 	    immagine.setFileImmagine(mpf.getBytes());
 	    foto.setImmagine(immagine);
 	    foto.setFotografo(this.albumService.albumPerId(id).getFotografo());
@@ -79,6 +81,8 @@ public class AlbumController {
 	    return "OperazioneCompletataPage.html";
 	}
 	rAttribute.addFlashAttribute("org.springframework.validation.BindingResult.foto", result);
+	if(!isImage)
+	    rAttribute.addFlashAttribute("erroreFile", "Formato file non supportato");
 	rAttribute.addFlashAttribute("foto", foto);
 	return "redirect:/album/{id}/newFoto";
     }

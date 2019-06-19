@@ -90,17 +90,17 @@
 
 	<div class="container mx-auto foto-form">
 		<h1 class="bd-title">Aggiungi una Foto all'Album</h1>
-		<form th:object="${foto}"
+		<form
 			th:action="@{'/album/' + ${album.id} + '/foto'}" method="POST"
 			enctype="multipart/form-data">
 			<div class="form-group">
 				<label>Titolo Foto <span
-					th:if="${#fields.hasErrors('titoloFoto')}"
-					th:errors="*{titoloFoto}"></span></label> <input class="form-control"
-					th:field="*{titoloFoto}" />
+					th:if="${#fields.hasErrors('${foto.titoloFoto}')}"
+					th:errors="${foto.titoloFoto}"></span></label> <input class="form-control"
+					th:field="${foto.titoloFoto}" />
 			</div>
 			<div class="form-group">
-				<label>File </label><input class="form-control-file" type="file"
+				<label>File <span th:text="${erroreFile}"></span></label><input class="form-control-file" type="file"
 					accept="image/*" name="multipart" required />
 			</div>
 			<button class="btn btn-primary" type="submit">Aggiungi</button>
