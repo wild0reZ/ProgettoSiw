@@ -1,5 +1,7 @@
 <!doctype html>
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport"
@@ -26,8 +28,6 @@
 
 <title>SiLPH Inc.</title>
 
-<!-- Favicon del tab -->
-<link rel="icon" type="image/ico" href="/Data/retro-photo-favicon.ico">
 
 <!-- Google fonts -->
 <link
@@ -40,11 +40,10 @@
 </head>
 
 <body>
-<a th:href="@{/addFoto}">aggiungi foto</a>
 
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="#"> <i
+		<a class="navbar-brand" href="/"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -55,46 +54,47 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class="nav-link" href="#">Fotografi</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Fotografie</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/newFotografo}" style="color: #4169E1;">Aggiungi Fotografo</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" href="javascript: document.logoutForm.submit()"
+					style="color: #4169E1;">Logout</a></li>
+				<li sec:authorize="isAnonymous()"
+					th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i
+						th:if="${session.fotoRichiesta.size() > 0}"
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<form class="form-inline my-2 my-lg-0">
+					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
+					<select class="form-control" name="entity">
+					<option value="FOTO">Foto</option>
+					<option value="ALBUM">Album</option>
+					<option value="FOTOGRAFO">Fotografo</option>
+					</select>
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca">
+							placeholder="Cerca" aria-label="Cerca" name="query" required>
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
-				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fas fa-file-alt moduli-icon"></i></a>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i
-						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
-					<div
-						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
-						aria-labelledby="navbarDropdown">
-						<form th:action="@{/login}" method="post" class="px-4 py-3">
-							<div class="form-group">
-								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
-									type="text" name="username" class="form-control" id="exampleDropdownFormID1"
-									placeholder="ID" size="30">
-							</div>
-							<div class="form-group">
-								<label for="exampleDropdownFormPassword1">Password</label> <input
-									type="password" name="password" class="form-control"
-									id="exampleDropdownFormPassword1" placeholder="Password"
-									size="30">
-							</div>
-							<button type="submit" class="btn btn-primary">Sign in</button>
-						</form>
-					</div></li>
+				</li>
 			</ul>
 		</div>
 	</nav>
+	<form sec:authorize="isAuthenticated()" name="logoutForm"
+		th:action="@{/logout}" method="post" th:hidden="true">
+		<input hidden="true" type="submit" value="Sign Out" />
+	</form>
 	<!-- Fine Navigation Bar -->
 
 	<!-- Inizio sezione Foto -->
@@ -102,8 +102,8 @@
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Foto</h1>
 			<p class="lead">
-				<i>le nostre immagini più recenti.</i> <br> <a href="#"
-					class="link ">Altre foto</a>
+				<i>le nostre immagini più recenti.</i> <br> <a
+					th:href="@{/listFoto}" class="link ">Altre foto</a>
 			</p>
 		</div>
 	</div>
@@ -113,132 +113,20 @@
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-4 fotocell">
+				<div th:each="foto : ${gruppoFoto}" class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg">
 						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="/SampleData/Pics/example1.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
+							<a th:href="@{'/foto/' + ${foto.id}}" class="pop"> <img
+								class="card-img"
+								th:attr="src=@{'/immagine/' + ${foto.getImmagine().getId()}}" />
 							</a>
 							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
+								<h4 th:text="${foto.titoloFoto}" class="card-title">Titolo
+									Foto</h4>
 							</div>
 						</div>
 					</div>
 				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example2.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example3.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example4.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example5.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example6.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example7.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example8.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg ">
-						<div class="hovereffect">
-							<a href="#" class="pop"> <img class="card-img"
-								src="SampleData/Pics/example9.jpg" data-toggle="modal"
-								data-target="#imagemodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Titolo Foto</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
 
 			</div>
 		</div>
@@ -250,7 +138,8 @@
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Album</h1>
 			<p class="lead">
-				<i>le nostre raccolte più attuali.</i>
+				<i>le nostre raccolte più attuali.</i> <br> <a
+					th:href="@{/listAlbum}" class="link ">Altri Album</a>
 			</p>
 		</div>
 	</div>
@@ -258,173 +147,23 @@
 		<div class="container">
 			<div class="row mb-2">
 
-				<div class="col-md-6">
+				<div th:each="album : ${gruppoAlbum}" class="col-md-6">
 					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
 						<div class="card-body d-flex flex-column align-items-end">
 							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
+								<a th:text="${album.titoloAlbum}" class="text-dark"
+									th:href="@{'/album/' + ${album.id}}">Titolo Album</a>
 							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto text-right text-truncate">Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-								est, malesuada quis placerat sed, congue at odio. Suspendisse
-								rhoncus tortor et aliquet eleifend.</p>
+							<a th:text="${album.getFotografo().getNome()}"
+								th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
+								class="mb-1 text-muted">Nome Fotografo</a>
+							<p th:text="${album.descrizione}"
+								class="card-text mb-auto text-right text-truncate">Descrizione
+								Album</p>
 						</div>
-						<a href="#"> <img
-							class="card-img-right flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example1.jpg"></a>
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<a href="#"> <img
-							class="card-img-left flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example2.jpg"></a>
-
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto">Breve descrizione dell'album.
-								Parla degli argomenti presentati al suo interno.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto text-right text-truncate">Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-								est, malesuada quis placerat sed, congue at odio. Suspendisse
-								rhoncus tortor et aliquet eleifend.</p>
-						</div>
-						<a href="#"> <img
-							class="card-img-right flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example3.jpg"></a>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<a href="#"> <img
-							class="card-img-left flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example4.jpg"></a>
-
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto">Breve descrizione dell'album.
-								Parla degli argomenti presentati al suo interno.</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto text-right text-truncate">Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-								est, malesuada quis placerat sed, congue at odio. Suspendisse
-								rhoncus tortor et aliquet eleifend.</p>
-						</div>
-						<a href="#"> <img
-							class="card-img-right flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example5.jpg"></a>
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<a href="#"> <img
-							class="card-img-left flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example6.jpg"></a>
-
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto">Breve descrizione dell'album.
-								Parla degli argomenti presentati al suo interno.</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto text-right text-truncate">Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-								est, malesuada quis placerat sed, congue at odio. Suspendisse
-								rhoncus tortor et aliquet eleifend.</p>
-						</div>
-						<a href="#"> <img
-							class="card-img-right flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example7.jpg"></a>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<a href="#"> <img
-							class="card-img-left flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example8.jpg"></a>
-
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto">Breve descrizione dell'album.
-								Parla degli argomenti presentati al suo interno.</p>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<div class="card-body d-flex flex-column align-items-end">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto text-right text-truncate">Lorem
-								ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-								est, malesuada quis placerat sed, congue at odio. Suspendisse
-								rhoncus tortor et aliquet eleifend.</p>
-						</div>
-						<a href="#"> <img
-							class="card-img-right flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example9.jpg"></a>
-					</div>
-				</div>
-				<div class="col-md-6">
-					<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-						<a href="#"> <img
-							class="card-img-left flex-auto d-none d-lg-block"
-							src="SampleData/Pics/example10.jpg"></a>
-
-						<div class="card-body d-flex flex-column align-items-start">
-							<h3 class="mb-0">
-								<a class="text-dark" href="#">Titolo Album</a>
-							</h3>
-							<a href="#" class="mb-1 text-muted">Nome Autore</a>
-							<p class="card-text mb-auto">Breve descrizione dell'album.
-								Parla degli argomenti presentati al suo interno.</p>
-						</div>
+						<a th:href="@{'/album/' + ${album.id}}"> <img
+							th:attr="src=@{'/immagine/' + ${album.getImmagineCopertina().getId()}}"
+							class="card-img-right flex-auto d-none d-lg-block" /></a>
 					</div>
 				</div>
 
@@ -435,183 +174,33 @@
 
 
 
-	<!-- Inizio sezione Album -->
+	<!-- Inizio sezione Fotografi-->
 	<div id="fotografi-jumbotron" class="jumbotron text-center">
 		<div class="container-fluid">
 			<h1 class="jumbotron-heading">Fotografi</h1>
 			<p class="lead">
-				<i>i nostri artisti più giovani.</i>
+				<i>i nostri artisti più giovani.</i> <br> <a
+					th:href="@{/listFotografi}" class="link ">Altre Foto</a>
 			</p>
 		</div>
 	</div>
 	<div id="fotografi-section"></div>
-	<!-- Fine sezione Album -->
 
-	<script>
-		$(function() {
-			$('.pop').on(
-					'click',
-					function() {
-						$('.imagepreview').attr('src',
-								$(this).find('img').attr('src'));
-						$('#imagemodal').modal('show');
-					});
-		});
-	</script>
-
-	<!-- Modal -->
-	<div class="modal fade" id="imagemodal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered modal-lg"
-			role="document">
-			<div class="modal-content">
-				<div class="row">
-					<div class="col-md-8 pr-0" id="showImg">
-						<img src="" class="imagepreview" style="width: 100%;">
-					</div>
-					<div class="col-md-4 pl-0">
-						<div class="modal-header">
-							<h5 class="modal-title" id="exampleModalLongTitle">Titolo
-								Foto</h5>
-						</div>
-						<div class="modal-body">Breve descrizione della foto.
-							Invoglia il Cliente a comprare la foto.</div>
-						<div class="modal-footer">
-							<p class="text-left">20€</p>
-							<button type="button" class="btn btn-primary">Seleziona</button>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<!-- Inizio sezione fotografi -->
 	<div id="foto-section">
 		<div class="container">
 			<div class="row">
 
-				<div class="col-md-4 fotocell">
+				<div th:each="fotografo : ${gruppoFotografo}"
+					class="col-md-4 fotocell">
 					<div class="card mx-auto shadow-lg fotografo">
 						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample1.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
+							<a th:href="@{'/fotografo/'+ ${fotografo.id}}"> <img
+								class="card-img"
+								th:attr="src=@{'/immagine' + '/' + ${fotografo.getImmagineProfilo().getId()}}" />
 							</a>
 							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample2.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample9.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample3.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample4.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample5.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample6.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample7.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
-							</div>
-						</div>
-					</div>
-				</div>
-
-				<div class="col-md-4 fotocell">
-					<div class="card mx-auto shadow-lg fotografo">
-						<div class="hovereffect">
-							<a class="pop" style="cursor: pointer;"> <img
-								class="card-img" src="SampleData/Pics/fExample8.jpg"
-								data-toggle="modal" data-target="#fotografomodal" />
-							</a>
-							<div class="overlay">
-								<h4 class="card-title">Nome Cognome</h4>
+								<h4 th:text="${fotografo.nome} + ' ' + ${fotografo.cognome}"
+									class="card-title">Nome Cognome</h4>
 							</div>
 						</div>
 					</div>
@@ -620,31 +209,6 @@
 			</div>
 		</div>
 	</div>
-
-
-	<!-- Modal per i fotografi -->
-
-	<div class="modal fade" id="fotografomodal" tabindex="-1" role="dialog"
-		aria-labelledby="exampleModalLabel" aria-hidden="true">
-		<div class="modal-dialog" role="document">
-			<div class="modal-content">
-				<div class="modal-header">
-					<h5 class="modal-title fotografo" id="exampleModalLabel">Ciao,
-						sono Nome Cognome 🙂</h5>
-					<button type="button" class="close" data-dismiss="modal"
-						aria-label="Close">
-						<span aria-hidden="true">&times;</span>
-					</button>
-				</div>
-				<div class="modal-body">Piccola descrizione fotografo (La bio
-					completa sarà sulla pagina del fotografo)</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-primary">Biografia</button>
-				</div>
-			</div>
-		</div>
-	</div>
-
 
 	<!-- JS Per alcune animazioni di Bootstrap -->
 	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"

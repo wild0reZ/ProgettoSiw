@@ -1,0 +1,11 @@
+@charset "UTF-8";
+
+.foto-form {
+	margin-top: 1rem;
+	margin-bottom: 3rem;
+	font-family: 'Ubuntu', sans-serif;
+}
+
+label span {
+	color: red;
+}

@@ -1,0 +1,10 @@
+@charset "UTF-8";
+
+#foto-section {
+	font-family: 'Ubuntu', sans-serif;
+}
+
+#foto-section .title {
+	margin-top: 1rem;
+	margin-bottom: 1.5rem;
+}

@@ -1,0 +1,12 @@
+@charset "UTF-8";
+
+.modulocell {
+	border-radius: 0;
+}
+
+.modulocell .text-muted, .modulocell h3, .modulocell p {
+	font-family: 'Ubuntu', sans-serif;
+	max-height: 6.125rem;
+	text-overflow: ellipsis;
+	white-space: normal;
+}

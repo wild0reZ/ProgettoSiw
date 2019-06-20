@@ -20,3 +20,6 @@
 	font-family: 'Ubuntu', sans-serif;
 }
 
+label span {
+	color: red;
+}

@@ -1,5 +1,7 @@
 <!doctype html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <!-- Required meta tags -->
 <meta charset="utf-8">
@@ -17,8 +19,6 @@
 
 <title>SiLPH Inc.</title>
 
-<!-- Favicon del tab -->
-<link rel="icon" type="image/ico" href="Data/retro-photo-favicon.ico">
 <!-- Google fonts -->
 <link
 	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches|Oswald|Ubuntu&display=swap"
@@ -38,9 +38,10 @@
 
 </head>
 <body>
+
 	<!-- Inizio Navigation Bar -->
 	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-		<a class="navbar-brand" href="#"> <i
+		<a class="navbar-brand" href="/"> <i
 			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
 		</a>
 		<button class="navbar-toggler" type="button" data-toggle="collapse"
@@ -51,111 +52,86 @@
 		</button>
 		<div class="collapse navbar-collapse" id="navbarSupportedContent">
 			<ul class="navbar-nav mr-auto">
-				<li class="nav-item"><a class=" nav-link" href="#">Fotografi</a></li>
-				<li class="nav-item"><a class="selected-entry nav-link"
-					href="#">Album</a></li>
-				<li class="nav-item"><a class="nav-link" href="#">Foto</a></li>
-				<li class="nav-item"><a class="nav-link disabled" href="#">Moduli</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/newFotografo}" style="color: #4169E1;">Aggiungi Fotografo</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" href="javascript: document.logoutForm.submit()"
+					style="color: #4169E1;">Logout</a></li>
+				<li sec:authorize="isAnonymous()" th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i
+						th:if="${session.fotoRichiesta.size() > 0}"
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
 			</ul>
 			<ul class="navbar-nav ml-auto">
 				<li class="nav-item">
-					<form class="form-inline my-2 my-lg-0">
+					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
+					<select class="form-control" name="entity">
+					<option value="FOTO">Foto</option>
+					<option value="ALBUM">Album</option>
+					<option value="FOTOGRAFO">Fotografo</option></select>
 						<input class="form-control mr-sm-2" type="search"
-							placeholder="Cerca" aria-label="Cerca">
+							placeholder="Cerca" aria-label="Cerca" name="query" required>
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
 					</form>
-				<li class="nav-item"><a class="nav-link" href="#"><i
-						class="fas fa-file-alt moduli-icon"></i></a>
-				<li class="nav-item dropdown"><a
-					class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-					role="button" data-toggle="dropdown" aria-haspopup="true"
-					aria-expanded="false"><i
-						class="fas fa-user-alt fa-fw dropdown-icon"></i></a>
-					<div
-						class="dropdown-menu dropdown-menu-right silph-login-dropdown bg-dark rounded-0"
-						aria-labelledby="navbarDropdown">
-						<form class="px-4 py-3">
-							<div class="form-group">
-								<label for="exampleDropdownFormID1">ID Funzionario</label> <input
-									type="text" class="form-control" id="exampleDropdownFormID1"
-									placeholder="ID" size="30">
-							</div>
-							<div class="form-group">
-								<label for="exampleDropdownFormPassword1">Password</label> <input
-									type="password" class="form-control"
-									id="exampleDropdownFormPassword1" placeholder="Password"
-									size="30">
-							</div>
-							<button type="submit" class="btn btn-primary">Sign in</button>
-						</form>
-					</div></li>
+				</li>
 			</ul>
 		</div>
 	</nav>
+	<form sec:authorize="isAuthenticated()" name="logoutForm"
+		th:action="@{/logout}" method="post" th:hidden="true">
+		<input hidden="true" type="submit" value="Sign Out" />
+	</form>
 	<!-- Fine Navigation Bar -->
+
+
 
 	<div class="container sezioneAlbum">
 		<div class="row">
-			<div class="col-md-6">
+
+			<div th:each="album : ${albumPage.content}" class="col-md-6">
 				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
 					<div class="card-body d-flex flex-column align-items-end">
 						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
+							<a th:text="${album.titoloAlbum}" class="text-dark" th:href="@{'/album/' + ${album.id}}">Titolo
+								Album</a>
 						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto text-right text-truncate">Lorem
-							ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-							est, malesuada quis placerat sed, congue at odio. Suspendisse
-							rhoncus tortor et aliquet eleifend.</p>
+						<a th:text="${album.getFotografo().getNome()}" th:href="@{'/fotografo/' + ${album.getFotografo().getId()}}"
+							class="mb-1 text-muted">Nome Fotografo</a>
+						<p th:text="${album.descrizione}"
+							class="card-text mb-auto text-right text-truncate">Descrizione
+							Album</p>
 					</div>
-					<a href="#"> <img
-						class="card-img-right flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example1.jpg"></a>
+					<a th:href="@{'/album/' + ${album.id}}"> <img
+						th:attr="src=@{'/immagine' + '/' + ${album.getImmagineCopertina().getId()}}"
+						class="card-img-right flex-auto d-none d-lg-block" /></a>
 				</div>
 			</div>
-
-			<div class="col-md-6">
-				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-					<a href="#"> <img
-						class="card-img-left flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example2.jpg"></a>
-
-					<div class="card-body d-flex flex-column align-items-start">
-						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
-						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto">Breve descrizione dell'album.
-							Parla degli argomenti presentati al suo interno.</p>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-6">
-				<div class="card flex-md-row mb-4 shadow-sm h-md-200 albumcell">
-					<div class="card-body d-flex flex-column align-items-end">
-						<h3 class="mb-0">
-							<a class="text-dark" href="#">Titolo Album</a>
-						</h3>
-						<a href="#" class="mb-1 text-muted">Nome Autore</a>
-						<p class="card-text mb-auto text-right text-truncate">Lorem
-							ipsum dolor sit amet, consectetur adipiscing elit. Proin lectus
-							est, malesuada quis placerat sed, congue at odio. Suspendisse
-							rhoncus tortor et aliquet eleifend.</p>
-					</div>
-					<a href="#"> <img
-						class="card-img-right flex-auto d-none d-lg-block"
-						src="SampleData/Pics/example3.jpg"></a>
-				</div>
-			</div>
-
-
-
-
-
-			<!-- End -->
 
 		</div>
 	</div>
+
+
+	<nav aria-label="Navigatore pagine album"
+		class="justify-content-center">
+		<ul class="pagination justify-content-center">
+			<li class="page-item" th:if="${albumPage.totalPages > 0}"
+				th:each="pageNumber : ${pageNumbers}"><a
+				th:href="@{/listAlbum(size=${albumPage.size}, page=${pageNumber})}"
+				th:text=${pageNumber}
+				th:class="(${pageNumber==albumPage.number + 1} ? active + ' ' + 'selected-entry') + ' ' + 'page-link' "></a></li>
+		</ul>
+	</nav>
+
 
 	<!-- Optional JavaScript -->
 	<!-- jQuery first, then Popper.js, then Bootstrap JS -->

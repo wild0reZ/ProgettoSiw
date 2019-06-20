@@ -12,9 +12,14 @@ the right, we value the items on the left more.*
 
 [Link](https://agilemanifesto.org/principles.html) per le 12 regole dello svilluppo *Agile*.
 
-## Scadenze
+> ### Informazioni Utili
+> * I dati di postgresql sono, **username** = postgres, **password** = ciao123
+> * Per accedere come funzionario **Codice funzionario** = 1111, **Password** = 4321
+> * Abbiamo creato un DBPopulation, quindi all'avvio ci saranno già fotografi/foto/album 
 
-Il progetto è da consegnare entro il **21 Giugno 2019**.
+
+## Scadenze
+Il progetto è da consegnare entro il **20 Giugno 2019 alle ore 19**.
 
 ## A che punto siamo?
 
@@ -22,11 +27,14 @@ Il progetto è da consegnare entro il **21 Giugno 2019**.
 - [x] Creazione del modello di dominio. (**Refinito, ma lo faremo sempre perché siamo AGILE**)
 - [x] Rifinimento della Navbar della homepage.
 - [x] Creazione del corpo della homepage.
+- [x] Iniziare fase di Progettazione.
+- [x] Iniziare a comporre 'AlbumPage'. 
+- [x] Iniziare a comporre 'FotografiPage'.
+- [x] Iniziare a comporre 'FotografoPage'. 
+- [x] Iniziare a comporre 'ModuliPage'.
+- [x] Iniziare a comporre 'ComponiModuloPage'.
 - [x] Implementare Spring Boot al più presto.
-- [x] Terminato di comporre le '\*Page' principali.
-- [ ] Iniziare fase di Progettazione.
-- [ ] Implementare i metodi di retrieve delle foto pagina per pagina
-- [ ] Impostare per bene l'auth con spring boot security
+- [x] Implementare Auth.
 
 
 ## Risorse utili

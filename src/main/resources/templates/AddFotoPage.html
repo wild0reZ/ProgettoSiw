@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="https://www.thymeleaf.org"
+	xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<html>
+<head>
+<meta charset="UTF-8">
+<title>SiLPH Inc.</title>
+
+<!-- Link per il CSS di Bootstrap -->
+<link rel="stylesheet"
+	href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+	integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+	crossorigin="anonymous">
+
+<!--  Link per le icone di FontAwesome -->
+<link rel="stylesheet"
+	href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
+	integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay"
+	crossorigin="anonymous">
+
+<!-- CSS locale per override -->
+<link rel="stylesheet" href="/CSS/silphbar.css">
+<link rel="stylesheet" href="/CSS/AddFotoPage.css">
+
+
+<!-- Google fonts -->
+<link
+	href="https://fonts.googleapis.com/css?family=Sedgwick+Ave+Display|Staatliches|Oswald|Ubuntu&display=swap"
+	rel="stylesheet">
+</head>
+<body>
+
+
+	<!-- Inizio Navigation Bar -->
+	<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+		<a class="navbar-brand" href="/"> <i
+			class="fas fa-camera-retro fa-fw silphbar-icon"></i>Silph Inc.
+		</a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item"><a class="nav-link" href="/listFotografi">Fotografi</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listAlbum">Album</a></li>
+				<li class="nav-item"><a class="nav-link" href="/listFoto">Fotografie</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/listModuli}" style="color: #4169E1;">Moduli</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" th:href="@{/newFotografo}" style="color: #4169E1;">Aggiungi Fotografo</a></li>
+				<li class="nav-item" sec:authorize="isAnonymous()"><a
+					class="nav-link" th:href="@{/loginFunzionario}"
+					style="color: #4169E1;">Login</a></li>
+				<li class="nav-item" sec:authorize="isAuthenticated()"><a
+					class="nav-link" href="javascript: document.logoutForm.submit()"
+					style="color: #4169E1;">Logout</a></li>
+				<li sec:authorize="isAnonymous()" th:if="${session.fotoRichiesta != null}" class="nav-item"><a
+					class="nav-link" th:href="@{/newModulo}"><i
+						th:if="${session.fotoRichiesta.size() > 0}"
+						class="fas fa-file-alt" style="color: #4169E1"><span
+							th:text="${session.fotoRichiesta.size()}"
+							style="color: #A4DE02; margin-left: 0.5rem;"></span></i></a></li>
+			</ul>
+			<ul class="navbar-nav ml-auto">
+				<li class="nav-item">
+					<form th:action="@{/search}" class="form-inline my-2 my-lg-0">
+					<select class="form-control" name="entity">
+					<option value="FOTO">Foto</option>
+					<option value="ALBUM">Album</option>
+					<option value="FOTOGRAFO">Fotografo</option></select>
+						<input class="form-control mr-sm-2" type="search"
+							placeholder="Cerca" aria-label="Cerca" name="query" required>
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+					</form>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<form sec:authorize="isAuthenticated()" name="logoutForm"
+		th:action="@{/logout}" method="post" th:hidden="true">
+		<input hidden="true" type="submit" value="Sign Out" />
+	</form>
+	<!-- Fine Navigation Bar -->
+
+
+
+	<div class="container mx-auto foto-form">
+		<h1 class="bd-title">Aggiungi una Foto all'Album</h1>
+		<form
+			th:action="@{'/album/' + ${album.id} + '/foto'}" method="POST"
+			enctype="multipart/form-data">
+			<div class="form-group">
+				<label>Titolo Foto <span
+					th:if="${#fields.hasErrors('${foto.titoloFoto}')}"
+					th:errors="${foto.titoloFoto}"></span></label> <input class="form-control"
+					th:field="${foto.titoloFoto}" />
+			</div>
+			<div class="form-group">
+				<label>File <span th:text="${erroreFile}"></span></label><input class="form-control-file" type="file"
+					accept="image/*" name="multipart" required />
+			</div>
+			<button class="btn btn-primary" type="submit">Aggiungi</button>
+		</form>
+	</div>
+
+</body>
+</html>
