@@ -93,6 +93,9 @@ public class FotoAlbumFotografiController {
 
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     public String searchFoto(Model model, @RequestParam("entity") String entity, @RequestParam("query") String query) {
+	if (query.replaceAll("\\s+", "").equals("")) {
+	    query = "Ω"; // carattere che non porterà mai risultati
+	}
 	switch (entity) {
 	case "FOTO":
 	    List<Foto> fotoSearch = new ArrayList<>();
@@ -106,23 +109,11 @@ public class FotoAlbumFotografiController {
 	    break;
 	case "FOTOGRAFO":
 	    List<Fotografo> fotografoSearch = new ArrayList<>();
-	    String[] nomeCognome = query.split(" ");
-	    String nome;
-	    String cognome;
-	    try {
-		nome = nomeCognome[0];
-	    } catch (Exception e) {
-		nome = "";
-	    }
-	    try {
-		cognome = nomeCognome[1];
-	    } catch (Exception e) {
-		cognome = "";
-	    }
-	    this.fotografoService.searchFoto(fotografoSearch, nome, cognome);
+	    this.fotografoService.searchFoto(fotografoSearch, query);
 	    model.addAttribute("fotografiSearch", fotografoSearch);
 	    break;
 	}
+
 	return "SearchPage.html";
     }
 
