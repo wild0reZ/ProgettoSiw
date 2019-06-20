@@ -58,7 +58,7 @@ public class DBPopulation implements ApplicationRunner {
 		System.out.println("DEVDEBUG: Funzionari aggiunti!");
 		
 		System.out.println("DEVDEBUG: Aggiungo fotografi!");
-		Fotografo fo1 = new Fotografo("Leonardo", "Idone", "Un bravo ragazzo.");
+		Fotografo fo1 = new Fotografo("Jane", "Doe", "Una brava ragazza");
 		Fotografo fo2 = new Fotografo("Maria", "Doe", "Fotografo per matrimoni");
 		Fotografo fo3 = new Fotografo("Julia", "Peace", "Fotografo per passione");
 		Fotografo fo4 = new Fotografo("Travis", "McKean", "Food photographer");

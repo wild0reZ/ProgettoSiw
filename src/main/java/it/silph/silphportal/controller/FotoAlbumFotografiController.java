@@ -43,9 +43,15 @@ public class FotoAlbumFotografiController {
 	Authentication auth = SecurityContextHolder.getContext().getAuthentication();
 	if (auth.isAuthenticated())
 	    status.setComplete();
-	model.addAttribute("gruppoFoto", this.fotoService.prime9PerData());
-	model.addAttribute("gruppoAlbum", this.albumService.primi10PerDataFraTutte());
-	model.addAttribute("gruppoFotografo", this.fotografoService.primi9PerDataFraTutti());
+	List<Foto> gruppoFoto = new ArrayList<Foto>();
+	List<Album> gruppoAlbum = new ArrayList<Album>();
+	List<Fotografo> gruppoFotografo = new ArrayList<Fotografo>();
+	this.fotoService.prime9PerDataFix(gruppoFoto);
+	this.albumService.primi10PerDataFraTutteFix(gruppoAlbum);
+	this.fotografoService.primi9PerDataFraTuttiFix(gruppoFotografo);
+	model.addAttribute("gruppoFoto", gruppoFoto);
+	model.addAttribute("gruppoAlbum", gruppoAlbum);
+	model.addAttribute("gruppoFotografo", gruppoFotografo);
 	return "HomePage";
     }
 

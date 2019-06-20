@@ -18,10 +18,12 @@ public interface AlbumRepository extends JpaRepository<Album, Long> {
      * public List<Album> findFirst10ByOrderByFoto_DataInserimento();
      */
 
-    @Query(value = "SELECT DISTINCT a, MAX(f.dataInserimento) FROM Album a, Foto f GROUP BY a ORDER BY MAX(f.dataInserimento) DESC")
-    public List<Album> customFindAllByFotoDataInserimento();
-
+//    @Query(value = "SELECT DISTINCT a FROM Album a, Foto f.dataInserimento GROUP BY a ORDER BY MIN(f.dataInserimento) DESC")
+//    public List<Album> customFindAllByFotoDataInserimento();
+//
     public List<Album> findAllByFotografo(Fotografo fotografo);
 
     public List<Album> findByTitoloAlbumContainingIgnoreCase(String query);
+    
+    public List<Album> findAllByOrderByFoto_DataInserimentoDesc();
 }

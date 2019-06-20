@@ -82,4 +82,10 @@ public class FotoService {
 		fotoSearch.addAll(foto);
 	}
 
+	@Transactional
+	public void prime9PerDataFix(List<Foto> gruppoFoto) {
+	    List<Foto> f = this.fotoRepository.findFirst9ByOrderByDataInserimentoDesc();
+	    gruppoFoto.addAll(f);
+	}
+
 }

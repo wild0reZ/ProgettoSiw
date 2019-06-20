@@ -14,7 +14,7 @@ public interface FotografoRepository extends JpaRepository<Fotografo, Long> {
 
     // @Query(value = "SELECT DISTINCT a.fotografo, MAX(f.dataInserimento) FROM
     // Fotografo fo, Album a, Foto f WHERE fo.id = a.fotografo.id")
-    public List<Fotografo> findAllByOrderByAlbum_Foto_DataInserimento();
+    public List<Fotografo> findAllByOrderByAlbum_Foto_DataInserimentoDesc();
 
     public List<Fotografo> findByNomeOrCognomeContainingIgnoreCase(String nome, String cognome);
 

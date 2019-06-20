@@ -3,8 +3,7 @@ package it.silph.silphportal.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
-import javax.validation.Valid;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -37,7 +36,7 @@ public class AlbumService {
 
     @Transactional
     public List<Album> tuttiPerData() {
-	return this.albumRepository.customFindAllByFotoDataInserimento();
+	return this.albumRepository.findAllByOrderByFoto_DataInserimentoDesc();
     }
 
     @Transactional
@@ -48,14 +47,15 @@ public class AlbumService {
     /**
      * relativamente inefficiente, ma dovrebbe mettere una toppa al bug segnalato
      * sotto (condividono la stessa responsabilità)
+     * 
      * @return
      */
     @Transactional
     public List<Album> primi10PerDataFraTutte() {
-	List<Album> l = this.albumRepository.customFindAllByFotoDataInserimento();
+	List<Album> l = removeDuplicates(this.albumRepository.findAllByOrderByFoto_DataInserimentoDesc());
 	if (l.size() > 10) {
 	    List<Album> shrink = new ArrayList<>();
-	    for (int i = 10; i >= 0; i--) {
+	    for (int i = 10; i >= 0; i--) { // FORSE DEVI CAMBIARNE IL VERSO!!!
 		shrink.add(l.get(i));
 	    }
 	    return shrink;
@@ -97,6 +97,28 @@ public class AlbumService {
     public void searchAlbum(List<Album> albumSearch, String query) {
 	List<Album> album = this.albumRepository.findByTitoloAlbumContainingIgnoreCase(query);
 	albumSearch.addAll(album);
+    }
+
+    @Transactional
+    public void primi10PerDataFraTutteFix(List<Album> gruppoAlbum) {
+	List<Album> l = removeDuplicates(this.albumRepository.findAllByOrderByFoto_DataInserimentoDesc());
+	if (l.size() > 10) {
+	    List<Album> shrink = new ArrayList<>();
+	    for (int i = 0; i >= 10; i--) { // FORSE DEVI CAMBIARNE IL VERSO!!!
+		shrink.add(l.get(i));
+	    }
+	}
+	gruppoAlbum.addAll(l);
+    }
+
+    /**
+     * Altro complice di questa mostruosità (vedi sopra)
+     * 
+     * @param l
+     * @return
+     */
+    private List<Album> removeDuplicates(List<Album> l) {
+	return l.stream().distinct().collect(Collectors.toList());
     }
 
 }
